@@ -1,0 +1,20 @@
+{
+  "name": "parkingmanagementsystem.pl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build:css && browser-sync start --proxy https://localhost:56043 --files 'wwwroot/css/*.css' 'Pages/**/*.cshtml'",
+    "watch:css": "postcss wwwroot/css/site.css -o wwwroot/css/site.min.css --watch",
+    "build:css": "postcss wwwroot/css/site.css -o wwwroot/css/site.min.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.0"
+  }
+}

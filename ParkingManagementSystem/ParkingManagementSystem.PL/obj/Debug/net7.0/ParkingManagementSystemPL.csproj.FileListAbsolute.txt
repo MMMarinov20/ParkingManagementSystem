@@ -27,3 +27,6 @@ C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMa
 C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.PL\obj\Debug\net7.0\ParkingManagementSystemPL.pdb
 C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.PL\obj\Debug\net7.0\ParkingManagementSystemPL.genruntimeconfig.cache
 C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.PL\obj\Debug\net7.0\ref\ParkingManagementSystemPL.dll
+C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.PL\bin\Debug\net7.0\package-lock.json
+C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.PL\bin\Debug\net7.0\package.json
+C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.PL\bin\Debug\net7.0\tailwind.extension.json
