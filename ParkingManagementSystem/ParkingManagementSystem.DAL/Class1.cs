@@ -1,4 +1,4 @@
-﻿namespace ParkingManagementSystem.DLL
+﻿namespace ParkingManagementSystem.DAL
 {
     public class Class1
     {

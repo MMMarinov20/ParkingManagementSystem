@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.DLL\\ParkingManagementSystem.DLL.csproj",
-      "projectName": "ParkingManagementSystem.DLL",
-      "projectPath": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.DLL\\ParkingManagementSystem.DLL.csproj",
+      "projectUniqueName": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.DAL\\ParkingManagementSystem.DAL.csproj",
+      "projectName": "ParkingManagementSystem.DAL",
+      "projectPath": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.DAL\\ParkingManagementSystem.DAL.csproj",
       "packagesPath": "C:\\Users\\maksm\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.DLL\\obj\\",
+      "outputPath": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.DAL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\maksm\\AppData\\Roaming\\NuGet\\NuGet.Config",
