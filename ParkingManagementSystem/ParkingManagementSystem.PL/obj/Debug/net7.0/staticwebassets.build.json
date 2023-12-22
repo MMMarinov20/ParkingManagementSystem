@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2G/C1wRT5sshIYQWexyokwT6cAhf1mDCvmA8v9a6w9w=",
+  "Hash": "FDiHhEedQ+0xgjMZG3Q1mCslQ15DB9P5+Oxvl6RZfwU=",
   "Source": "ParkingManagementSystemPL",
   "BasePath": "_content/ParkingManagementSystemPL",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\assets\\background.jpg",
+      "SourceId": "ParkingManagementSystemPL",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\",
+      "BasePath": "_content/ParkingManagementSystemPL",
+      "RelativePath": "assets/background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\background.jpg"
+    },
     {
       "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\css\\site.css",
       "SourceId": "ParkingManagementSystemPL",

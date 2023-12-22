@@ -12,8 +12,22 @@
     <link rel="stylesheet" href="~/css/site.min.css" />  <!-- Make sure to use the correct path to your generated Tailwind CSS file -->
 </head>
 <body>
-    <div class="w-screen h-screen bg-blue-300 flex flex-col items-center justify-center">
-        <h1>Parking Management System</h1>
+    <div class="w-screen h-screen bg-[url('/assets/background.jpg')] bg-cover bg-center bg-no-repeat bg-opacity-10">
+        <div class="w-screen flex flex-row justify-center text-2xl gap-x-10 pt-16 text-white">
+            <h1>Home</h1>
+            <h1>Parking Lots</h1>
+            <h1>My Reservations</h1>
+            <h1>Contact us</h1>
+
+            <a asp-page="/Login"><button class="bg-blue-400 rounded-full px-5 py-2 text-white">Log in</button></a>
+        </div>
+
+        <div class="pt-52 lg:pt-24 w-screen pl-24 lg:pl-14 2xl:pl-32">
+            <h1 class="text-blue-400 font-bold text-5xl lg:text-3xl 2xl:text-5xl">Park with Ease. Travel with Confidence</h1>
+            <h1 class="text-8xl lg:text-5xl 2xl:text-8xl font-black text-white lg:max-w-lg max-w-3xl 2xl:max-w-3xl pt-6">We assure your parking spot!</h1>
+            <h1 class="text-white font-semibold text-3xl lg:text-xl max-w-2xl py-10">Effortless parking, just a click away. Explore, reserve, and travel stress-free with our intuitive Parking Management System. Your journey, simplified.</h1>
+            <button class="bg-white px-8 py-4 rounded-full text-blue-400 text-3xl lg:text-xl 2xl:text-3xl font-semibold">Reserve your spot</button>
+        </div>
     </div>
 </body>
 </html>
