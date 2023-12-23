@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FDiHhEedQ+0xgjMZG3Q1mCslQ15DB9P5+Oxvl6RZfwU=",
+  "Hash": "kOM+OeB6Q0nZwhqLgxm4+kWO8poUbHgqXRa/mw8nUyA=",
   "Source": "ParkingManagementSystemPL",
   "BasePath": "_content/ParkingManagementSystemPL",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\assets\\background.jpg",
+      "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\assets\\background.jpeg",
       "SourceId": "ParkingManagementSystemPL",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\",
       "BasePath": "_content/ParkingManagementSystemPL",
-      "RelativePath": "assets/background.jpg",
+      "RelativePath": "assets/background.jpeg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,7 +31,41 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\background.jpg"
+      "OriginalItemSpec": "wwwroot\\assets\\background.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\assets\\lot.jpg",
+      "SourceId": "ParkingManagementSystemPL",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\",
+      "BasePath": "_content/ParkingManagementSystemPL",
+      "RelativePath": "assets/lot.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\lot.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\assets\\parking.jpg",
+      "SourceId": "ParkingManagementSystemPL",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\",
+      "BasePath": "_content/ParkingManagementSystemPL",
+      "RelativePath": "assets/parking.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\parking.jpg"
     },
     {
       "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\css\\site.css",

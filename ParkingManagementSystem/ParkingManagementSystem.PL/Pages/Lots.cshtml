@@ -8,11 +8,12 @@
 <head>
     <meta charset="utf-8" />
     <title>My ASP.NET Core App</title>
+    <script src="~/js/site.js"></script>
     <link rel="stylesheet" href="~/css/site.min.css" />  <!-- Make sure to use the correct path to your generated Tailwind CSS file -->
 </head>
 <body>
-    <div class="w-screen min-h-screen overflow-x-hidden">
-        <div class="w-screen flex flex-row justify-center items-center text-2xl gap-x-10 pt-16 text-black">
+    <div class="w-screen min-h-screen bg-[url('/assets/background.jpeg')] bg-cover bg-center bg-no-repeat bg-opacity-10 overflow-x-hidden">
+        <div class="w-screen flex flex-row justify-center items-center text-2xl gap-x-10 pt-16 text-white">
             <a asp-page="/Index" class="group inline-block relative">
                 <h1 class="relative z-20">Home</h1>
                 <div class="absolute w-full h-0.5 bg-blue-500 transform translate-y-full opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"></div>
@@ -41,48 +42,90 @@
 
 
         </div>
-        <h1 class="text-center text-5xl text-black font-semibold underline pt-32 2xl:pt-20">Available Parking Lots</h1>
-        <div class="flex flex-col justify-center items-center 2xl:grid 2xl:grid-cols-2 2xl:place-items-center pt-20 gap-y-32 pb-20">
+        <h1 class="text-center text-5xl text-white font-bold pt-32 2xl:pt-20">Available Parking Lots</h1>
+        <div class="flex flex-col justify-center items-center 2xl:grid 2xl:grid-cols-2 2xl:place-items-center pt-20 gap-y-32 pb-32">
             <div class="w-[60vw] h-[15vh] 2xl:w-[40vw] 2xl:h-[35vh]">
                 <div class="bg-[url('/assets/parking.jpg')] bg-cover bg-center bg-no-repeat w-full h-full rounded-xl shadow-2xl"></div>
 
-                <div class="flex flex-row text-xl justify-between items-center pt-5">
+                <div class="flex flex-row text-xl justify-between items-center pt-5 text-white">
                     <h1>Parking Lot 1</h1>
                     <h1 class="font-semibold">Available spaces: 202/202</h1>
-                    <button class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold">Reserve</button>
+                    <button id="reserve" class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                        Reserve
+                    </button>
                 </div>
             </div>
 
             <div class="w-[60vw] h-[15vh] 2xl:w-[40vw] 2xl:h-[35vh]">
                 <div class="bg-[url('/assets/parking.jpg')] bg-cover bg-center bg-no-repeat w-full h-full rounded-xl shadow-2xl"></div>
 
-                <div class="flex flex-row text-xl justify-between items-center pt-5">
+                <div class="flex flex-row text-xl justify-between items-center pt-5 text-white">
                     <h1>Parking Lot 1</h1>
                     <h1 class="font-semibold">Available spaces: 202/202</h1>
-                    <button class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold">Reserve</button>
+                    <button class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                        Reserve
+                    </button>
                 </div>
             </div>
 
             <div class="w-[60vw] h-[15vh] 2xl:w-[40vw] 2xl:h-[35vh]">
                 <div class="bg-[url('/assets/parking.jpg')] bg-cover bg-center bg-no-repeat w-full h-full rounded-xl shadow-2xl"></div>
 
-                <div class="flex flex-row text-xl justify-between items-center pt-5">
+                <div class="flex flex-row text-xl justify-between items-center pt-5 text-white">
                     <h1>Parking Lot 1</h1>
                     <h1 class="font-semibold">Available spaces: 202/202</h1>
-                    <button class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold">Reserve</button>
+                    <button class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                        Reserve
+                    </button>
                 </div>
             </div>
 
             <div class="w-[60vw] h-[15vh] 2xl:w-[40vw] 2xl:h-[35vh]">
                 <div class="bg-[url('/assets/parking.jpg')] bg-cover bg-center bg-no-repeat w-full h-full rounded-xl shadow-2xl"></div>
 
-                <div class="flex flex-row text-xl justify-between items-center pt-5">
+                <div class="flex flex-row text-xl justify-between items-center pt-5 text-white">
                     <h1>Parking Lot 1</h1>
                     <h1 class="font-semibold">Available spaces: 202/202</h1>
-                    <button class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold">Reserve</button>
+                    <button class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                        Reserve
+                    </button>
                 </div>
             </div>
         </div>
+
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden"></div>
+        <div id="myModal" class="hidden bg-white p-6 rounded-xl shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <h2 class="text-2xl font-bold mb-4 text-center">Make a reservation</h2>
+            <div class="flex flex-col gap-y-5">
+                <select placeholder="Choose parking lot" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full">
+                    <option value="" selected disabled>Choose a parking lot</option>
+                    <option>Parking Lot 1</option>
+                    <option>Parking Lot 1</option>
+                    <option>Parking Lot 1</option>
+                    <option>Parking Lot 1</option>
+                </select>
+
+                <input type="date" placeholder="Choose date" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full" />
+                <select placeholder="Choose date" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full">
+                    <option value="" selected disabled>Choose a timestamp</option>
+                    <option>1 hour</option>
+                    <option>2 hours</option>
+                    <option>3 hours</option>
+                    <option>6 hours</option>
+                    <option>12 hours</option>
+                    <option>1 day</option>
+                    <option>3 days</option>
+                    <option>5 days</option>
+                    <option>1 week</option>
+                </select>
+                <input placeholder="Car plate" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full" />
+            </div>
+            <div class="w-full h-fit flex flex-row justify-end gap-x-5">
+                <button id="closeModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-xl hover:scale-110 transition transform duration-300">Close Modal</button>
+                <button id="goToCheckout" class="mt-4 px-4 py-2 bg-green-400 text-white rounded-xl hover:scale-110 transition transform duration-300">Go to checkout</button>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
