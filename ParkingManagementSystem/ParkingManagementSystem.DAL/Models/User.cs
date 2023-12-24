@@ -11,9 +11,9 @@ namespace ParkingManagementSystem.DAL.Models
         public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string EmailAddress { get; set; }
+        public string Email { get; set; }
         public string PasswordHash { get; set; }
-
+        public string Phone { get; set; }
         // Navigation property for reservations
         public ICollection<Reservation> Reservations { get; set; }
 
