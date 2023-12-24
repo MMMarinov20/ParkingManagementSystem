@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace ParkingManagementSystem.DAL.Models
 {
-    internal class Reservation
+    public class Reservation
     {
+        public int ReservationID { get; set; }
+        public int UserID { get; set; }
+        public int LotID { get; set; }
+        public string CarPlate { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public string Status { get; set; }
+
+        // Navigation property for ParkingLot
+        public ParkingLot ParkingLot { get; set; }
+
+        // Other properties as needed
     }
 }
