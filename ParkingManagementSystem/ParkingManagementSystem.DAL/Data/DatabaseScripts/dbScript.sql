@@ -3,7 +3,7 @@ USE ParkingManagementSystem;
 
 
 CREATE TABLE Users (
-    UserID INT PRIMARY KEY,
+    UserID INT PRIMARY KEY IDENTITY(1,1),
     FirstName VARCHAR(50) NOT NULL,
     LastName VARCHAR(50) NOT NULL,
     Email VARCHAR(100) UNIQUE NOT NULL,
@@ -36,3 +36,5 @@ CREATE TABLE Feedback (
     Rating INT NOT NULL, -- Rating out of 5, for example
     Comment TEXT,
 );
+
+INSERT INTO Users (FirstName, LastName, Email, [Password], Phone) VALUES ('admin', 'admin', 'example@', 'admin', '1234567890');

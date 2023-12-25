@@ -16,7 +16,5 @@ namespace ParkingManagementSystem.DAL.Models
         public string Phone { get; set; }
         // Navigation property for reservations
         public ICollection<Reservation> Reservations { get; set; }
-
-        // Other properties as needed
     }
 }

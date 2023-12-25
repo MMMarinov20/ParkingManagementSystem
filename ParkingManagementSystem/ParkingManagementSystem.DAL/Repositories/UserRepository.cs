@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using ParkingManagementSystem.DAL.Models;
+using ParkingManagementSystem.DAL.Validators;
 
 namespace ParkingManagementSystem.DAL.Repositories
 {
     public class UserRepository
     {
+        UserValidator userValidator = new UserValidator();
         private readonly string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ParkingManagementSystem;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False\r\n";
 
         public UserRepository(string connectionString)
@@ -17,8 +19,12 @@ namespace ParkingManagementSystem.DAL.Repositories
             this._connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         }
 
-        public async Task CreateUser(User user)
+        public async Task<bool> CreateUser(User user)
         {
+            if (userValidator.EmailAlreadyExists(user.Email, _connectionString))
+            {
+                return false;
+            }
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
@@ -37,6 +43,8 @@ namespace ParkingManagementSystem.DAL.Repositories
                     await command.ExecuteNonQueryAsync();
                 }
             }
+
+            return true;
         }
 
         public async Task<User> GetUserByIdAsync(int userId)
@@ -70,6 +78,62 @@ namespace ParkingManagementSystem.DAL.Repositories
             }
 
             return null;
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT * FROM Users WHERE Email = @Email";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Email", email);
+
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            return new User
+                            {
+                                UserID = (int)reader["UserID"],
+                                FirstName = reader["FirstName"].ToString(),
+                                LastName = reader["LastName"].ToString(),
+                                Email = reader["Email"].ToString(),
+                                PasswordHash = reader["Password"].ToString(),
+                                Phone = reader["Phone"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public async Task<bool> DeleteUser(string email)
+        {
+            if (!userValidator.EmailAlreadyExists(email, _connectionString))
+            {
+                return false;
+            }
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "DELETE FROM Users WHERE Email = @Email";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Email", email);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+
+            return true;
         }
     }
 }

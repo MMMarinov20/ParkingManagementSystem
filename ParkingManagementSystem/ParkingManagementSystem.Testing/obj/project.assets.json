@@ -712,6 +712,19 @@
           }
         }
       },
+      "ParkingManagementSystem.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "ParkingManagementSystem.DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ParkingManagementSystem.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ParkingManagementSystem.BLL.dll": {}
+        }
+      },
       "ParkingManagementSystem.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -2009,6 +2022,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "ParkingManagementSystem.BLL/1.0.0": {
+      "type": "project",
+      "path": "../ParkingManagementSystem.BLL/ParkingManagementSystem.BLL.csproj",
+      "msbuildProject": "../ParkingManagementSystem.BLL/ParkingManagementSystem.BLL.csproj"
+    },
     "ParkingManagementSystem.DAL/1.0.0": {
       "type": "project",
       "path": "../ParkingManagementSystem.DAL/ParkingManagementSystem.DAL.csproj",
@@ -2017,6 +2035,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "ParkingManagementSystem.BLL >= 1.0.0",
       "ParkingManagementSystem.DAL >= 1.0.0"
     ]
   },
@@ -2047,6 +2066,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.BLL\\ParkingManagementSystem.BLL.csproj": {
+              "projectPath": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.BLL\\ParkingManagementSystem.BLL.csproj"
+            },
             "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.DAL\\ParkingManagementSystem.DAL.csproj": {
               "projectPath": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.DAL\\ParkingManagementSystem.DAL.csproj"
             }

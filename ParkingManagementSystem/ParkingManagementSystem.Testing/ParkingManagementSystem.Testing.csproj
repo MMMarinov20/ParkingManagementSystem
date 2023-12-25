@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ParkingManagementSystem.BLL\ParkingManagementSystem.BLL.csproj" />
     <ProjectReference Include="..\ParkingManagementSystem.DAL\ParkingManagementSystem.DAL.csproj" />
   </ItemGroup>
 

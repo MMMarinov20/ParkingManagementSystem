@@ -50,3 +50,5 @@ C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMa
 C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.Testing\obj\Debug\net7.0\ParkingManagementSystem.Testing.pdb
 C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.Testing\obj\Debug\net7.0\ParkingManagementSystem.Testing.genruntimeconfig.cache
 C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.Testing\obj\Debug\net7.0\ref\ParkingManagementSystem.Testing.dll
+C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.Testing\bin\Debug\net7.0\ParkingManagementSystem.BLL.dll
+C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.Testing\bin\Debug\net7.0\ParkingManagementSystem.BLL.pdb
