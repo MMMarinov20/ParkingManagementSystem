@@ -9,6 +9,7 @@ namespace ParkingManagementSystem.DAL.Models
     public class ParkingLot
     {
         public int LotID { get; set; }
+        public string LotName { get; set; }
         public string Location { get; set; }
         public int Capacity { get; set; }
         public int CurrentAvailability { get; set; }
