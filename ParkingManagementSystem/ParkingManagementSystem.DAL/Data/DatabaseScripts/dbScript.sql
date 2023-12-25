@@ -1,6 +1,7 @@
 ﻿CREATE DATABASE ParkingManagementSystem;
 USE ParkingManagementSystem;
 
+
 CREATE TABLE Users (
     UserID INT PRIMARY KEY,
     FirstName VARCHAR(50) NOT NULL,
@@ -12,6 +13,7 @@ CREATE TABLE Users (
 
 CREATE TABLE ParkingLots (
     LotID INT PRIMARY KEY,
+	LotName VARCHAR(50) NOT NULL,
     [Location] VARCHAR(100) NOT NULL,
     Capacity INT NOT NULL,
     CurrentAvailability INT NOT NULL,
