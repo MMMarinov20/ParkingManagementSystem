@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "LujbiDkAdXZG5eqQqDXf0edD9RrBCYJzZiyw2sYASNlH0d+nfWW0KwgK9ZesQ7xbdVU0T9F7XLpepfpxPev1bw==",
+  "dgSpecHash": "RHtargca3qynEA95cUAvGNLOqHGhI2FA444SfARn5BVVnGAeh9m+yNXTP98iSEq9R+m/oabso0BOOsNDEiUrwA==",
   "success": true,
   "projectFilePath": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.BLL\\ParkingManagementSystem.BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maksm\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\maksm\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\maksm\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\maksm\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\maksm\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\maksm\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.2\\microsoft.data.sqlclient.5.1.2.nupkg.sha512",

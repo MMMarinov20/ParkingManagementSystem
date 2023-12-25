@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "pbr9yK0Drs5w96F8che8fcw19H7OPXGaJTJcoQcEo//h+mdWqv7Wu2k9d6Bil6uyIINKxLEaMEJ80S5CTwbh0g==",
+  "dgSpecHash": "ugIDI5qCQgd2aECG7z19OryvCjhbvceFkSDc1IRzm6xanw/xsh9tlrXnJWHeUgJ/PzNLtMdGE41SVJ/PlBDVLg==",
   "success": true,
   "projectFilePath": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\ParkingManagementSystemPL.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\maksm\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

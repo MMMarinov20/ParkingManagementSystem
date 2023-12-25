@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ParkingManagementSystem.DAL.Models;
 using ParkingManagementSystem.DAL.Repositories;
 using ParkingManagementSystem.BLL.Validators;
+using BCryptNet = BCrypt.Net.BCrypt;
+
 namespace ParkingManagementSystem.BLL.Services
 {
     public class AuthenticationService
@@ -25,6 +27,19 @@ namespace ParkingManagementSystem.BLL.Services
             if (user == null) return false;
 
             return userValidator.ValidateUserLogin(user, password);
+        }
+
+        public async Task<bool> RegisterUser(User user)
+        {
+            if (userValidator.EmailAlreadyExists(user.Email) || !userValidator.PasswordRegex(user.PasswordHash))
+            {
+                return false;
+            }
+
+            user.PasswordHash = BCryptNet.HashPassword(user.PasswordHash);
+            await _userRepository.CreateUser(user);
+            
+            return true;
         }
     }
 }

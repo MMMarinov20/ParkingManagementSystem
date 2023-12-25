@@ -11,7 +11,6 @@ namespace ParkingManagementSystem.DAL.Repositories
 {
     public class UserRepository
     {
-        UserValidator userValidator = new UserValidator();
         private readonly string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ParkingManagementSystem;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False\r\n";
 
         public UserRepository(string connectionString)
@@ -19,12 +18,8 @@ namespace ParkingManagementSystem.DAL.Repositories
             this._connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         }
 
-        public async Task<bool> CreateUser(User user)
+        public async Task CreateUser(User user)
         {
-            if (userValidator.EmailAlreadyExists(user.Email, _connectionString))
-            {
-                return false;
-            }
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
@@ -43,8 +38,6 @@ namespace ParkingManagementSystem.DAL.Repositories
                     await command.ExecuteNonQueryAsync();
                 }
             }
-
-            return true;
         }
 
         public async Task<User> GetUserByIdAsync(int userId)
@@ -113,12 +106,8 @@ namespace ParkingManagementSystem.DAL.Repositories
             return null;
         }
 
-        public async Task<bool> DeleteUser(string email)
+        public async Task DeleteUser(string email)
         {
-            if (!userValidator.EmailAlreadyExists(email, _connectionString))
-            {
-                return false;
-            }
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
@@ -132,8 +121,6 @@ namespace ParkingManagementSystem.DAL.Repositories
                     await command.ExecuteNonQueryAsync();
                 }
             }
-
-            return true;
         }
     }
 }

@@ -7,9 +7,10 @@ using Microsoft.Data.SqlClient;
 
 namespace ParkingManagementSystem.DAL.Validators
 {
-    public class UserValidator
+    public class UserValidation
     {
-        public bool EmailAlreadyExists(string email, string connectionString)
+        string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ParkingManagementSystem;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False\r\n";
+        public bool EmailAlreadyExists(string email)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

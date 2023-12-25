@@ -16,10 +16,13 @@ namespace ConsoleApp
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "example@1",
-                PasswordHash = "123",
+                PasswordHash = "Pafi123.",
                 Phone = "123"
             };
 
+            AuthenticationService authenticationService = new AuthenticationService(userRepository);
+            bool result = await authenticationService.AuthenticateUser("example@1", "Pafi123.");
+            Console.WriteLine(result);
         }
     }
 }
