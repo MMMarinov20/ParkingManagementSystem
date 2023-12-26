@@ -37,4 +37,6 @@ CREATE TABLE Feedback (
     Comment TEXT,
 );
 
+USE ParkingManagementSystem;
 INSERT INTO Users (FirstName, LastName, Email, [Password], Phone) VALUES ('admin', 'admin', 'example@', 'admin', '1234567890');
+INSERT INTO ParkingLots (LotID, LotName, [Location], Capacity, CurrentAvailability) VALUES (1, 'Lot 1', 'Location 1', 100, 100);

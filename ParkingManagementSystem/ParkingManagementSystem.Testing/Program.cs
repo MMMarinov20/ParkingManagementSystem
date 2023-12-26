@@ -10,19 +10,23 @@ namespace ConsoleApp
         static async Task Main(string[] args)
         {
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ParkingManagementSystem;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False\r\n";
-            UserRepository userRepository = new UserRepository(connectionString);
-            User user = new User
+            ReservationRepository reservationRepository = new ReservationRepository(connectionString);
+
+            ReservationService reservationService = new ReservationService(reservationRepository);
+
+            Reservation reservation = new Reservation()
             {
-                FirstName = "John",
-                LastName = "Doe",
-                Email = "example@1",
-                PasswordHash = "Pafi123.",
-                Phone = "123"
+                ReservationID = 1,
+                UserID = 1,
+                LotID = 1,
+                CarPlate = "ABC1234",
+                StartTime = DateTime.Now,
+                EndTime = DateTime.Now.AddHours(1),
+                Status = "Active"
             };
 
-            AuthenticationService authenticationService = new AuthenticationService(userRepository);
-            bool result = await authenticationService.AuthenticateUser("example@1", "Pafi123.");
-            Console.WriteLine(result);
+            //Console.WriteLine(await reservationService.CreateReservation(reservation));
+            Console.WriteLine(await reservationService.DeleteReservation(1));
         }
     }
 }
