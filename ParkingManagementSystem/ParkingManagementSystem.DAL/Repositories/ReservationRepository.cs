@@ -8,13 +8,55 @@ using ParkingManagementSystem.DAL.Models;
 
 namespace ParkingManagementSystem.DAL.Repositories
 {
-    public class ReservationRepository
+    public interface IReservationRepository
+    {
+        Task<List<Reservation>> GetAllReservations();
+        Task CreateReservation(Reservation reservation);
+        Task EditReservation(Reservation reservation);
+        Task DeleteReservation(int id);
+        Task<Reservation> GetReservationById(int id);
+    }
+    public class ReservationRepository : IReservationRepository
     {
         private readonly string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ParkingManagementSystem;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False\r\n";
 
-        public ReservationRepository(string connectionString)
+        public ReservationRepository()
         {
-            this._connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+           
+        }
+
+        public async Task<List<Reservation>> GetAllReservations()
+        {
+            List<Reservation> reservations = new List<Reservation>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Reservation", connection))
+                {
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            Reservation reservation = new Reservation
+                            {
+                                ReservationID = reader.GetInt32(0),
+                                UserID = reader.GetInt32(1),
+                                LotID = reader.GetInt32(2),
+                                CarPlate = reader.GetString(3),
+                                StartTime = reader.GetDateTime(4),
+                                EndTime = reader.GetDateTime(5),
+                                Status = reader.GetString(6)
+                            };
+
+                            reservations.Add(reservation);
+                        }
+                    }
+                }
+            }
+
+            return reservations;
         }
 
         public async Task CreateReservation(Reservation reservation)
@@ -64,6 +106,7 @@ namespace ParkingManagementSystem.DAL.Repositories
                 }
             }
         }
+
         public async Task DeleteReservation(int reservationId)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))

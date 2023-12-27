@@ -22,4 +22,9 @@
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ParkingManagementSystem.BLL\ParkingManagementSystem.BLL.csproj" />
+    <ProjectReference Include="..\ParkingManagementSystem.DAL\ParkingManagementSystem.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

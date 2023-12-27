@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using ParkingManagementSystem.DAL.Models;
 using ParkingManagementSystem.DAL.Repositories;
+using ParkingManagementSystem.BLL.Interfaces;
 
 namespace ParkingManagementSystem.BLL.Services
 {
-    public class ReservationService
+    public class ReservationService : IReservationService
     {
-        private readonly ReservationRepository _reservationRepository;
+        private readonly IReservationRepository _reservationRepository;
 
-        public ReservationService(ReservationRepository reservationRepository)
+        public ReservationService(IReservationRepository reservationRepository)
         {
             _reservationRepository = reservationRepository;
         }
@@ -49,6 +50,11 @@ namespace ParkingManagementSystem.BLL.Services
             if (id <= 0) return null;
 
             return await _reservationRepository.GetReservationById(id);
+        }
+
+        public async Task<List<Reservation>> GetAllReservations()
+        {
+            return await _reservationRepository.GetAllReservations();
         }
     }
 }

@@ -2,7 +2,6 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('reserve').addEventListener('click', function () {
         document.getElementById('overlay').classList.remove('hidden');
@@ -23,4 +22,25 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.style.overflow = '';
         }
     });
+
+    document.getElementById('goToCheckout').addEventListener('click', async function () {
+        try {
+            const response = await fetch("/api/reservation/CreateReservation", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "RequestVerificationToken": '@Request.GetAntiforgeryToken()',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            alert(data);
+        } catch (error) {
+            console.error(error);
+        }
+    })
 });

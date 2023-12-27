@@ -1,7 +1,17 @@
+using ParkingManagementSystem.BLL.Interfaces;
+using ParkingManagementSystem.BLL.Services;
+using ParkingManagementSystem.DAL.Repositories;
+using Microsoft.Data.SqlClient;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 
 var app = builder.Build();
 
@@ -20,6 +30,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapControllers(); // Use top-level route registration for controllers.
+
 app.MapRazorPages();
 
 app.Run();
+
