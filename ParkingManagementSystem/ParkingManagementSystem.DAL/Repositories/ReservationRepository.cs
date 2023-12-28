@@ -65,12 +65,11 @@ namespace ParkingManagementSystem.DAL.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Reservations (ReservationID, UserID, LotID, CarPlate, StartTime, EndTime, Status) " +
-                               "VALUES (@ReservationID, @UserID, @LotID, @CarPlate, @StartTime, @EndTime, @Status)";
+                string query = "INSERT INTO Reservations (UserID, LotID, CarPlate, StartTime, EndTime, Status) " +
+                               "VALUES (@UserID, @LotID, @CarPlate, @StartTime, @EndTime, @Status)";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@ReservationID", reservation.ReservationID);
                     command.Parameters.AddWithValue("@UserID", reservation.UserID);
                     command.Parameters.AddWithValue("@LotID", reservation.LotID);
                     command.Parameters.AddWithValue("@CarPlate", reservation.CarPlate);

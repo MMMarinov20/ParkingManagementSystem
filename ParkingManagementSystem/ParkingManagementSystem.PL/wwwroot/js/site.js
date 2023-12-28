@@ -24,6 +24,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.getElementById('goToCheckout').addEventListener('click', async function () {
+        var lot = await parseFloat(document.getElementById('lot').value);
+        var date = await document.getElementById('date').value;
+        var timestamp = await parseFloat(document.getElementById('timestamp').value);
+        var plate = await document.getElementById('plate').value;
+
+        const data = {
+            Lot: lot,
+            Date: date,
+            Timestamp: timestamp,
+            Plate: plate
+        }
+        
         try {
             const response = await fetch("/api/reservation/CreateReservation", {
                 method: "POST",
@@ -31,6 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     "Content-Type": "application/json",
                     "RequestVerificationToken": '@Request.GetAntiforgeryToken()',
                 },
+                body: JSON.stringify({
+                    Lot: lot,
+                    Date: date,
+                    Timestamp: timestamp,
+                    Plate: plate
+                })
             });
 
             if (!response.ok) {
@@ -39,6 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const data = await response.json();
             alert(data);
+            document.getElementById('overlay').classList.add('hidden');
+            document.getElementById('myModal').classList.add('hidden');
+            window.location.href = "/";
         } catch (error) {
             console.error(error);
         }

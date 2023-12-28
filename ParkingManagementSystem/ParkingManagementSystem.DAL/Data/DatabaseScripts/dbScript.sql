@@ -1,4 +1,6 @@
-﻿CREATE DATABASE ParkingManagementSystem;
+﻿use master;
+DROP DATABASE ParkingManagementSystem;
+CREATE DATABASE ParkingManagementSystem;
 USE ParkingManagementSystem;
 
 
@@ -20,7 +22,7 @@ CREATE TABLE ParkingLots (
 );
 
 CREATE TABLE Reservations (
-    ReservationID INT PRIMARY KEY,
+    ReservationID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT REFERENCES Users(UserID),
     LotID INT REFERENCES ParkingLots(LotID),
 	CarPlate VARCHAR(10) NOT NULL,
@@ -37,6 +39,5 @@ CREATE TABLE Feedback (
     Comment TEXT,
 );
 
-USE ParkingManagementSystem;
 INSERT INTO Users (FirstName, LastName, Email, [Password], Phone) VALUES ('admin', 'admin', 'example@', 'admin', '1234567890');
 INSERT INTO ParkingLots (LotID, LotName, [Location], Capacity, CurrentAvailability) VALUES (1, 'Lot 1', 'Location 1', 100, 100);

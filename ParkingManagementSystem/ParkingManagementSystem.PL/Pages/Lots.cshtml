@@ -97,28 +97,28 @@
         <div id="myModal" class="hidden bg-white p-6 rounded-xl shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <h2 class="text-2xl font-bold mb-4 text-center">Make a reservation</h2>
             <div class="flex flex-col gap-y-5">
-                <select placeholder="Choose parking lot" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full">
+                <select id="lot" placeholder="Choose parking lot" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full">
                     <option value="" selected disabled>Choose a parking lot</option>
-                    <option>Parking Lot 1</option>
-                    <option>Parking Lot 1</option>
-                    <option>Parking Lot 1</option>
-                    <option>Parking Lot 1</option>
+                    <option value="1">Parking Lot 1</option>
+                    <option value="2">Parking Lot 1</option>
+                    <option value="3">Parking Lot 1</option>
+                    <option value="4">Parking Lot 1</option>
                 </select>
 
-                <input type="date" placeholder="Choose date" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full" />
-                <select placeholder="Choose date" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full">
+                <input id="date" type="date" placeholder="Choose date" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full" />
+                <select id="timestamp" placeholder="Choose date" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full">
                     <option value="" selected disabled>Choose a timestamp</option>
-                    <option>1 hour</option>
-                    <option>2 hours</option>
-                    <option>3 hours</option>
-                    <option>6 hours</option>
-                    <option>12 hours</option>
-                    <option>1 day</option>
-                    <option>3 days</option>
-                    <option>5 days</option>
-                    <option>1 week</option>
+                    <option value="60">1 hour</option>
+                    <option value="120">2 hours</option>
+                    <option value="180">3 hours</option>
+                    <option value="360">6 hours</option>
+                    <option value="720">12 hours</option>
+                    <option value="1040">1 day</option>
+                    <option value="3120">3 days</option>
+                    <option value="5200">5 days</option>
+                    <option value="7280">1 week</option>
                 </select>
-                <input placeholder="Car plate" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full" />
+                <input id="plate" placeholder="Car plate" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full" />
             </div>
             <div class="w-full h-fit flex flex-row justify-end gap-x-5">
                 <button id="closeModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-xl hover:scale-110 transition transform duration-300">Close Modal</button>
