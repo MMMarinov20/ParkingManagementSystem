@@ -28,20 +28,13 @@ document.addEventListener('DOMContentLoaded', function () {
         var date = await document.getElementById('date').value;
         var timestamp = await parseFloat(document.getElementById('timestamp').value);
         var plate = await document.getElementById('plate').value;
-
-        const data = {
-            Lot: lot,
-            Date: date,
-            Timestamp: timestamp,
-            Plate: plate
-        }
         
         try {
             const response = await fetch("/api/reservation/CreateReservation", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "RequestVerificationToken": '@Request.GetAntiforgeryToken()',
+                    //"RequestVerificationToken": '@Request.GetAntiforgeryToken()',
                 },
                 body: JSON.stringify({
                     Lot: lot,

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kOM+OeB6Q0nZwhqLgxm4+kWO8poUbHgqXRa/mw8nUyA=",
+  "Hash": "bC5BRuNc+BzzGUJiToenV86ABoeJodKe/TdM//KO/1s=",
   "Source": "ParkingManagementSystemPL",
   "BasePath": "_content/ParkingManagementSystemPL",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\js\\login.js",
+      "SourceId": "ParkingManagementSystemPL",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\",
+      "BasePath": "_content/ParkingManagementSystemPL",
+      "RelativePath": "js/login.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\login.js"
     },
     {
       "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\js\\site.js",
