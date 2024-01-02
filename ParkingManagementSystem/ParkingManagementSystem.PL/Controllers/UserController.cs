@@ -32,9 +32,6 @@ namespace ParkingManagementSystemPL.Controllers
                 {
                     return new JsonResult("Wrong password");
                 }
-
-                //return new JsonResult("Success");
-
             }
             catch (Exception ex)
             {
@@ -43,10 +40,40 @@ namespace ParkingManagementSystemPL.Controllers
             }
         }
 
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequest user)
+        {
+            User newUser = new User()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PasswordHash = user.PasswordHash,
+                Phone = user.Phone
+            };
+            if (await _authenticationService.CreateUser(newUser))
+            {
+                return new JsonResult("Success");
+            }
+            else
+            {
+                return new JsonResult("User already exists");
+            }
+        }
+
         public class LoginRequest
         {
             public string Email { get; set; }
             public string PasswordHash { get; set; }
+        }
+
+        public class RegisterRequest
+        { 
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Email { get; set; }
+            public string PasswordHash { get; set; }
+            public string Phone { get; set; }
         }
     }
 }

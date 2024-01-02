@@ -14,22 +14,29 @@
     <div class="w-screen h-screen bg-blue-300 flex flex-col items-center justify-center">
         <h1 class="text-white text-5xl font-semibold">Register</h1>
         <div class="pt-16">
-            <p class="text-2xl text-white">Username:</p>
-            <input class="w-[30vw] rounded-sm placeholder:text-gray-500 placeholder:text-xl bg-transparent border-2 border-gray-300 px-6 py-3 mt-2" placeholder="Username" />
+            <p class="text-2xl text-white">First Name:</p>
+            <input id="fName" class="w-[30vw] rounded-sm placeholder:text-gray-500 placeholder:text-xl bg-transparent border-2 border-gray-300 px-6 py-3 mt-2" placeholder="Username" />
 
+            <p class="text-2xl text-white pt-5">Last Name:</p>
+            <input id="lName" class="w-[30vw] rounded-sm placeholder:text-gray-500 placeholder:text-xl bg-transparent border-2 border-gray-300 px-6 py-3 mt-2" placeholder="Last Name" />
+
+            <p class="text-2xl text-white pt-5">Email:</p>
+            <input id="email" type="email" class="w-[30vw] rounded-sm placeholder:text-gray-500 placeholder:text-xl bg-transparent border-2 border-gray-300 px-6 py-3 mt-2" placeholder="Email" />
+            
             <p class="text-2xl text-white pt-5">Password:</p>
-            <input class="w-[30vw] rounded-sm placeholder:text-gray-500 placeholder:text-xl bg-transparent border-2 border-gray-300 px-6 py-3 mt-2" placeholder="Email" />
-
-            <p class="text-2xl text-white pt-5">Password:</p>
-            <input class="w-[30vw] rounded-sm placeholder:text-gray-500 placeholder:text-xl bg-transparent border-2 border-gray-300 px-6 py-3 mt-2" placeholder="Password" />
-
+            <input id="password" type="password" class="w-[30vw] rounded-sm placeholder:text-gray-500 placeholder:text-xl bg-transparent border-2 border-gray-300 px-6 py-3 mt-2" placeholder="Password" />
+            
+            <p class="text-2xl text-white pt-5">Phone:</p>
+            <input id="phone" maxlength="10" class="w-[30vw] rounded-sm placeholder:text-gray-500 placeholder:text-xl bg-transparent border-2 border-gray-300 px-6 py-3 mt-2" placeholder="Phone" />
         </div>
 
         <div class="pt-16">
-            <a asp-page="/Index"><button class="bg-white rounded-full w-[20vw] py-3 text-xl hover:bg-gray-200 transition duration-1000">Register</button></a>
+            <button id="register" class="bg-white rounded-full w-[20vw] py-3 text-xl hover:bg-gray-200 transition duration-1000">Register</button>
         </div>
 
         <a asp-page="/Login"><h1 class="underline pt-3">Already have an account? Log in.</h1></a>
     </div>
+
+    <script src="./js/register.js"></script>
 </body>
 </html>

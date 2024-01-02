@@ -11,7 +11,7 @@ namespace ParkingManagementSystem.BLL.Interfaces
 {
     public interface IUserService
     {
-        Task CreateUser(User user);
+        Task<bool> CreateUser(User user);
         Task<User> GetUserByIdAsync(int id);
         Task<User> GetUserByEmail(string email);
         Task<bool> AuthenticateUser(string email = "example", string password = "example");
