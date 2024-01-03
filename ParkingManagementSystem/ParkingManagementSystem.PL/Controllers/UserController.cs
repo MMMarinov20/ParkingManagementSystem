@@ -26,11 +26,11 @@ namespace ParkingManagementSystemPL.Controllers
             {
                 if (await _authenticationService.AuthenticateUser(email, password))
                 {
-                    return new JsonResult("Success");
+                    return new JsonResult("Success!");
                 }
                 else
                 {
-                    return new JsonResult("Wrong password");
+                    return new JsonResult("Invalid credentials!");
                 }
             }
             catch (Exception ex)

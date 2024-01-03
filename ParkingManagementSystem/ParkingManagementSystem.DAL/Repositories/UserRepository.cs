@@ -45,7 +45,7 @@ namespace ParkingManagementSystem.DAL.Repositories
                     command.Parameters.AddWithValue("@FirstName", user.FirstName);
                     command.Parameters.AddWithValue("@LastName", user.LastName);
                     command.Parameters.AddWithValue("@Email", user.Email);
-                    command.Parameters.AddWithValue("@Password", user.PasswordHash);
+                    command.Parameters.AddWithValue("@Password", BCryptNet.HashPassword(user.PasswordHash));
                     command.Parameters.AddWithValue("@Phone", user.Phone);
 
                     await command.ExecuteNonQueryAsync();

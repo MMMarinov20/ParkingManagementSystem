@@ -1,7 +1,7 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('login').addEventListener('click', async function () {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
         console.log(JSON.stringify({ email: email, password: password }));
         console.log('@Request.GetAntiforgeryToken()');
 
@@ -13,8 +13,8 @@
                     "RequestVerificationToken": '@Request.GetAntiforgeryToken()',
                 },
                 body: JSON.stringify({
-                    Email: email,
-                    PasswordHash: password
+                    Email: email.value,
+                    PasswordHash: password.value
                 })
             });
 
@@ -24,8 +24,12 @@
 
             const data = await response.json();
             alert(data);
-            console.log(data);
-            //window.location.href = "/";
+            if (data == "Success!") 
+                email.value = "";
+                password.value = "";
+                window.location.href = "/";
+            }
+                        
         } catch (error) {
             console.error(error);
         }

@@ -6,6 +6,12 @@
         const password = document.getElementById("password").value;
         const phone = document.getElementById("phone").value;
 
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        if (!passwordRegex.test(password)) {
+            alert("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!");
+            return;
+        }
+
         try {
             const response = await fetch("/api/User/Register", {
                 method: "POST",

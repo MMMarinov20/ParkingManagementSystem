@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ParkingManagementSystem"
   ],
-  "SelectedNode": "\\ParkingManagementSystem.sln",
+  "SelectedNode": "\\ParkingManagementSystem\\ParkingManagementSystem.sln",
   "PreviewInSolutionExplorer": false
 }
