@@ -2,7 +2,25 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    var currentUser = UserSession.Instance.currentUser;
+    if(currentUser != null) Console.WriteLine(currentUser.FirstName);
+        
 }
+
+@if (currentUser != null)
+{
+    <script>
+        var currentUserData = @Html.Raw(Json.Serialize(currentUser));
+    </script>
+}
+else
+{
+    <script>
+        var currentUserData = null;
+                console.log("currentUserData after logout:", currentUserData);
+    </script>
+}
+@using ParkingManagementSystemPL.Controllers
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,18 +51,30 @@
                 <h1 class="relative z-20">Contact us</h1>
                 <div class="absolute w-full h-0.5 bg-blue-500 transform translate-y-full opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"></div>
             </a>
-            <a asp-page="/Login" class="inline-block">
-                <button class="relative bg-blue-400 rounded-full px-5 py-2 text-white overflow-hidden transition duration-300 ease-in-out text-center transform hover:scale-105 hover:shadow-2xl">
+            
+            @if (UserSession.Instance.currentUser != null)
+            {
+                <button id="logout" class="relative bg-blue-400 rounded-full px-5 py-2 text-white overflow-hidden transition duration-300 ease-in-out text-center transform hover:scale-105 hover:shadow-2xl">
                     <span class="absolute inset-0 bg-gradient-to-r from-blue-400 to-transparent mix-blend-multiply opacity-50 text-center"></span>
-                    <span class="relative z-10 text-lg text-center">Log in</span>
+                    <span class="relative z-10 text-lg text-center">Log out</span>
                 </button>
-            </a>
+                <script src="./js//site.js"></script>
+            }
+            else
+            {
+                <a asp-page="/Login" class="inline-block">
+                    <button id="login" class="relative bg-blue-400 rounded-full px-5 py-2 text-white overflow-hidden transition duration-300 ease-in-out text-center transform hover:scale-105 hover:shadow-2xl">
+                        <span class="absolute inset-0 bg-gradient-to-r from-blue-400 to-transparent mix-blend-multiply opacity-50 text-center"></span>
+                        <span class="relative z-10 text-lg text-center">Log in</span>
+                    </button>
+                </a>
+            }
         </div>
 
         <div class="pt-52 lg:pt-24 w-screen pl-24 lg:pl-14 2xl:pl-32 bg-opacity-25">
             <h1 class="text-blue-400 font-bold text-5xl lg:text-3xl 2xl:text-5xl">Park with Ease. Travel with Confidence</h1>
             <h1 class="text-8xl lg:text-5xl 2xl:text-8xl font-black text-white lg:max-w-lg max-w-3xl 2xl:max-w-3xl pt-6">We assure your parking spot!</h1>
-            <h1 class="text-white font-semibold text-3xl lg:text-xl max-w-2xl py-10">Effortless parking, just a click away. Explore, reserve, and travel stress-free with our intuitive Parking Management System. Your journey, simplified.</h1>
+            <h1 class="text-white font-semibold text-3xl lg:text-xl max-w-2xl py-10">Effortless parking, just a click away. Explore, reserve, and travel stress-free with our intuitive Parking Management System. Your journey, simplified.</h1
             <a asp-page="/Login" class="inline-block">
                 <button class="bg-white px-8 py-4 rounded-full text-blue-400 text-3xl lg:text-xl 2xl:text-2xl font-semibold transition duration-300 ease-in-out transform hover:scale-105">
                     Reserve your spot

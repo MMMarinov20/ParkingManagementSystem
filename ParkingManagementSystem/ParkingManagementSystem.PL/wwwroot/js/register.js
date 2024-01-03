@@ -6,6 +6,11 @@
         const password = document.getElementById("password").value;
         const phone = document.getElementById("phone").value;
 
+        if (fName == "" || lName == "" || email == "" || password == "" || phone == "") {
+            alert("Please fill all the fields");
+            return;
+        }
+
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
         if (!passwordRegex.test(password)) {
             alert("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!");

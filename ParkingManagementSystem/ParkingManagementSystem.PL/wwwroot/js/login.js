@@ -24,7 +24,7 @@
 
             const data = await response.json();
             alert(data);
-            if (data == "Success!") 
+            if (data == "Success!") {
                 email.value = "";
                 password.value = "";
                 window.location.href = "/";

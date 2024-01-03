@@ -1,7 +1,39 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// logout.js
+document.addEventListener('DOMContentLoaded', async function () {
+    const logoutButton = document.getElementById('logout');
+    const loginButton = document.getElementById('login');
+    
+    if (logoutButton) {
+        logoutButton.addEventListener('click', async function () {
+            // Access user session data in JavaScript
+            console.log(currentUserData);
 
-// Write your JavaScript code.
+            try {
+                const response = await fetch("/api/User/Logout", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                alert(data);
+                if (data == "Success!") {
+                    window.location.href = "/";
+                }
+            }
+            catch (error) {
+                console.error(error);
+            }
+        });
+    }
+});
+
+
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('reserve').addEventListener('click', function () {
         document.getElementById('overlay').classList.remove('hidden');

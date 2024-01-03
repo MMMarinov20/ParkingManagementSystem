@@ -9,6 +9,7 @@ namespace ParkingManagementSystemPL.Controllers
     [ApiController]
     public class UserController : Controller
     {
+        private UserSession session = UserSession.Instance;
         private readonly IUserService _authenticationService;
 
         public UserController(IUserService authenticationService)
@@ -19,13 +20,14 @@ namespace ParkingManagementSystemPL.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest user)
         {
-            //get the type of user.email
             string email = user.Email;
             string password = user.PasswordHash;
             try
             {
                 if (await _authenticationService.AuthenticateUser(email, password))
                 {
+                    User currentUser = await _authenticationService.GetUserByEmail(email);
+                    session.currentUser = currentUser; 
                     return new JsonResult("Success!");
                 }
                 else
@@ -59,6 +61,14 @@ namespace ParkingManagementSystemPL.Controllers
             {
                 return new JsonResult("User already exists");
             }
+        }
+
+        [HttpPost("Logout")]
+        public IActionResult Logout()
+        {
+            UserSession.Instance.currentUser = null;
+
+            return new JsonResult("Success");
         }
 
         public class LoginRequest
