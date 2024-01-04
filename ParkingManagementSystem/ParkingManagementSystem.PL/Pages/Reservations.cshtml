@@ -1,5 +1,6 @@
 ﻿@page
 @model ParkingManagementSystemPL.Pages.ReservationsModel
+@using ParkingManagementSystemPL.Controllers;
 @{
 }
 
@@ -17,7 +18,7 @@
         <div class="bg-black text-white w-64 h-screen px-4 py-10">
             <h2 class="text-2xl font-semibold">My Reservations</h2>
             <ul class="mt-4">
-                <li><a asp-page="/Index" class="text-gray-300 hover:text-white">Link 1</a></li>
+                <li><a asp-page="/Reservations" class="text-gray-300 hover:text-white">Hello, @UserSession.Instance.currentUser.FirstName</a></li>
                 <li><a asp-page="/Index" class="text-gray-300 hover:text-white">Link 2</a></li>
                 <li><a asp-page="/Index" class="text-gray-300 hover:text-white">Link 3</a></li>
             </ul>

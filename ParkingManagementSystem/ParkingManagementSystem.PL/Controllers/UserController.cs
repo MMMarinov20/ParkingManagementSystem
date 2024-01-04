@@ -55,7 +55,7 @@ namespace ParkingManagementSystemPL.Controllers
             };
             if (await _authenticationService.CreateUser(newUser))
             {
-                return new JsonResult("Success");
+                return new JsonResult("Success!");
             }
             else
             {
@@ -68,7 +68,7 @@ namespace ParkingManagementSystemPL.Controllers
         {
             UserSession.Instance.currentUser = null;
 
-            return new JsonResult("Success");
+            return new JsonResult("Success!");
         }
 
         public class LoginRequest
