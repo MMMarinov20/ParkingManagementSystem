@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using ParkingManagementSystem.DAL.Models;
+using ParkingManagementSystem.DAL.Data;
 
 namespace ParkingManagementSystem.DAL.Repositories
 {
@@ -18,21 +19,19 @@ namespace ParkingManagementSystem.DAL.Repositories
     }
     public class ReservationRepository : IReservationRepository
     {
-        private readonly string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ParkingManagementSystem;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False\r\n";
+        private readonly DatabaseConnector _databaseConnector;
 
-        public ReservationRepository()
+        public ReservationRepository(DatabaseConnector databaseConnector)
         {
-           
+            _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
         }
 
         public async Task<List<Reservation>> GetAllReservations()
         {
             List<Reservation> reservations = new List<Reservation>();
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
-
                 using (SqlCommand command = new SqlCommand("SELECT * FROM Reservation", connection))
                 {
                     using (SqlDataReader reader = await command.ExecuteReaderAsync())
@@ -61,10 +60,8 @@ namespace ParkingManagementSystem.DAL.Repositories
 
         public async Task CreateReservation(Reservation reservation)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
-
                 string query = "INSERT INTO Reservations (UserID, LotID, CarPlate, StartTime, EndTime, Status) " +
                                "VALUES (@UserID, @LotID, @CarPlate, @StartTime, @EndTime, @Status)";
 
@@ -84,10 +81,8 @@ namespace ParkingManagementSystem.DAL.Repositories
 
         public async Task EditReservation(Reservation reservation)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
-
                 string query = "UPDATE Reservations SET UserID = @UserID, LotID = @LotID, CarPlate = @CarPlate, StartTime = @StartTime, EndTime = @EndTime, Status = @Status " +
                                "WHERE ReservationID = @ReservationID";
 
@@ -108,10 +103,8 @@ namespace ParkingManagementSystem.DAL.Repositories
 
         public async Task DeleteReservation(int reservationId)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
-
                 string query = "DELETE FROM Reservations WHERE ReservationID = @ReservationID";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -125,10 +118,8 @@ namespace ParkingManagementSystem.DAL.Repositories
 
         public async Task<Reservation> GetReservationById(int reservationId)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
-
                 string query = "SELECT ReservationID, UserID, LotID, CarPlate, StartTime, EndTime, Status " +
                                "FROM Reservations " +
                                "WHERE ReservationID = @ReservationID";

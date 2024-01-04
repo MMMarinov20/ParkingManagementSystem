@@ -2,6 +2,7 @@ using ParkingManagementSystem.BLL.Interfaces;
 using ParkingManagementSystem.BLL.Services;
 using ParkingManagementSystem.DAL.Repositories;
 using ParkingManagementSystem.DAL.Models;
+using ParkingManagementSystem.DAL.Data;
 using Microsoft.Data.SqlClient;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<DatabaseConnector>();
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();

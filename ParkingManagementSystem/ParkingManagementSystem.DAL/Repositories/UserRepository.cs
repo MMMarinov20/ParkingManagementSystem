@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using ParkingManagementSystem.DAL.Models;
 using ParkingManagementSystem.DAL.Validators;
+using ParkingManagementSystem.DAL.Data;
 using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace ParkingManagementSystem.DAL.Repositories
@@ -22,20 +23,19 @@ namespace ParkingManagementSystem.DAL.Repositories
     }
     public class UserRepository : IUserRepository
     {
-        private readonly string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ParkingManagementSystem;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False\r\n";
+        private readonly DatabaseConnector _databaseConnector;
 
-        public UserRepository()
+        public UserRepository(DatabaseConnector databaseConnector)
         {
-
+            _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
         }
 
         public async Task<bool> CreateUser(User user)
         {
             UserValidation userValidation = new UserValidation();
             if (userValidation.EmailAlreadyExists(user.Email)) return false;
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
 
                 string query = "INSERT INTO Users (FirstName, LastName, Email, Password, Phone) " +
                                "VALUES (@FirstName, @LastName, @Email, @Password, @Phone)";
@@ -57,9 +57,8 @@ namespace ParkingManagementSystem.DAL.Repositories
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
 
                 string query = "SELECT * FROM Users WHERE UserID = @UserID";
 
@@ -96,9 +95,8 @@ namespace ParkingManagementSystem.DAL.Repositories
 
         public async Task<User> GetUserByEmail(string email)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
 
                 string query = "SELECT * FROM Users WHERE Email = @Email";
 
@@ -135,9 +133,8 @@ namespace ParkingManagementSystem.DAL.Repositories
 
         public async Task<bool> AuthenticateUser(string email, string password)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
 
                 string query = "SELECT Password FROM Users WHERE Email = @Email";
 
@@ -168,10 +165,8 @@ namespace ParkingManagementSystem.DAL.Repositories
 
         public async Task DeleteUser(string email)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
-
                 string query = "DELETE FROM Users WHERE Email = @Email";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
