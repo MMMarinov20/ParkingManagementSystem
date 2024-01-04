@@ -37,6 +37,10 @@
       "PackagePath": "staticwebassets\\js\\register.js"
     },
     {
+      "Id": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\js\\reservations.js",
+      "PackagePath": "staticwebassets\\js\\reservations.js"
+    },
+    {
       "Id": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4HUqD+a9QIiSMR4E/vhpbpnK9xGIAXR705uwJdoxVVQ=",
+  "Hash": "lOgp278dGRfIOlDQZpz3E0PRI0h5JKwzplhjE5bThXU=",
   "Source": "ParkingManagementSystemPL",
   "BasePath": "_content/ParkingManagementSystemPL",
   "Mode": "Default",
@@ -168,6 +168,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\register.js"
+    },
+    {
+      "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\js\\reservations.js",
+      "SourceId": "ParkingManagementSystemPL",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\",
+      "BasePath": "_content/ParkingManagementSystemPL",
+      "RelativePath": "js/reservations.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\reservations.js"
     },
     {
       "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\js\\site.js",

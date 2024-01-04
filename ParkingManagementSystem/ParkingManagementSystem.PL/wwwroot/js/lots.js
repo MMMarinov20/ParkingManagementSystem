@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.style.overflow = '';
         }
     });
-
     document.getElementById('goToCheckout').addEventListener('click', async function () {
         var lot = await parseFloat(document.getElementById('lot').value);
         var date = await document.getElementById('date').value;
@@ -33,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     //"RequestVerificationToken": '@Request.GetAntiforgeryToken()',
                 },
                 body: JSON.stringify({
+                    UserID: currentUserData.userID,
                     Lot: lot,
                     Date: date,
                     Timestamp: timestamp,

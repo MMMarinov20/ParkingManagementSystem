@@ -16,6 +16,7 @@ namespace ParkingManagementSystem.DAL.Repositories
         Task EditReservation(Reservation reservation);
         Task DeleteReservation(int id);
         Task<Reservation> GetReservationById(int id);
+        Task<List<Reservation>> GetReservationsByUserId(int id);
     }
     public class ReservationRepository : IReservationRepository
     {
@@ -148,6 +149,44 @@ namespace ParkingManagementSystem.DAL.Repositories
             }
 
             return null;
+        }
+
+        public async Task<List<Reservation>> GetReservationsByUserId(int userId)
+        {
+            List<Reservation> reservations = new List<Reservation>();
+
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
+            {
+                string query = "SELECT ReservationID, UserID, LotID, CarPlate, StartTime, EndTime, Status " +
+                               "FROM Reservations " +
+                               "WHERE UserID = @UserID";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@UserID", userId);
+
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            Reservation reservation = new Reservation
+                            {
+                                ReservationID = reader.GetInt32(0),
+                                UserID = reader.GetInt32(1),
+                                LotID = reader.GetInt32(2),
+                                CarPlate = reader.GetString(3),
+                                StartTime = reader.GetDateTime(4),
+                                EndTime = reader.GetDateTime(5),
+                                Status = reader.GetString(6)
+                            };
+
+                            reservations.Add(reservation);
+                        }
+                    }
+                }
+            }
+
+            return reservations;
         }
     }
 }
