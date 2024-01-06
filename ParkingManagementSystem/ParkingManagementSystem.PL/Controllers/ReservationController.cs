@@ -59,6 +59,21 @@ namespace ParkingManagementSystemPL.Controllers
             }
         }
 
+        [HttpPost("DeleteReservation")]
+        public async Task<IActionResult> DeleteReservation([FromBody] DeleteReservationRequest request)
+        {
+            try
+            {
+                await _reservationService.DeleteReservation(request.id);
+                return new JsonResult("Success!");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return BadRequest("Error processing the request");
+            }
+        }
+
         public class ReservationRequestModel
         {
             public int UserID { get; set; }
@@ -69,6 +84,11 @@ namespace ParkingManagementSystemPL.Controllers
         }
 
         public class GetReservationRequest
+        {
+            public int id { get; set; }
+        }
+
+        public class DeleteReservationRequest
         {
             public int id { get; set; }
         }
