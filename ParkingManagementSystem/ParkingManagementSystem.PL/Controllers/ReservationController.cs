@@ -24,13 +24,13 @@ namespace ParkingManagementSystemPL.Controllers
             {
                 var reservation = new Reservation
                 {
-                    ReservationID = 1,
+                    //ReservationID = 1,
                     UserID = request.UserID,
                     LotID = request.Lot,
                     CarPlate = request.Plate,
                     StartTime = DateTime.Parse(request.Date),
                     EndTime = DateTime.Parse(request.Date).AddMinutes(request.Timestamp),
-                    Status = "Active"
+                    Status = "Pending"
                 };
 
                 await _reservationService.CreateReservation(reservation);
@@ -50,7 +50,6 @@ namespace ParkingManagementSystemPL.Controllers
             try
             {
                 var reservations = await _reservationService.GetReservationsByUserId(request.id);
-                Console.Write(reservations);
                 return new JsonResult(reservations);
             }
             catch (Exception ex)
