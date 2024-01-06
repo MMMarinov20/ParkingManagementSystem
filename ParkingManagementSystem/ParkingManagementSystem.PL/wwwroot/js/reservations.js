@@ -23,17 +23,21 @@
         console.log(e);
     }
 
+    handleModal();
 })
 
 const generateTable = (data) => {
     const tableTitle = document.getElementById("tableTitle");
     const tableEl = document.getElementById("table");
+    const reservationsLabel = document.getElementById("reservations-label");
 
     if (data.length == 0) {
         tableTitle.innerHTML = "You have no reservations";
+        reservationsLabel.innerHTML = "📉 Reservations: 0";
         tableEl.classList.add("hidden");
     } else {
         tableTitle.innerHTML = "Your reservations";
+        reservationsLabel.innerHTML = `📈 Reservations: ${data.length}`;
         tableEl.classList.add("visible");
     }
 
@@ -84,12 +88,12 @@ const generateTable = (data) => {
                         id: reservation.reservationID,
                     })
                 });
-                
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                     return;
                 }
-                
+
                 const data = await response.json();
                 alert(data);
                 if (data == "Success!") {
@@ -99,6 +103,57 @@ const generateTable = (data) => {
             catch (e) {
                 console.log(e);
             }
+        }
+    })
+}
+
+const handleModal = () => {
+    const password = document.getElementById("password");
+    document.getElementById('delete').addEventListener('click', function () {
+        document.getElementById('overlay').classList.remove('hidden');
+        document.getElementById('myModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('closeModal').addEventListener('click', function () {
+        document.getElementById('overlay').classList.add('hidden');
+        document.getElementById('myModal').classList.add('hidden');
+        document.body.style.overflow = '';
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target === document.getElementById('overlay')) {
+            document.getElementById('overlay').classList.add('hidden');
+            document.getElementById('myModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    });
+
+    document.getElementById('deleteConfirmation').addEventListener('click', async function () {
+        try {
+            const response = await fetch("/api/user/DeleteUser", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    password: password.value,
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+                return;
+            }
+
+            const data = await response.json();
+            alert(data);
+            if (data == "Success!") {
+                window.location.href = "/";
+            }
+        }
+        catch (e) {
+            console.log(e);
         }
     })
 }

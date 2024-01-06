@@ -18,7 +18,7 @@ namespace ParkingManagementSystem.DAL.Repositories
         Task<User> GetUserByIdAsync(int id);
         Task<User> GetUserByEmail(string email);
         Task<bool> AuthenticateUser(string email, string password);
-        Task DeleteUser(string email);
+        Task<bool> DeleteUser(int id, string password);
 
     }
     public class UserRepository : IUserRepository
@@ -157,18 +157,48 @@ namespace ParkingManagementSystem.DAL.Repositories
 
 
 
-        public async Task DeleteUser(string email)
+        public async Task<bool> DeleteUser(int id, string password)
         {
             using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                string query = "DELETE FROM Users WHERE Email = @Email";
+                string query = "SELECT Password FROM Users WHERE UserID = @UserID";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Email", email);
+                    command.Parameters.AddWithValue("@UserID", id);
 
-                    await command.ExecuteNonQueryAsync();
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            string storedPassword = reader["Password"].ToString();
+                            if (BCryptNet.Verify(password, storedPassword))
+                            {
+                                // Close the SqlDataReader before executing additional commands
+                                reader.Close();
+
+                                // Now you can execute additional commands
+                                query = "DELETE FROM Reservations WHERE UserID = @UserID";
+                                using (SqlCommand command2 = new SqlCommand(query, connection))
+                                {
+                                    command2.Parameters.AddWithValue("@UserID", id);
+                                    await command2.ExecuteNonQueryAsync();
+                                }
+
+                                query = "DELETE FROM Users WHERE UserID = @UserID";
+                                using (SqlCommand command3 = new SqlCommand(query, connection))
+                                {
+                                    command3.Parameters.AddWithValue("@UserID", id);
+                                    await command3.ExecuteNonQueryAsync();
+                                }
+
+                                return true;
+                            }
+                            return false;
+                        }
+                    }
                 }
+                return false;
             }
         }
     }

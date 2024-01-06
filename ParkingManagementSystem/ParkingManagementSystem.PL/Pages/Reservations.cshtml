@@ -36,12 +36,17 @@ else
     <div class="flex">
         <!-- Sidebar -->
         <div class="bg-black text-white w-64 h-screen px-4 py-10">
-            <h2 class="text-2xl font-semibold">My Reservations</h2>
-            <ul class="mt-4">
-                <li><a asp-page="/Reservations" class="text-gray-300 hover:text-white">Hello, @UserSession.Instance.currentUser.FirstName</a></li>
-                <li><a asp-page="/Index" class="text-gray-300 hover:text-white">Link 2</a></li>
-                <li><a asp-page="/Index" class="text-gray-300 hover:text-white">Link 3</a></li>
-            </ul>
+            <h2 class="text-2xl font-semibold">My Profile</h2>
+            <div class="h-full flex flex-col justify-between py-5">
+                <div>
+                    <li class="text-gray-300 hover:text-white font-bold">👋 Hello, @UserSession.Instance.currentUser.FirstName!</li>
+                    <li id="reservations-label" class="text-gray-300 hover:text-white font-bold"></li>
+                </div>
+                <div>
+                    <button class="bg-blue-800 rounded-xl py-2 w-full mb-5 hover:bg-blue-950 transition-all">Update account settings</button>
+                    <button id="delete" class="bg-red-500 rounded-xl py-2 w-full hover:bg-red-700 transition-all">Delete account</button>
+                </div>
+            </div>
         </div>
 
         <div class="flex-1">
@@ -104,17 +109,20 @@ else
                 </table>
             </div>
 
+            <!--
             <div class="pt-10 pb-5 w-full flex flex-col justify-center items-center gap-y-7">
                 <h1 class="text-center text-3xl font-bold">Create a reservation</h1>
 
                 <select class="w-[50%] border-2 border-gray-400 py-1 rounded-full pl-5 bg-gray-300 bg-opacity-20" placeholder="Choose a parking lot">
                     <option value="" selected disabled>Choose a parking lot</option>
                     <option>Parking Lot 1</option>
-                    <option>Parking Lot 1</option>
-                    <option>Parking Lot 1</option>
-                    <option>Parking Lot 1</option>
+                    <option>Parking Lot 2</option>
+                    <option>Parking Lot 3</option>
+                    <option>Parking Lot 4</option>
                 </select>
+
                 <input type="date" class="w-[50%] border-2 border-gray-400 py-1 rounded-full pl-5 bg-gray-300 bg-opacity-20" placeholder="Choose a date" />
+
                 <select class="w-[50%] border-2 border-gray-400 py-1 rounded-full pl-5 bg-gray-300 bg-opacity-20" placeholder="Choose a timestamp">
                     <option value="" selected disabled>Choose a timestamp</option>
                     <option>1 hour</option>
@@ -126,11 +134,26 @@ else
                     <option>3 days</option>
                     <option>5 days</option>
                     <option>1 week</option>
-                    </>
-                    <input class="w-[50%] border-2 border-gray-400 py-1 rounded-full pl-5 bg-gray-300 bg-opacity-20" placeholder="Enter car plate" />
-                    <div class="flex flex-row justify-end w-1/2">
-                        <button id="goToCheckout" class="mt-4 px-4 py-2 bg-green-400 text-white rounded-xl hover:scale-110 transition transform duration-300">Go to checkout</button>
-                    </div>
+                </select>
+
+                <input class="w-[50%] border-2 border-gray-400 py-1 rounded-full pl-5 bg-gray-300 bg-opacity-20" placeholder="Enter car plate" />
+
+                <div class="flex flex-row justify-end w-1/2">
+                    <button id="goToCheckout" class="mt-4 px-4 py-2 bg-green-400 text-white rounded-xl hover:scale-110 transition transform duration-300">Go to checkout</button>
+                </div>
+            </div>
+            -->
+
+        </div>
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden"></div>
+        <div id="myModal" class="hidden bg-white p-6 rounded-xl shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <h2 class="text-2xl font-bold mb-4 text-center">Confirmation</h2>
+            <div class="flex flex-col gap-y-5">
+                <input id="password" type="password" placeholder="Enter your password" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full"/>
+            </div>
+            <div class="w-full h-fit flex flex-row justify-end gap-x-5">
+                <button id="closeModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-xl hover:scale-110 transition transform duration-300">Cancel</button>
+                <button id="deleteConfirmation" class="mt-4 px-4 py-2 bg-green-400 text-white rounded-xl hover:scale-110 transition transform duration-300">Delete account</button>
             </div>
         </div>
     </div>

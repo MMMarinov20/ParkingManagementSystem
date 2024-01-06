@@ -27,7 +27,7 @@ namespace ParkingManagementSystemPL.Controllers
                 if (await _authenticationService.AuthenticateUser(email, password))
                 {
                     User currentUser = await _authenticationService.GetUserByEmail(email);
-                    session.currentUser = currentUser; 
+                    session.currentUser = currentUser;
                     return new JsonResult("Success!");
                 }
                 else
@@ -71,6 +71,25 @@ namespace ParkingManagementSystemPL.Controllers
             return new JsonResult("Success!");
         }
 
+        [HttpPost("DeleteUser")]
+        public async Task<IActionResult> DeleteUser([FromBody] DeleteUserRequest user)
+        {
+            try
+            {
+                if (await _authenticationService.DeleteUser(UserSession.Instance.currentUser.UserID, user.password))
+                {
+                    UserSession.Instance.currentUser = null;
+                    return new JsonResult("Success!");
+                }
+                return new JsonResult("Wrong credentials!");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return BadRequest("Error processing the request");
+            }
+        }
+
         public class LoginRequest
         {
             public string Email { get; set; }
@@ -78,12 +97,17 @@ namespace ParkingManagementSystemPL.Controllers
         }
 
         public class RegisterRequest
-        { 
+        {
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public string Email { get; set; }
             public string PasswordHash { get; set; }
             public string Phone { get; set; }
+        }
+
+        public class DeleteUserRequest
+        {
+            public string password { get; set; }
         }
     }
 }
