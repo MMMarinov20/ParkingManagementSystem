@@ -15,9 +15,11 @@
 }
 else
 {
+    return;
     <script>
         var currentUserData = null;
         console.log("currentUserData after logout:", currentUserData);
+        window.location.href("/");
     </script>
 }
 @using ParkingManagementSystemPL.Controllers
@@ -69,6 +71,7 @@ else
                         <span class="absolute inset-0 bg-gradient-to-r from-blue-400 to-transparent mix-blend-multiply opacity-50 text-center"></span>
                         <span class="relative z-10 text-lg text-center">Log out</span>
                     </button>
+                    <script src="./js//site.js"></script>
                 }
                 else
                 {

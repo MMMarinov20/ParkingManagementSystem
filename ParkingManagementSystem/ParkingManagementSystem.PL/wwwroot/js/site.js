@@ -1,7 +1,7 @@
 ﻿document.addEventListener('DOMContentLoaded', async function () {
     const logoutButton = document.getElementById('logout');
     const loginButton = document.getElementById('login');
-    
+
     if (logoutButton) {
         logoutButton.addEventListener('click', async function () {
             console.log(currentUserData);
@@ -21,6 +21,9 @@
                 const data = await response.json();
                 alert(data);
                 if (data == "Success!") {
+                    if (window.location.pathname === "/Reservations") {
+                        return window.location.href = "/";
+                    }
                     location.reload();
                 }
             }
