@@ -1,4 +1,68 @@
-document.addEventListener('DOMContentLoaded', function () {
+var lots;
+document.addEventListener('DOMContentLoaded', async function () {
+    const capacityLabels = document.getElementsByClassName('capacity');
+    const lotLabels = document.getElementsByClassName('lotName');
+    try {
+        const response = await fetch("/api/parkinglot/GetAllLots", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+            return;
+        }
+
+        const data = await response.json();
+        lots = data;
+        
+        data.forEach((lot, i) => {
+            capacityLabels[i].innerHTML = `Available spaces: ${lot.currentAvailability}/${lot.capacity}`
+            lotLabels[i].innerHTML = lot.lotName;
+        })
+    }
+    catch (e) {
+        console.log(e);
+    }
+
+    try {
+        const response = await fetch("/api/reservation/GetAllReservations", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+            return;
+        }
+
+        const data = await response.json();
+        console.log(data);
+        data.forEach((reservation, i) => {
+            const now = new Date();
+            const startTime = new Date(reservation.startTime);
+            const endTime = new Date(reservation.endTime);
+            if (now >= startTime && now <= endTime) {
+                console.log(lots[reservation.lotID].currentAvailability);
+                lots[reservation.lotID].currentAvailability--;
+            }
+
+            capacityLabels[reservation.lotID].innerHTML = `Available spaces: ${lots[reservation.lotID].currentAvailability}/${lots[reservation.lotID].capacity}`
+        })
+        
+    }
+    catch (e) {
+        console.log(e);
+    }
+
+    handleReservation();
+});
+
+const handleReservation = () => {
     document.getElementById('reserve').addEventListener('click', function () {
         document.getElementById('overlay').classList.remove('hidden');
         document.getElementById('myModal').classList.remove('hidden');
@@ -29,7 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    //"RequestVerificationToken": '@Request.GetAntiforgeryToken()',
                 },
                 body: JSON.stringify({
                     UserID: currentUserData.userID,
@@ -53,4 +116,4 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error(error);
         }
     })
-});
+}

@@ -74,6 +74,21 @@ namespace ParkingManagementSystemPL.Controllers
             }
         }
 
+        [HttpGet("GetAllReservations")]
+        public async Task<IActionResult> GetAllReservations()
+        {
+            try
+            {
+                var reservations = await _reservationService.GetAllReservations();
+                return new JsonResult(reservations);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return BadRequest("Error processing the request");
+            }
+        }
+
         public class ReservationRequestModel
         {
             public int UserID { get; set; }

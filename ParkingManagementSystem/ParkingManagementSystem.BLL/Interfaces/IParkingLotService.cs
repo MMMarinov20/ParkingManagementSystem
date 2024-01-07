@@ -14,5 +14,6 @@ namespace ParkingManagementSystem.BLL.Interfaces
         Task CreateParkingLot(ParkingLot parkingLot);
         Task EditParkingLot(ParkingLot parkingLot);
         Task<bool> DeleteParkingLot(int id);
+        Task UpdateAvailableSpots(int id, int availableSpots);
     }
 }

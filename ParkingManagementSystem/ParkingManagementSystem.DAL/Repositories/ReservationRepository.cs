@@ -33,7 +33,7 @@ namespace ParkingManagementSystem.DAL.Repositories
 
             using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                using (SqlCommand command = new SqlCommand("SELECT * FROM Reservation", connection))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Reservations", connection))
                 {
                     using (SqlDataReader reader = await command.ExecuteReaderAsync())
                     {
