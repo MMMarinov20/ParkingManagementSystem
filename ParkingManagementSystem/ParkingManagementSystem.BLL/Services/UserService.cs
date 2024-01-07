@@ -43,8 +43,8 @@ namespace ParkingManagementSystem.BLL.Services
             return await _userRepository.DeleteUser(id, password);
         }
 
-        public void UpdateUser(User user, string oldPassword) {
-            _userRepository.UpdateUser(user, oldPassword);
+        public async Task<bool> UpdateUser(User user, string oldPassword) {
+            return await _userRepository.UpdateUser(user, oldPassword);
         }
     }
 }

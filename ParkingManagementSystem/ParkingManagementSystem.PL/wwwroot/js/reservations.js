@@ -166,7 +166,7 @@ const handleUpdateModal = () => {
         document.body.style.overflow = 'hidden';
     });
 
-    document.getElementById('updateModal').addEventListener('click', function () {
+    document.getElementById('closeUpdateModal').addEventListener('click', function () {
         document.getElementById('overlay').classList.add('hidden');
         document.getElementById('updateModal').classList.add('hidden');
         document.body.style.overflow = '';
@@ -179,4 +179,55 @@ const handleUpdateModal = () => {
             document.body.style.overflow = '';
         }
     });
+
+    document.getElementById('updateConfirmation').addEventListener('click', async function () {
+        const firstName = document.getElementById("FirstName").value;
+        const lastName = document.getElementById("LastName").value;
+        const email = document.getElementById("Email").value;
+        const oldPassword = document.getElementById("OldPassword").value;
+        const newPassword = document.getElementById("NewPassword").value;
+        const phone = document.getElementById("Phone").value;
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        if (!passwordRegex.test(newPassword)) {
+            alert("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!");
+            return;
+        }
+
+        if (firstName == "" || lastName == "" || email == "" || oldPassword == "" || newPassword == "" || phone == "") {
+            alert("Please fill in all the fields!");
+            return;
+        }
+
+        try {
+            const response = await fetch("/api/user/UpdateUser", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    FirstName: firstName,
+                    LastName: lastName,
+                    Email: email,
+                    OldPassword: oldPassword,
+                    NewPassword: newPassword,
+                    Phone: phone,
+                })
+            })
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+                return;
+            }
+
+            const data = await response.json();
+            alert(data);
+            if (data == "Success!") {
+                location.reload();
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    })
 }

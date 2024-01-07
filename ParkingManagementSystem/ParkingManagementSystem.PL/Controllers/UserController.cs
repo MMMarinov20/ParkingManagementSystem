@@ -90,6 +90,34 @@ namespace ParkingManagementSystemPL.Controllers
             }
         }
 
+        [HttpPost("UpdateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest user)
+        {
+            User updatedUser = new User()
+            {
+                UserID = UserSession.Instance.currentUser.UserID,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PasswordHash = user.NewPassword,
+                Phone = user.Phone
+            };
+            try
+            {
+                if (await _authenticationService.UpdateUser(updatedUser, user.OldPassword))
+                {
+                    UserSession.Instance.currentUser = updatedUser;
+                    return new JsonResult("Success!");
+                }
+                return new JsonResult("Email already exists or wrong password!");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return BadRequest("Error processing the request");
+            }
+        }
+
         public class LoginRequest
         {
             public string Email { get; set; }
@@ -108,6 +136,16 @@ namespace ParkingManagementSystemPL.Controllers
         public class DeleteUserRequest
         {
             public string password { get; set; }
+        }
+
+        public class UpdateUserRequest
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Email { get; set; }
+            public string OldPassword { get; set; }
+            public string NewPassword { get; set; }
+            public string Phone { get; set; }
         }
     }
 }
