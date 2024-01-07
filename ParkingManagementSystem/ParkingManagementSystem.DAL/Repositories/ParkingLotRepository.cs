@@ -4,25 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using ParkingManagementSystem.DAL.Data;
 using ParkingManagementSystem.DAL.Models;
 
 namespace ParkingManagementSystem.DAL.Repositories
 {
-    public class ParkingLotRepository
+    public interface IParkingLotRepository
     {
-        private readonly string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ParkingManagementSystem;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False\r\n";
-
-        public ParkingLotRepository(string connectionString)
+        Task<List<ParkingLot>> GetAllLots();
+        Task CreateParkingLot(ParkingLot parkingLot);
+        Task EditParkingLot(ParkingLot parkingLot);
+        Task<bool> DeleteParkingLot(int id);
+    }
+    public class ParkingLotRepository : IParkingLotRepository
+    {
+        private readonly DatabaseConnector _databaseConnector;
+        public ParkingLotRepository(DatabaseConnector databaseConnector)
         {
-            this._connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+            _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
         }
 
         public async Task CreateParkingLot(ParkingLot parkingLot)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
-
                 string query = "INSERT INTO ParkingLots (LotID, LotName, Location, Capacity, CurrentAvailability) " +
                                "VALUES (@LotID, @LotName, @Location, @Capacity, @CurrentAvailability)";
 
@@ -41,10 +46,8 @@ namespace ParkingManagementSystem.DAL.Repositories
 
         public async Task EditParkingLot(ParkingLot parkingLot)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
-
                 string query = "UPDATE ParkingLots SET LotName = @LotName, Location = @Location, Capacity = @Capacity, CurrentAvailability = @CurrentAvailability " +
                                "WHERE LotID = @LotID";
 
@@ -61,12 +64,10 @@ namespace ParkingManagementSystem.DAL.Repositories
             }
         }
 
-        public async Task DeleteParkingLot(int lotId)
+        public async Task<bool> DeleteParkingLot(int lotId)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                await connection.OpenAsync();
-
                 string query = "DELETE FROM ParkingLots WHERE LotID = @LotID";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -74,8 +75,44 @@ namespace ParkingManagementSystem.DAL.Repositories
                     command.Parameters.AddWithValue("@LotID", lotId);
 
                     await command.ExecuteNonQueryAsync();
+
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+
+        public async Task<List<ParkingLot>> GetAllLots()
+        {
+            List<ParkingLot> parkingLots = new List<ParkingLot>();
+
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
+            {
+                string query = "SELECT * FROM ParkingLots";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            ParkingLot parkingLot = new ParkingLot()
+                            {
+                                LotID = reader.GetInt32(0),
+                                LotName = reader.GetString(1),
+                                Location = reader.GetString(2),
+                                Capacity = reader.GetInt32(3),
+                                CurrentAvailability = reader.GetInt32(4)
+                            };
+
+                            parkingLots.Add(parkingLot);
+                        }
+                    }
                 }
             }
+
+            return parkingLots;
         }
     }
 }

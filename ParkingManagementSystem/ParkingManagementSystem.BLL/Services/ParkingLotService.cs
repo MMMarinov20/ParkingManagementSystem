@@ -5,43 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 using ParkingManagementSystem.DAL.Models;
 using ParkingManagementSystem.DAL.Repositories;
+using ParkingManagementSystem.BLL.Interfaces;
 
 namespace ParkingManagementSystem.BLL.Services
 {
-    public class ParkingLotService
+    public class ParkingLotService : IParkingLotService 
     {
-        private readonly ParkingLotRepository _parkingLotRepository;
+        private readonly IParkingLotRepository _parkingLotRepository;
 
-        public ParkingLotService(ParkingLotRepository parkingLotRepository)
+        public ParkingLotService(IParkingLotRepository parkingLotRepository)
         {
             _parkingLotRepository = parkingLotRepository;
         }
 
-        public async Task<bool> CreateParkingLot(ParkingLot parkingLot)
+        public async Task CreateParkingLot(ParkingLot parkingLot)
         {
-            if (parkingLot == null) return false;
-
             await _parkingLotRepository.CreateParkingLot(parkingLot);
-
-            return true;
         }
 
         public async Task<bool> DeleteParkingLot(int id)
         {
-            if (id <= 0) return false;
-
-            await _parkingLotRepository.DeleteParkingLot(id);
-
-            return true;
+            return await _parkingLotRepository.DeleteParkingLot(id);
         }
 
-        public async Task<bool> EditParkingLot(ParkingLot parkingLot)
+        public async Task EditParkingLot(ParkingLot parkingLot)
         {
-            if (parkingLot == null) return false;
-
             await _parkingLotRepository.EditParkingLot(parkingLot);
+        }
 
-            return true;
+        public async Task<List<ParkingLot>> GetAllLots()
+        {
+            return await _parkingLotRepository.GetAllLots();
         }
     }
 }
