@@ -19,6 +19,7 @@ namespace ParkingManagementSystem.DAL.Repositories
         Task<User> GetUserByEmail(string email);
         Task<bool> AuthenticateUser(string email, string password);
         Task<bool> DeleteUser(int id, string password);
+        Task<bool> UpdateUser(User user, string oldPassword);
 
     }
     public class UserRepository : IUserRepository
@@ -174,10 +175,8 @@ namespace ParkingManagementSystem.DAL.Repositories
                             string storedPassword = reader["Password"].ToString();
                             if (BCryptNet.Verify(password, storedPassword))
                             {
-                                // Close the SqlDataReader before executing additional commands
                                 reader.Close();
 
-                                // Now you can execute additional commands
                                 query = "DELETE FROM Reservations WHERE UserID = @UserID";
                                 using (SqlCommand command2 = new SqlCommand(query, connection))
                                 {
@@ -190,6 +189,47 @@ namespace ParkingManagementSystem.DAL.Repositories
                                 {
                                     command3.Parameters.AddWithValue("@UserID", id);
                                     await command3.ExecuteNonQueryAsync();
+                                }
+
+                                return true;
+                            }
+                            return false;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateUser(User user, string oldPassword)
+        {
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
+            {
+                string query = "SELECT Password FROM Users WHERE UserID = @UserID";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@UserID", user.UserID);
+
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            string storedPassword = reader["Password"].ToString();
+                            if (BCryptNet.Verify(oldPassword, storedPassword))
+                            {
+                                reader.Close();
+
+                                query = "UPDATE Users SET FirstName = @FirstName, LastName = @LastName, Email = @Email, Password = @Password, Phone = @Phone WHERE UserID = @UserID";
+                                using (SqlCommand command2 = new SqlCommand(query, connection))
+                                {
+                                    command2.Parameters.AddWithValue("@FirstName", user.FirstName);
+                                    command2.Parameters.AddWithValue("@LastName", user.LastName);
+                                    command2.Parameters.AddWithValue("@Email", user.Email);
+                                    command2.Parameters.AddWithValue("@Password", BCryptNet.HashPassword(user.PasswordHash));
+                                    command2.Parameters.AddWithValue("@Phone", user.Phone);
+                                    command2.Parameters.AddWithValue("@UserID", user.UserID);
+                                    await command2.ExecuteNonQueryAsync();
                                 }
 
                                 return true;

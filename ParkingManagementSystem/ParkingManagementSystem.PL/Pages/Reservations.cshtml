@@ -43,7 +43,7 @@ else
                     <li id="reservations-label" class="text-gray-300 hover:text-white font-bold"></li>
                 </div>
                 <div>
-                    <button class="bg-blue-800 rounded-xl py-2 w-full mb-5 hover:bg-blue-950 transition-all">Update account settings</button>
+                    <button id="update" class="bg-blue-800 rounded-xl py-2 w-full mb-5 hover:bg-blue-950 transition-all">Update account settings</button>
                     <button id="delete" class="bg-red-500 rounded-xl py-2 w-full hover:bg-red-700 transition-all">Delete account</button>
                 </div>
             </div>
@@ -146,7 +146,7 @@ else
 
         </div>
         <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden"></div>
-        <div id="myModal" class="hidden bg-white p-6 rounded-xl shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div id="deleteModal" class="hidden bg-white p-6 rounded-xl shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <h2 class="text-2xl font-bold mb-4 text-center">Confirmation</h2>
             <div class="flex flex-col gap-y-5">
                 <input id="password" type="password" placeholder="Enter your password" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full"/>
@@ -154,6 +154,17 @@ else
             <div class="w-full h-fit flex flex-row justify-end gap-x-5">
                 <button id="closeModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-xl hover:scale-110 transition transform duration-300">Cancel</button>
                 <button id="deleteConfirmation" class="mt-4 px-4 py-2 bg-green-400 text-white rounded-xl hover:scale-110 transition transform duration-300">Delete account</button>
+            </div>
+        </div>
+
+        <div id="updateModal" class="hidden bg-white p-6 rounded-xl shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <h2 class="text-2xl font-bold mb-4 text-center">Update Account</h2>
+            <div class="flex flex-col gap-y-5">
+                <input id="password1" type="password" placeholder="Enter your password" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full" />
+            </div>
+            <div class="w-full h-fit flex flex-row justify-end gap-x-5">
+                <button id="closeModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-xl hover:scale-110 transition transform duration-300">Cancel</button>
+                <button id="deleteConfirmation" class="mt-4 px-4 py-2 bg-green-400 text-white rounded-xl hover:scale-110 transition transform duration-300">Update account</button>
             </div>
         </div>
     </div>

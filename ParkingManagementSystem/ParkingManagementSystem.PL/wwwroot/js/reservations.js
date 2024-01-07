@@ -23,7 +23,8 @@
         console.log(e);
     }
 
-    handleModal();
+    handleDeleteModal();
+    handleUpdateModal();
 })
 
 const generateTable = (data) => {
@@ -107,24 +108,24 @@ const generateTable = (data) => {
     })
 }
 
-const handleModal = () => {
+const handleDeleteModal = () => {
     const password = document.getElementById("password");
     document.getElementById('delete').addEventListener('click', function () {
         document.getElementById('overlay').classList.remove('hidden');
-        document.getElementById('myModal').classList.remove('hidden');
+        document.getElementById('deleteModal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     });
 
     document.getElementById('closeModal').addEventListener('click', function () {
         document.getElementById('overlay').classList.add('hidden');
-        document.getElementById('myModal').classList.add('hidden');
+        document.getElementById('deleteModal').classList.add('hidden');
         document.body.style.overflow = '';
     });
 
     window.addEventListener('click', function (event) {
         if (event.target === document.getElementById('overlay')) {
             document.getElementById('overlay').classList.add('hidden');
-            document.getElementById('myModal').classList.add('hidden');
+            document.getElementById('deleteModal').classList.add('hidden');
             document.body.style.overflow = '';
         }
     });
@@ -156,4 +157,26 @@ const handleModal = () => {
             console.log(e);
         }
     })
+}
+
+const handleUpdateModal = () => {
+    document.getElementById('update').addEventListener('click', function () {
+        document.getElementById('overlay').classList.remove('hidden');
+        document.getElementById('updateModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('updateModal').addEventListener('click', function () {
+        document.getElementById('overlay').classList.add('hidden');
+        document.getElementById('updateModal').classList.add('hidden');
+        document.body.style.overflow = '';
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target === document.getElementById('overlay')) {
+            document.getElementById('overlay').classList.add('hidden');
+            document.getElementById('updateModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    });
 }

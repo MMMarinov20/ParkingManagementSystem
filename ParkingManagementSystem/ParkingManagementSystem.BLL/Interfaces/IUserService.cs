@@ -16,6 +16,6 @@ namespace ParkingManagementSystem.BLL.Interfaces
         Task<User> GetUserByEmail(string email);
         Task<bool> AuthenticateUser(string email = "example", string password = "example");
         Task<bool> DeleteUser(int id, string password);
-
+        Task<bool> UpdateUser(User user, string oldPassword);
     }
 }

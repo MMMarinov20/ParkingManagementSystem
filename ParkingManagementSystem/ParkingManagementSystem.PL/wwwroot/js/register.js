@@ -39,7 +39,9 @@
 
             const data = await response.json();
             alert(data);
-            console.log(data);
+            if (data == "Success!") {
+                window.location.href = "../Login";
+            }
         } catch (error) {
             console.error(error);
         }
