@@ -37,10 +37,5 @@ namespace ParkingManagementSystem.BLL.Services
         {
             return await _parkingLotRepository.GetAllLots();
         }
-
-        public async Task UpdateAvailableSpots(int id, int spots)
-        {
-            await _parkingLotRepository.UpdateAvailableSpots(id, spots);
-        }
     }
 }
