@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         const data = await response.json();
         lots = data;
-        
+
         data.forEach((lot, i) => {
             capacityLabels[i].innerHTML = `Available spaces: ${lot.currentAvailability}/${lot.capacity}`
             lotLabels[i].innerHTML = lot.lotName;
@@ -27,36 +27,29 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.log(e);
     }
 
-    //try {
-    //    const response = await fetch("/api/reservation/GetAllReservations", {
-    //        method: "GET",
-    //        headers: {
-    //            "Content-Type": "application/json",
-    //        }
-    //    })
+    try {
+        const response = await fetch("/api/reservation/GetAllReservations", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
 
-    //    if (!response.ok) {
-    //        throw new Error(`HTTP error! Status: ${response.status}`);
-    //        return;
-    //    }
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+            return;
+        }
 
-    //    const data = await response.json();
-    //    console.log(data);
-    //    data.forEach((reservation, i) => {
-    //        const now = new Date();
-    //        const startTime = new Date(reservation.startTime);
-    //        const endTime = new Date(reservation.endTime);
-    //        if (now >= startTime && now <= endTime) {
-    //            lots[reservation.lotID].currentAvailability--;
-    //        }
+        const data = await response.json();
+        console.log(data);
+        data.forEach((reservation, i) => {
+            capacityLabels[reservation.lotID].innerHTML = `Available spaces: ${lots[reservation.lotID].currentAvailability}/${lots[reservation.lotID].capacity}`;
+        })
 
-    //        capacityLabels[reservation.lotID].innerHTML = `Available spaces: ${lots[reservation.lotID].currentAvailability}/${lots[reservation.lotID].capacity}`
-    //    })
-        
-    //}
-    //catch (e) {
-    //    console.log(e);
-    //}
+    }
+    catch (e) {
+        console.log(e);
+    }
 
     handleReservation();
 });
