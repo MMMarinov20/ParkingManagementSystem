@@ -63,5 +63,12 @@ namespace ParkingManagementSystem.BLL.Services
 
             return await _reservationRepository.GetReservationsByUserId(id);
         }
+
+        public async Task UpdateStatus(int id)
+        {
+            if (id <= 0) return;
+
+            await _reservationRepository.UpdateStatus(id);
+        }
     }
 }

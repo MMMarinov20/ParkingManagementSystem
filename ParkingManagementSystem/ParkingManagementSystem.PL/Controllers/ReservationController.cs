@@ -64,7 +64,7 @@ namespace ParkingManagementSystemPL.Controllers
         {
             try
             {
-                await _reservationService.DeleteReservation(request.id);
+                await _reservationService.UpdateStatus(request.id);
                 return new JsonResult("Success!");
             }
             catch (Exception ex)

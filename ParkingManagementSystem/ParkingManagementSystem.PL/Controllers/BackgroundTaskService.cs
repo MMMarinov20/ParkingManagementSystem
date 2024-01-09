@@ -38,7 +38,7 @@ public class BackgroundTaskService : BackgroundService
 
             foreach (var reservation in reservations)
             {
-                if (reservation.EndTime < DateTime.Now)
+                if (reservation.EndTime < DateTime.Now || reservation.Status == "Cancelled")
                 {
                     await reservationService.DeleteReservation(reservation.ReservationID);
                     await parkingLotService.UpdateLotAvailability(reservation.LotID, true);

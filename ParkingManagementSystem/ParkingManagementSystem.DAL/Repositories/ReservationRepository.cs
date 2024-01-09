@@ -17,14 +17,17 @@ namespace ParkingManagementSystem.DAL.Repositories
         Task DeleteReservation(int id);
         Task<Reservation> GetReservationById(int id);
         Task<List<Reservation>> GetReservationsByUserId(int id);
+        Task UpdateStatus(int id);
     }
     public class ReservationRepository : IReservationRepository
     {
         private readonly DatabaseConnector _databaseConnector;
+        private readonly IParkingLotRepository _parkingLotRepository;
 
-        public ReservationRepository(DatabaseConnector databaseConnector)
+        public ReservationRepository(DatabaseConnector databaseConnector, IParkingLotRepository parkingLotRepository)
         {
             _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
+            _parkingLotRepository = parkingLotRepository ?? throw new ArgumentNullException(nameof(parkingLotRepository));
         }
 
         public async Task<List<Reservation>> GetAllReservations()
@@ -187,6 +190,20 @@ namespace ParkingManagementSystem.DAL.Repositories
             }
 
             return reservations;
+        }
+        public async Task UpdateStatus(int id)
+        {
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
+            {
+                string query = "UPDATE Reservations SET Status = 'Cancelled' WHERE ReservationID = @ReservationID";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ReservationID", id);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
         }
     }
 }

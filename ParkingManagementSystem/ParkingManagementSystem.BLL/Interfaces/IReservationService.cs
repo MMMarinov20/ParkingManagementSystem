@@ -15,5 +15,6 @@ namespace ParkingManagementSystem.BLL.Interfaces
         Task<Reservation> GetReservationById(int id);
         Task<List<Reservation>> GetAllReservations();
         Task<List<Reservation>> GetReservationsByUserId(int id);
+        Task UpdateStatus(int id);
     }
 }

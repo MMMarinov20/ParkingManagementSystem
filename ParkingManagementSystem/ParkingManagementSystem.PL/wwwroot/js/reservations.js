@@ -63,8 +63,8 @@ const generateTable = (data) => {
                             <td class="py-2 px-4 border-b">${new Date(reservation.endTime).toLocaleString('en-US', options)}</td>
                             <td class="py-2 px-4 border-b">${reservation.status}</td>
                             <td class="py-2 px-4 border-b">
-                                <button class="text-blue-500 hover:underline mr-2">Edit</button>
-                                <button class="text-red-500 hover:underline">Delete</button>
+                                <button style="color: #3498db; text-decoration: none; cursor: pointer; margin-right: 2px;">Edit</button>
+                                <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Cancel</button>
                             </td>
                         </tr>
         `
