@@ -12,17 +12,15 @@ namespace ParkingManagementSystem.BLL.Services
     public class ParkingLotService : IParkingLotService 
     {
         private readonly IParkingLotRepository _parkingLotRepository;
-        private readonly IReservationRepository _reservationRepository;
 
-        public ParkingLotService(IParkingLotRepository parkingLotRepository, IReservationRepository reservationRepository)
+        public ParkingLotService(IParkingLotRepository parkingLotRepository)
         {
             _parkingLotRepository = parkingLotRepository;
-            _reservationRepository = reservationRepository;
         }
 
-        public async Task UpdateLotAvailability()
+        public async Task UpdateLotAvailability(int id, bool isAvailable)
         {
-
+            await _parkingLotRepository.UpdateLotAvailability(id, isAvailable);
         }
 
         public async Task CreateParkingLot(ParkingLot parkingLot)

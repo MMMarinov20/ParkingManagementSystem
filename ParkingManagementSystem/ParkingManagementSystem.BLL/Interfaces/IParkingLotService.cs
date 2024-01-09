@@ -10,7 +10,7 @@ namespace ParkingManagementSystem.BLL.Interfaces
 {
     public interface IParkingLotService
     {
-        Task UpdateLotAvailability();
+        Task UpdateLotAvailability(int id, bool isAvailable);
         Task<List<ParkingLot>> GetAllLots();
         Task CreateParkingLot(ParkingLot parkingLot);
         Task EditParkingLot(ParkingLot parkingLot);

@@ -15,6 +15,7 @@ namespace ParkingManagementSystem.DAL.Repositories
         Task CreateParkingLot(ParkingLot parkingLot);
         Task EditParkingLot(ParkingLot parkingLot);
         Task<bool> DeleteParkingLot(int id);
+        Task UpdateLotAvailability(int id, bool isAvailable);
     }
     public class ParkingLotRepository : IParkingLotRepository
     {
@@ -113,6 +114,23 @@ namespace ParkingManagementSystem.DAL.Repositories
             }
 
             return parkingLots;
+        }
+
+        public async Task UpdateLotAvailability(int id, bool isAvailable)
+        {
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
+            {
+                string query = "UPDATE ParkingLots SET CurrentAvailability = CurrentAvailability + @CurrentAvailability " +
+                               "WHERE LotID = @LotID";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@LotID", id);
+                    command.Parameters.AddWithValue("@CurrentAvailability", isAvailable ? 1 : -1);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
         }
     }
 }
