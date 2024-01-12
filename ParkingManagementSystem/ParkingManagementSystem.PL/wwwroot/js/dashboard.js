@@ -1,4 +1,86 @@
-﻿document.addEventListener('DOMContentLoaded', async function () {
+﻿let areReservationsVisible = true;
+document.addEventListener('DOMContentLoaded', async function () {
+    const showReservations = document.getElementById("showReservations");
+    const showUsers = document.getElementById("showUsers");
+    const tableTitleReservations = document.getElementById("tableTitleReservations");
+    const tableElReservations = document.getElementById("tableReservations");
+
+    const tableTitleUsers = document.getElementById("tableTitleUsers");
+    const tableElUsers = document.getElementById("tableUsers");
+
+
+    showUsers.addEventListener('click', () => {
+        //areReservationsVisible = !areReservationsVisible;
+        tableTitleUsers.classList.remove("hidden");
+        tableElUsers.classList.remove("hidden");
+        tableTitleReservations.classList.add("hidden");
+        tableElReservations.classList.add("hidden");
+    })
+
+    showReservations.addEventListener('click', () => {
+        //areReservationsVisible = !areReservationsVisible;
+        tableTitleUsers.classList.add("hidden");
+        tableElUsers.classList.add("hidden");
+        tableTitleReservations.classList.remove("hidden");
+        tableElReservations.classList.remove("hidden");
+    })
+
+    fetchReservations();
+    fetchUsers();
+    handleDeleteModal();
+    handleUpdateModal();
+})
+
+const fetchUsers = async () => {
+    try {
+        const response = await fetch("/api/user/GetUsers", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+            return;
+        }
+
+        const data = await response.json();
+        console.log(data);
+        generateUsersTable(data);
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
+
+const generateUsersTable = (data) => {
+    const tableTitle = document.getElementById("tableTitleUsers");
+    const tableEl = document.getElementById("tableUsers");
+    //const usersLabel = document.getElementById("usersLabel");
+    const table = document.getElementById("tbodyUsers");
+
+    data.forEach((user, i) => {
+        const html = `
+                        <tr id="res-${i}" class="text-center">
+                            <td class="py-2 px-4 border-b">${user.userID}</td>
+                            <td class="py-2 px-4 border-b">${user.firstName}</td>
+                            <td class="py-2 px-4 border-b">${user.lastName}</td>
+                            <td class="py-2 px-4 border-b">${user.email}</td>
+                            <td class="py-2 px-4 border-b">${user.phone}</td>
+                            <td class="py-2 px-4 border-b">soon</td>
+                            <td class="py-2 px-4 border-b">
+                                <button style="color: #3498db; text-decoration: none; cursor: pointer; margin-right: 2px;">Edit</button>
+                                <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Cancel</button>
+                            </td>
+                        </tr>
+        `
+
+        table.innerHTML += html;
+    })
+}
+
+const fetchReservations = async () => {
     try {
         console.log(currentUserData.userID);
         const response = await fetch("/api/reservation/GetReservationsByUserId", {
@@ -17,20 +99,17 @@
         }
 
         const data = await response.json();
-        generateTable(data);
+        generateReservationsTable(data);
     }
     catch (e) {
         console.log(e);
     }
+}
 
-    handleDeleteModal();
-    handleUpdateModal();
-})
-
-const generateTable = (data) => {
-    const tableTitle = document.getElementById("tableTitle");
-    const tableEl = document.getElementById("table");
-    const reservationsLabel = document.getElementById("reservations-label");
+const generateReservationsTable = (data) => {
+    const tableTitle = document.getElementById("tableTitleReservations");
+    const tableEl = document.getElementById("tableReservations");
+    const reservationsLabel = document.getElementById("reservationsLabel");
 
     if (data.length == 0) {
         toastr.info("Why don't you make one?", "You don't have any reservations!");
@@ -44,7 +123,7 @@ const generateTable = (data) => {
         tableEl.classList.add("visible");
     }
 
-    const table = document.getElementsByTagName("tbody");
+    const table = document.getElementById("tbodyReservations");
     console.log(table);
     data.forEach((reservation, i) => {
         const options = {
@@ -65,16 +144,16 @@ const generateTable = (data) => {
                             <td class="py-2 px-4 border-b">${new Date(reservation.endTime).toLocaleString('en-US', options)}</td>
                             <td class="py-2 px-4 border-b">${reservation.status}</td>
                             <td class="py-2 px-4 border-b">
-                                <button style="color: #3498db; text-decoration: none; cursor: pointer; margin-right: 2px;">Edit</button>
-                                <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Cancel</button>
+                                <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Edit</button>
+                                <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Delete</button>
                             </td>
                         </tr>
         `
 
-        table[0].innerHTML += html;
+        table.innerHTML += html;
     })
 
-    table[0].addEventListener("click", async (e) => {
+    table.addEventListener("click", async (e) => {
         const target = e.target;
         const parent = target.parentElement.parentElement;
         const reservationID = parent.id.split("-")[1];

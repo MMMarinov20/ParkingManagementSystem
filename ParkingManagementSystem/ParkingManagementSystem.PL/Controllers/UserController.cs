@@ -118,6 +118,20 @@ namespace ParkingManagementSystemPL.Controllers
             }
         }
 
+        [HttpGet("GetUsers")]
+        public async Task<IActionResult> GetUsers()
+        {
+            try
+            {
+                return new JsonResult(await _authenticationService.GetAllUsers());
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return BadRequest("Error processing the request");
+            }
+        }
+
         public class LoginRequest
         {
             public string Email { get; set; }

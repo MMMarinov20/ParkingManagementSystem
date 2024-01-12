@@ -20,6 +20,7 @@ namespace ParkingManagementSystem.DAL.Repositories
         Task<bool> AuthenticateUser(string email, string password);
         Task<bool> DeleteUser(int id, string password);
         Task<bool> UpdateUser(User user, string oldPassword);
+        Task<List<User>> GetAllUsers();
 
     }
     public class UserRepository : IUserRepository
@@ -242,6 +243,35 @@ namespace ParkingManagementSystem.DAL.Repositories
                 }
                 return false;
             }
+        }
+
+        public async Task<List<User>> GetAllUsers()
+        {
+            List<User> users = new List<User>();
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
+            {
+                string query = "SELECT * FROM Users";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            users.Add(new User
+                            {
+                                UserID = reader.GetInt32(0),
+                                FirstName = reader.GetString(1),
+                                LastName = reader.GetString(2),
+                                Email = reader.GetString(3),
+                                PasswordHash = reader.GetString(4),
+                                Phone = reader.GetString(5)
+                            });
+                        }
+                    }
+                }
+            }
+            return users;
         }
     }
 }

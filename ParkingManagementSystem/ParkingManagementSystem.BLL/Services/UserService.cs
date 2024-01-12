@@ -46,5 +46,10 @@ namespace ParkingManagementSystem.BLL.Services
         public async Task<bool> UpdateUser(User user, string oldPassword) {
             return await _userRepository.UpdateUser(user, oldPassword);
         }
+
+        public async Task<List<User>> GetAllUsers()
+        {
+            return await _userRepository.GetAllUsers();
+        }
     }
 }
