@@ -47,8 +47,8 @@ else
 
             @if (UserSession.Instance.currentUser != null)
             {
-                <a asp-page="/Reservations" class="group inline-block relative">
-                    <h1 class="relative z-20">Reservations</h1>
+                <a asp-page="/Dashboard" class="group inline-block relative">
+                    <h1 class="relative z-20">Dashboard</h1>
                     <div class="absolute w-full h-0.5 bg-blue-500 transform translate-y-full opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"></div>
                 </a>
             }
@@ -88,7 +88,7 @@ else
                     <h1 class="font-semibold capacity">Loading...</h1>
                     @if (UserSession.Instance.currentUser != null)
                     {
-                        <button id="reserve" class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                        <button class="reserve px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
                             Reserve
                         </button>
                     }
@@ -110,14 +110,14 @@ else
                     <h1 class="font-semibold capacity">Loading...</h1>
                     @if (UserSession.Instance.currentUser != null)
                     {
-                        <button id="reserve" class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                        <button class="reserve px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
                             Reserve
                         </button>
                     }
                     else
                     {
                         <a asp-page="/Login">
-                            <button id="reserve" class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                            <button class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
                                 Log in to reserve
                             </button>
                         </a>
@@ -133,14 +133,14 @@ else
                     <h1 class="font-semibold capacity">Loading...</h1>
                     @if (UserSession.Instance.currentUser != null)
                     {
-                        <button id="reserve" class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                        <button class="reserve px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
                             Reserve
                         </button>
                     }
                     else
                     {
                         <a asp-page="/Login">
-                            <button id="reserve" class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                            <button class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
                                 Log in to reserve
                             </button>
                         </a>
@@ -156,7 +156,7 @@ else
                     <h1 class="font-semibold capacity">Loading...</h1>
                     @if (UserSession.Instance.currentUser != null)
                     {
-                        <button id="reserve" class="px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                        <button class="reserve px-7 py-3 bg-green-500 rounded-full text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105">
                             Reserve
                         </button>
                     }
@@ -178,10 +178,6 @@ else
             <div class="flex flex-col gap-y-5">
                 <select id="lot" placeholder="Choose parking lot" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full">
                     <option value="" selected disabled>Choose a parking lot</option>
-                    <option value="1">Parking Lot 1</option>
-                    <option value="2">Parking Lot 2</option>
-                    <option value="3">Parking Lot 3</option>
-                    <option value="4">Parking Lot 4</option>
                 </select>
 
                 <input id="date" type="datetime-local" placeholder="Choose date" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full" />
