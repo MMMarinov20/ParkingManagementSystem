@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             capacityLabels[i].innerHTML = `Available spaces: ${lot.currentAvailability}/${lot.capacity}`
             lotLabels[i].innerHTML = lot.lotName;
         })
+
+        toastr.info("Parking lots fetched successfuly.");
     }
     catch (e) {
         console.log(e);
@@ -41,7 +43,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
 
         const data = await response.json();
-        console.log(data);
         data.forEach((reservation, i) => {
             capacityLabels[reservation.lotID].innerHTML = `Available spaces: ${lots[reservation.lotID].currentAvailability}/${lots[reservation.lotID].capacity}`;
         })
@@ -56,6 +57,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 const handleReservation = () => {
     document.getElementById('reserve').addEventListener('click', function () {
+        toastr.info("Please fill all fields to create a reservation.")
         document.getElementById('overlay').classList.remove('hidden');
         document.getElementById('myModal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
@@ -100,10 +102,13 @@ const handleReservation = () => {
             }
 
             const data = await response.json();
-            alert(data);
+            toastr.success("You can view your reservations in your profile page", "Reservation created.")
+            setTimeout(function () {
+                window.location.href = "/";
+            }, 500);
             document.getElementById('overlay').classList.add('hidden');
             document.getElementById('myModal').classList.add('hidden');
-            window.location.href = "/";
+
         } catch (error) {
             console.error(error);
         }

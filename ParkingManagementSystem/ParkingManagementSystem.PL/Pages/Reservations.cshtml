@@ -29,7 +29,6 @@ else
 <head>
     <meta charset="utf-8" />
     <title>My ASP.NET Core App</title>
-    <script src="~/js/reservations.js"></script>
     <link rel="stylesheet" href="~/css/site.min.css" />  <!-- Make sure to use the correct path to your generated Tailwind CSS file -->
 </head>
 <body>
@@ -109,41 +108,6 @@ else
                 </table>
             </div>
 
-            <!--
-            <div class="pt-10 pb-5 w-full flex flex-col justify-center items-center gap-y-7">
-                <h1 class="text-center text-3xl font-bold">Create a reservation</h1>
-
-                <select class="w-[50%] border-2 border-gray-400 py-1 rounded-full pl-5 bg-gray-300 bg-opacity-20" placeholder="Choose a parking lot">
-                    <option value="" selected disabled>Choose a parking lot</option>
-                    <option>Parking Lot 1</option>
-                    <option>Parking Lot 2</option>
-                    <option>Parking Lot 3</option>
-                    <option>Parking Lot 4</option>
-                </select>
-
-                <input type="date" class="w-[50%] border-2 border-gray-400 py-1 rounded-full pl-5 bg-gray-300 bg-opacity-20" placeholder="Choose a date" />
-
-                <select class="w-[50%] border-2 border-gray-400 py-1 rounded-full pl-5 bg-gray-300 bg-opacity-20" placeholder="Choose a timestamp">
-                    <option value="" selected disabled>Choose a timestamp</option>
-                    <option>1 hour</option>
-                    <option>2 hours</option>
-                    <option>3 hours</option>
-                    <option>6 hours</option>
-                    <option>12 hours</option>
-                    <option>1 day</option>
-                    <option>3 days</option>
-                    <option>5 days</option>
-                    <option>1 week</option>
-                </select>
-
-                <input class="w-[50%] border-2 border-gray-400 py-1 rounded-full pl-5 bg-gray-300 bg-opacity-20" placeholder="Enter car plate" />
-
-                <div class="flex flex-row justify-end w-1/2">
-                    <button id="goToCheckout" class="mt-4 px-4 py-2 bg-green-400 text-white rounded-xl hover:scale-110 transition transform duration-300">Go to checkout</button>
-                </div>
-            </div>
-            -->
-
         </div>
         <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden"></div>
         <div id="deleteModal" class="hidden bg-white p-6 rounded-xl shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -173,5 +137,10 @@ else
             </div>
         </div>
     </div>
+    
+    <script src="./lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="~/js/reservations.js"></script>
 </body>
 </html>

@@ -1,9 +1,13 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('login').addEventListener('click', async function () {
+    const loginButton = document.getElementById("login");
+    loginButton.addEventListener('click', async function () {
         const email = document.getElementById('email');
         const password = document.getElementById('password');
-        console.log(JSON.stringify({ email: email, password: password }));
-        console.log('@Request.GetAntiforgeryToken()');
+
+        if (email == "" || password == "") {
+            toastr.error("Please fill all fields!");
+            return;
+        }
 
         try {
             const response = await fetch("/api/User/Login", {
@@ -23,13 +27,19 @@
             }
 
             const data = await response.json();
-            alert(data);
             if (data == "Success!") {
+                toastr.success("Login successful!");
+                toastr.options.closeDuration = 500;
+                setTimeout(function () {
+                    window.location.href = "/";
+                }, 500);
                 email.value = "";
                 password.value = "";
-                window.location.href = "/";
+            } else {
+                toastr.error("Login failed!");
+                toastr.options.closeDuration = 500;
             }
-                        
+
         } catch (error) {
             console.error(error);
         }

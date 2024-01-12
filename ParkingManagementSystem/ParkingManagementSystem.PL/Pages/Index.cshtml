@@ -3,8 +3,6 @@
 @{
     ViewData["Title"] = "Home page";
     var currentUser = UserSession.Instance.currentUser;
-    if(currentUser != null) Console.WriteLine(currentUser.FirstName);
-        
 }
 
 @if (currentUser != null)
@@ -17,7 +15,6 @@ else
 {
     <script>
         var currentUserData = null;
-                console.log("currentUserData after logout:", currentUserData);
     </script>
 }
 @using ParkingManagementSystemPL.Controllers
@@ -86,5 +83,9 @@ else
 
         </div>
     </div>
+    
+    <script src="./lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </body>
 </html>

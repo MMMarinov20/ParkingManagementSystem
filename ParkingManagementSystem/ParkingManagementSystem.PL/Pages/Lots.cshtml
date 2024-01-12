@@ -30,7 +30,6 @@ else
 <head>
     <meta charset="utf-8" />
     <title>My ASP.NET Core App</title>
-    <script src="~/js/lots.js"></script>
     <link rel="stylesheet" href="~/css/site.min.css" />  <!-- Make sure to use the correct path to your generated Tailwind CSS file -->
 </head>
 <body>
@@ -205,7 +204,11 @@ else
                 <button id="goToCheckout" class="mt-4 px-4 py-2 bg-green-400 text-white rounded-xl hover:scale-110 transition transform duration-300">Go to checkout</button>
             </div>
         </div>
-
     </div>
+    
+    <script src="./lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="~/js/lots.js"></script>
 </body>
 </html>

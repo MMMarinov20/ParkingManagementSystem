@@ -33,10 +33,12 @@ const generateTable = (data) => {
     const reservationsLabel = document.getElementById("reservations-label");
 
     if (data.length == 0) {
+        toastr.info("Why don't you make one?", "You don't have any reservations!");
         tableTitle.innerHTML = "You have no reservations";
         reservationsLabel.innerHTML = "📉 Reservations: 0";
         tableEl.classList.add("hidden");
     } else {
+        toastr.info("You can delete or edit your reservations by clicking on the actions buttons!", "Reservations fetched!");
         tableTitle.innerHTML = "Your reservations";
         reservationsLabel.innerHTML = `📈 Reservations: ${data.length}`;
         tableEl.classList.add("visible");
@@ -78,7 +80,7 @@ const generateTable = (data) => {
         const reservationID = parent.id.split("-")[1];
         const reservation = data[reservationID];
 
-        if (target.innerHTML == "Delete") {
+        if (target.innerHTML == "Cancel") {
             try {
                 const response = await fetch("/api/reservation/DeleteReservation", {
                     method: "POST",
@@ -96,13 +98,16 @@ const generateTable = (data) => {
                 }
 
                 const data = await response.json();
-                alert(data);
                 if (data == "Success!") {
-                    location.reload();
+                    toastr.success("Reservation Cancelled");
+                    setTimeout(function () {
+                        location.reload();
+                    }, 500)
+
                 }
             }
             catch (e) {
-                console.log(e);
+                toastr.error(e);
             }
         }
     })
@@ -111,6 +116,8 @@ const generateTable = (data) => {
 const handleDeleteModal = () => {
     const password = document.getElementById("password");
     document.getElementById('delete').addEventListener('click', function () {
+        toastr.info("Please enter your password to confirm the action!");
+        toastr.warning("Are you sure you want to do this?", "Delete Account");
         document.getElementById('overlay').classList.remove('hidden');
         document.getElementById('deleteModal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
@@ -148,19 +155,26 @@ const handleDeleteModal = () => {
             }
 
             const data = await response.json();
-            alert(data);
             if (data == "Success!") {
-                window.location.href = "/";
+                toastr.success("Account Deleted!");
+
+                setTimeout(function () {
+                    window.location.href = "/";
+                }, 500)
+            }
+            else {
+                toastr.error("Wrong password");
             }
         }
         catch (e) {
-            console.log(e);
+            toastr.error(e);
         }
     })
 }
 
 const handleUpdateModal = () => {
     document.getElementById('update').addEventListener('click', function () {
+        toastr.info("Fill the needed details to update your account.")
         document.getElementById('overlay').classList.remove('hidden');
         document.getElementById('updateModal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
@@ -190,12 +204,12 @@ const handleUpdateModal = () => {
 
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
         if (!passwordRegex.test(newPassword)) {
-            alert("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!");
+            toast.error("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!");
             return;
         }
 
         if (firstName == "" || lastName == "" || email == "" || oldPassword == "" || newPassword == "" || phone == "") {
-            alert("Please fill in all the fields!");
+            toastr.error("Please fill in all the fields!");
             return;
         }
 
@@ -221,9 +235,12 @@ const handleUpdateModal = () => {
             }
 
             const data = await response.json();
-            alert(data);
             if (data == "Success!") {
-                location.reload();
+                toastr.success("Account Updated!");
+
+                setTimeout(function () {
+                    location.reload();
+                }, 500)
             }
         }
         catch (e) {
