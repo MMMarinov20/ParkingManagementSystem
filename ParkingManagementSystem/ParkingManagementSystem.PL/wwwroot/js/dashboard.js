@@ -8,22 +8,24 @@ document.addEventListener('DOMContentLoaded', async function () {
     const tableTitleUsers = document.getElementById("tableTitleUsers");
     const tableElUsers = document.getElementById("tableUsers");
 
+    if (currentUserData.isAdmin) {
+        console.log("Asd");
+        showUsers.addEventListener('click', () => {
+            //areReservationsVisible = !areReservationsVisible;
+            tableTitleUsers.classList.remove("hidden");
+            tableElUsers.classList.remove("hidden");
+            tableTitleReservations.classList.add("hidden");
+            tableElReservations.classList.add("hidden");
+        })
 
-    showUsers.addEventListener('click', () => {
-        //areReservationsVisible = !areReservationsVisible;
-        tableTitleUsers.classList.remove("hidden");
-        tableElUsers.classList.remove("hidden");
-        tableTitleReservations.classList.add("hidden");
-        tableElReservations.classList.add("hidden");
-    })
-
-    showReservations.addEventListener('click', () => {
-        //areReservationsVisible = !areReservationsVisible;
-        tableTitleUsers.classList.add("hidden");
-        tableElUsers.classList.add("hidden");
-        tableTitleReservations.classList.remove("hidden");
-        tableElReservations.classList.remove("hidden");
-    })
+        showReservations.addEventListener('click', () => {
+            //areReservationsVisible = !areReservationsVisible;
+            tableTitleUsers.classList.add("hidden");
+            tableElUsers.classList.add("hidden");
+            tableTitleReservations.classList.remove("hidden");
+            tableElReservations.classList.remove("hidden");
+        })
+    }
 
     fetchReservations();
     fetchUsers();
@@ -145,7 +147,7 @@ const generateReservationsTable = (data) => {
                             <td class="py-2 px-4 border-b">${reservation.status}</td>
                             <td class="py-2 px-4 border-b">
                                 <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Edit</button>
-                                <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Delete</button>
+                                <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Cancel</button>
                             </td>
                         </tr>
         `

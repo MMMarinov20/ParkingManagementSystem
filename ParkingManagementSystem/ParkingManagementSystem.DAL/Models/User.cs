@@ -14,7 +14,7 @@ namespace ParkingManagementSystem.DAL.Models
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string Phone { get; set; }
-        // Navigation property for reservations
+        public bool IsAdmin { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
     }
 }

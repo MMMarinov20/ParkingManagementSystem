@@ -74,18 +74,13 @@ namespace ParkingManagementSystem.DAL.Repositories
                         {
                             return new User
                             {
-                                //UserID = (int)reader["UserID"],
-                                //FirstName = reader["FirstName"].ToString(),
-                                //LastName = reader["LastName"].ToString(),
-                                //Email = reader["Email"].ToString(),
-                                //PasswordHash = reader["Password"].ToString(),
-                                //Phone = reader["Phone"].ToString()
                                 UserID = reader.GetInt32(0),
                                 FirstName = reader.GetString(1),
                                 LastName = reader.GetString(2),
                                 Email = reader.GetString(3),
                                 PasswordHash = reader.GetString(4),
-                                Phone = reader.GetString(5)
+                                Phone = reader.GetString(5),
+                                IsAdmin = reader.GetBoolean(6)
                             };
                         }
                     }
@@ -117,7 +112,8 @@ namespace ParkingManagementSystem.DAL.Repositories
                                 LastName = reader.GetString(2),
                                 Email = reader.GetString(3),
                                 PasswordHash = reader.GetString(4),
-                                Phone = reader.GetString(5)
+                                Phone = reader.GetString(5),
+                                IsAdmin = reader.GetBoolean(6)
                             };
                         }
                     }
@@ -265,7 +261,8 @@ namespace ParkingManagementSystem.DAL.Repositories
                                 LastName = reader.GetString(2),
                                 Email = reader.GetString(3),
                                 PasswordHash = reader.GetString(4),
-                                Phone = reader.GetString(5)
+                                Phone = reader.GetString(5),
+                                IsAdmin = reader.GetBoolean(6)
                             });
                         }
                     }

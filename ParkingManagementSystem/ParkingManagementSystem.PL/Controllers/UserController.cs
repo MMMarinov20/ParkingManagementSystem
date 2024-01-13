@@ -2,6 +2,8 @@
 using ParkingManagementSystem.BLL.Interfaces;
 using ParkingManagementSystem.DAL.Models;
 using ParkingManagementSystemPL.Pages;
+using System.Text.Json;
+
 
 namespace ParkingManagementSystemPL.Controllers
 {
@@ -27,7 +29,9 @@ namespace ParkingManagementSystemPL.Controllers
                 if (await _authenticationService.AuthenticateUser(email, password))
                 {
                     User currentUser = await _authenticationService.GetUserByEmail(email);
-                    session.currentUser = currentUser;
+
+                    HttpContext.Session.SetString("CurrentUser", JsonSerializer.Serialize(currentUser));
+                    Console.WriteLine("Session: " + HttpContext.Session.GetString("CurrentUser"));
                     return new JsonResult("Success!");
                 }
                 else
@@ -66,7 +70,8 @@ namespace ParkingManagementSystemPL.Controllers
         [HttpPost("Logout")]
         public IActionResult Logout()
         {
-            UserSession.Instance.currentUser = null;
+            //UserSession.Instance.currentUser = null;
+            HttpContext.Session.Clear();
 
             return new JsonResult("Success!");
         }

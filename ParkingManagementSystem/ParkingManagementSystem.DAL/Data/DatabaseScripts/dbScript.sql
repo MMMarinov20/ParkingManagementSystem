@@ -11,6 +11,7 @@ CREATE TABLE Users (
     Email VARCHAR(100) UNIQUE NOT NULL,
     [Password] VARCHAR(255) NOT NULL,
     Phone VARCHAR(20),
+	isAdmin BIT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE ParkingLots (
@@ -28,7 +29,7 @@ CREATE TABLE Reservations (
 	CarPlate VARCHAR(10) NOT NULL,
     StartTime DATETIME NOT NULL,
     EndTime DATETIME NOT NULL,
-    [Status] VARCHAR(20) NOT NULL, -- Confirmed/Pending
+    [Status] VARCHAR(20) NOT NULL, -- Pending/Active
     CONSTRAINT chk_ReservationTime CHECK (StartTime < EndTime),
 );
 
@@ -39,7 +40,7 @@ CREATE TABLE Feedback (
     Comment TEXT,
 );
 
-INSERT INTO Users (FirstName, LastName, Email, [Password], Phone) VALUES ('admin', 'admin', 'example@', 'admin', '1234567890');
+--INSERT INTO Users (FirstName, LastName, Email, [Password], Phone) VALUES ('admin', 'admin', 'example@', 'admin', '1234567890');
 INSERT INTO ParkingLots (LotID, LotName, [Location], Capacity, CurrentAvailability) VALUES (1, 'Sea Garden Parking', 'Sea Garden', 220, 220);
 INSERT INTO ParkingLots (LotID, LotName, [Location], Capacity, CurrentAvailability) VALUES (2, 'Grand Mall Parking', 'Grand Mall', 500, 500);
 INSERT INTO ParkingLots (LotID, LotName, [Location], Capacity, CurrentAvailability) VALUES (3, 'West Airport Parking', 'West Airport Parking', 700, 700);

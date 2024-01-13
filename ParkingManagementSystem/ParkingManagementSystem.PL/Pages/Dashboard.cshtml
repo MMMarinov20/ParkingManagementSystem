@@ -1,10 +1,13 @@
 ﻿@page
 @model ParkingManagementSystemPL.Pages.ReservationsModel
+@using ParkingManagementSystem.DAL.Models
+@using System.Text.Json
 @{
     ViewData["Title"] = "Home page";
-    var currentUser = UserSession.Instance.currentUser;
-    if (currentUser != null) Console.WriteLine(currentUser.FirstName);
-
+    var currentUserJson = HttpContext.Session.GetString("CurrentUser");
+    var currentUser = !string.IsNullOrEmpty(currentUserJson)
+        ? JsonSerializer.Deserialize<User>(currentUserJson)
+        : null;
 }
 
 @if (currentUser != null)
@@ -13,15 +16,7 @@
         var currentUserData = @Html.Raw(Json.Serialize(currentUser));
     </script>
 }
-else
-{
-    return;
-    <script>
-        var currentUserData = null;
-        console.log("currentUserData after logout:", currentUserData);
-        window.location.href("/");
-    </script>
-}
+
 @using ParkingManagementSystemPL.Controllers
 
 <!DOCTYPE html>
@@ -38,10 +33,13 @@ else
             <h2 class="text-2xl font-semibold">My Profile</h2>
             <div class="h-full flex flex-col justify-between py-5">
                 <div>
-                    <li class="text-gray-300 hover:text-white font-bold">👋 Hello, @UserSession.Instance.currentUser.FirstName!</li>
+                    <li class="text-gray-300 hover:text-white font-bold">👋 Hello, @currentUser?.FirstName!</li>
                     <li id="reservationsLabel" class="text-gray-300 hover:text-white font-bold"></li>
-                    <li id="showReservations" class="text-gray-300 hover:text-white font-bold hover:cursor-pointer">Reservation Table</li>
-                    <li id="showUsers" class="text-gray-300 hover:text-white font-bold hover:cursor-pointer">Users Table</li>
+                    @if (currentUser.IsAdmin)
+                    {
+                        <li id="showReservations" class="text-gray-300 hover:text-white font-bold hover:cursor-pointer">Reservation Table</li>
+                        <li id="showUsers" class="text-gray-300 hover:text-white font-bold hover:cursor-pointer">Users Table</li>
+                    }
                 </div>
                 <div>
                     <button id="update" class="bg-blue-800 rounded-xl py-2 w-full mb-5 hover:bg-blue-950 transition-all">Update account settings</button>
@@ -71,7 +69,7 @@ else
                     <h1 class="relative z-20">Contact us</h1>
                     <div class="absolute w-full h-0.5 bg-blue-500 transform translate-y-full opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"></div>
                 </a>
-                @if (UserSession.Instance.currentUser != null)
+                @if (currentUser != null)
                 {
                     <button id="logout" class="relative bg-blue-400 rounded-full px-5 py-2 text-white overflow-hidden transition duration-300 ease-in-out text-center transform hover:scale-105 hover:shadow-2xl">
                         <span class="absolute inset-0 bg-gradient-to-r from-blue-400 to-transparent mix-blend-multiply opacity-50 text-center"></span>
@@ -135,7 +133,7 @@ else
         <div id="deleteModal" class="hidden bg-white p-6 rounded-xl shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <h2 class="text-2xl font-bold mb-4 text-center">Confirmation</h2>
             <div class="flex flex-col gap-y-5">
-                <input id="password" type="password" placeholder="Enter your password" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full"/>
+                <input id="password" type="password" placeholder="Enter your password" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full" />
             </div>
             <div class="w-full h-fit flex flex-row justify-end gap-x-5">
                 <button id="closeModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-xl hover:scale-110 transition transform duration-300">Cancel</button>
@@ -159,7 +157,7 @@ else
             </div>
         </div>
     </div>
-    
+
     <script src="./lib/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
