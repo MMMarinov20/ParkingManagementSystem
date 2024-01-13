@@ -1,6 +1,22 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\assets\\Airport.jpg",
+      "PackagePath": "staticwebassets\\assets\\Airport.jpg"
+    },
+    {
+      "Id": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\assets\\GrandMall.jpg",
+      "PackagePath": "staticwebassets\\assets\\GrandMall.jpg"
+    },
+    {
+      "Id": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\assets\\SeaGarden.jpg",
+      "PackagePath": "staticwebassets\\assets\\SeaGarden.jpg"
+    },
+    {
+      "Id": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\assets\\Stadium.jpg",
+      "PackagePath": "staticwebassets\\assets\\Stadium.jpg"
+    },
+    {
       "Id": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\assets\\background.jpeg",
       "PackagePath": "staticwebassets\\assets\\background.jpeg"
     },
