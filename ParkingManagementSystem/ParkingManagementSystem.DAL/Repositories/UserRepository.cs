@@ -224,7 +224,7 @@ namespace ParkingManagementSystem.DAL.Repositories
         public async Task<bool> UpdateUser(User user, string oldPassword)
         {
             UserValidation userValidation = new UserValidation();
-            if (userValidation.EmailAlreadyExists(user.Email)) return false;
+            //if (userValidation.EmailAlreadyExists(user.Email)) return false;
             using (SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
                 string query = "SELECT Password FROM Users WHERE UserID = @UserID";

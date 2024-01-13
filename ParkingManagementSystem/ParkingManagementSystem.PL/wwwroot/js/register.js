@@ -1,4 +1,5 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+﻿import { fetchData, isPasswordValid } from './utils.js'
+document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('register').addEventListener('click', async function () {
         const fName = document.getElementById('fName').value;
         const lName = document.getElementById('lName').value;
@@ -11,43 +12,26 @@
             return;
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-        if (!passwordRegex.test(password)) {
+        if (!isPasswordValid(password)) {
             toastr.error("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!");
             return;
         }
 
-        try {
-            const response = await fetch("/api/User/Register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "RequestVerificationToken": '@Request.GetAntiforgeryToken()',
-                },
-                body: JSON.stringify({
-                    FirstName: fName,
-                    LastName: lName,
-                    Email: email,
-                    PasswordHash: password,
-                    Phone: phone,
-                })
-            });
+        const data = await fetchData("/api/User/Register", "POST", {
+            FirstName: fName,
+            LastName: lName,
+            Email: email,
+            PasswordHash: password,
+            Phone: phone,
+        });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            if (data == "Success!") {
-                toastr.success("Registration completed.");
-                setTimeout(function () {
-                    window.location.href = "../Login";
-                }, 500)
-            } else {
-                toastr.error(data);
-            }
-        } catch (error) {
-            console.error(error);
+        if (data == "Success!") {
+            toastr.success("Registration completed.");
+            setTimeout(function () {
+                window.location.href = "../Login";
+            }, 500)
+        } else {
+            toastr.error(data);
         }
     });
 })

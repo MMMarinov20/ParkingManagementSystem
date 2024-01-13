@@ -118,6 +118,7 @@ namespace ParkingManagementSystemPL.Controllers
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest user)
         {
             var currentUser = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("CurrentUser"));
+            Console.WriteLine(currentUser.UserID);
             User updatedUser = new User()
             {
                 UserID = currentUser.UserID,
@@ -131,7 +132,7 @@ namespace ParkingManagementSystemPL.Controllers
             {
                 if (await _authenticationService.UpdateUser(updatedUser, user.OldPassword))
                 {
-                    UserSession.Instance.currentUser = updatedUser;
+                    HttpContext.Session.SetString("CurrentUser", JsonSerializer.Serialize(updatedUser));
                     return new JsonResult("Success!");
                 }
                 return new JsonResult("Email already exists or wrong password!");

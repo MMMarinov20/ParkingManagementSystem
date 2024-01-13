@@ -1,4 +1,5 @@
-﻿let areReservationsVisible = true;
+﻿import { fetchData, isPasswordValid } from "./utils.js";
+
 document.addEventListener('DOMContentLoaded', async function () {
     const showReservations = document.getElementById("showReservations");
     const showUsers = document.getElementById("showUsers");
@@ -9,7 +10,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     const tableElUsers = document.getElementById("tableUsers");
 
     if (currentUserData.isAdmin) {
-        console.log("Asd");
         showUsers.addEventListener('click', () => {
             //areReservationsVisible = !areReservationsVisible;
             tableTitleUsers.classList.remove("hidden");
@@ -34,26 +34,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 })
 
 const fetchUsers = async () => {
-    try {
-        const response = await fetch("/api/user/GetUsers", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-            return;
-        }
-
-        const data = await response.json();
-        console.log(data);
-        generateUsersTable(data);
-    }
-    catch (e) {
-        console.log(e);
-    }
+    const data = await fetchData("/api/user/GetUsers", "GET");
+    generateUsersTable(data);
 }
 
 const generateUsersTable = (data) => {
@@ -92,66 +74,24 @@ const generateUsersTable = (data) => {
                 return;
             }
 
-            try {
-                const response = await fetch("/api/user/DeleteUserById", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': "application/json",
-                    },
-                    body: JSON.stringify({
-                        id: user.userID,
-                    })
-                });
+            const data = await fetchData("/api/user/DeleteUserById", "POST", { id: user.userID });
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                    return;
-                }
-
-                const data = await response.json();
-
-                if (data == "Success!") {
-                    toastr.success("User deleted successfully!");
-                    setTimeout(() => {
-                        location.reload();
-                    }, 500);
-                }
-                else {
-                    toastr.error("Something went wrong!");
-                }
+            if (data == "Success!") {
+                toastr.success("User deleted successfully!");
+                setTimeout(() => {
+                    location.reload();
+                }, 500);
             }
-            catch (e) {
-                toastr.error(e);
+            else {
+                toastr.error("Something went wrong!");
             }
-
         }
     })
 }
 
 const fetchReservations = async () => {
-    try {
-        console.log(currentUserData.userID);
-        const response = await fetch("/api/reservation/GetReservationsByUserId", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                id: currentUserData.userID,
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-            return;
-        }
-
-        const data = await response.json();
-        generateReservationsTable(data);
-    }
-    catch (e) {
-        console.log(e);
-    }
+    const data = await fetchData("/api/reservation/GetReservationsByUserId", "POST", { id: currentUserData.userID });
+    generateReservationsTable(data);
 }
 
 const generateReservationsTable = (data) => {
@@ -208,33 +148,13 @@ const generateReservationsTable = (data) => {
         const reservation = data[reservationID];
 
         if (target.innerHTML == "Cancel") {
-            try {
-                const response = await fetch("/api/reservation/DeleteReservation", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        id: reservation.reservationID,
-                    })
-                });
+            const data = await fetchData("/api/reservation/DeleteReservation", "POST", { id: reservation.reservationID });
+            if (data == "Success!") {
+                toastr.success("Reservation Cancelled");
+                setTimeout(function () {
+                    location.reload();
+                }, 500)
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                    return;
-                }
-
-                const data = await response.json();
-                if (data == "Success!") {
-                    toastr.success("Reservation Cancelled");
-                    setTimeout(function () {
-                        location.reload();
-                    }, 500)
-
-                }
-            }
-            catch (e) {
-                toastr.error(e);
             }
         }
     })
@@ -265,43 +185,35 @@ const handleDeleteModal = () => {
     });
 
     document.getElementById('deleteConfirmation').addEventListener('click', async function () {
-        try {
-            const response = await fetch("/api/user/DeleteUser", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    password: password.value,
-                })
-            });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-                return;
-            }
+        const data = await fetchData("/api/user/DeleteUser", "POST", {
+            password: password.value,
+        });
+        if (data == "Success!") {
+            toastr.success("Account Deleted!");
 
-            const data = await response.json();
-            if (data == "Success!") {
-                toastr.success("Account Deleted!");
-
-                setTimeout(function () {
-                    window.location.href = "/";
-                }, 500)
-            }
-            else {
-                toastr.error("Wrong password");
-            }
+            setTimeout(function () {
+                window.location.href = "/";
+            }, 500)
         }
-        catch (e) {
-            toastr.error(e);
+        else {
+            toastr.error("Wrong password");
         }
     })
 }
 
 const handleUpdateModal = () => {
+    const firstName = document.getElementById("FirstName");
+    const lastName = document.getElementById("LastName");
+    const email = document.getElementById("Email");
+    const phone = document.getElementById("Phone");
+
     document.getElementById('update').addEventListener('click', function () {
-        toastr.info("Fill the needed details to update your account.")
+        toastr.info("Fill the needed details to update your account.");
+        firstName.value = currentUserData.firstName;
+        lastName.value = currentUserData.lastName;
+        email.value = currentUserData.email;
+        phone.value = currentUserData.phone;
         document.getElementById('overlay').classList.remove('hidden');
         document.getElementById('updateModal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
@@ -322,16 +234,11 @@ const handleUpdateModal = () => {
     });
 
     document.getElementById('updateConfirmation').addEventListener('click', async function () {
-        const firstName = document.getElementById("FirstName").value;
-        const lastName = document.getElementById("LastName").value;
-        const email = document.getElementById("Email").value;
         const oldPassword = document.getElementById("OldPassword").value;
         const newPassword = document.getElementById("NewPassword").value;
-        const phone = document.getElementById("Phone").value;
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-        if (!passwordRegex.test(newPassword)) {
-            toast.error("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!");
+        if (!isPasswordValid(oldPassword)) {
+            toastr.error("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!");
             return;
         }
 
@@ -340,38 +247,21 @@ const handleUpdateModal = () => {
             return;
         }
 
-        try {
-            const response = await fetch("/api/user/UpdateUser", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    FirstName: firstName,
-                    LastName: lastName,
-                    Email: email,
-                    OldPassword: oldPassword,
-                    NewPassword: newPassword,
-                    Phone: phone,
-                })
-            })
+        const data = await fetchData("/api/user/UpdateUser", "POST", {
+            FirstName: firstName.value,
+            LastName: lastName.value,
+            Email: email.value,
+            OldPassword: oldPassword,
+            NewPassword: newPassword,
+            Phone: phone.value,
+        });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-                return;
-            }
+        if (data == "Success!") {
+            toastr.success("Account Updated!");
 
-            const data = await response.json();
-            if (data == "Success!") {
-                toastr.success("Account Updated!");
-
-                setTimeout(function () {
-                    location.reload();
-                }, 500)
-            }
-        }
-        catch (e) {
-            console.log(e);
+            setTimeout(function () {
+                location.reload();
+            }, 500)
         }
     })
 }
