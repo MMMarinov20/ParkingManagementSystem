@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const lotLabels = document.getElementsByClassName('lotName');
     const lotSelect = document.getElementById('lot');
 
-    fetchLots(capacityLabels, lotLabels, lotSelect);
+    await fetchLots(capacityLabels, lotLabels, lotSelect);
     fetchReservations(capacityLabels);
 
     handleReservation();

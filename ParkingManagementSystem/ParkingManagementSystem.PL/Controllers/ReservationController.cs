@@ -89,6 +89,48 @@ namespace ParkingManagementSystemPL.Controllers
             }
         }
 
+        [HttpGet("GetReservationById")]
+        public async Task<IActionResult> GetReservationById([FromBody] GetReservationRequest request)
+        {
+            try
+            {
+                var reservation = await _reservationService.GetReservationById(request.id);
+                return new JsonResult(reservation);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return BadRequest("Error processing the request");
+            }
+        }
+
+        [HttpPost("EditReservation")]
+        public async Task<IActionResult> EditReservation([FromBody] EditReservationRequestModel request)
+        {
+            try
+            {
+                var reservation = new Reservation
+                {
+                    ReservationID = request.ReservationID,
+                    UserID = request.UserID,
+                    LotID = request.Lot,
+                    CarPlate = request.Plate,
+                    StartTime = DateTime.Parse(request.Date),
+                    EndTime = DateTime.Parse(request.Date).AddMinutes(request.Timestamp),
+                    Status = "Pending"
+                };
+
+                await _reservationService.EditReservation(reservation);
+
+                return new JsonResult("Success!");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return BadRequest("Error processing the request");
+            }
+        }
+
         public class ReservationRequestModel
         {
             public int UserID { get; set; }
@@ -106,6 +148,16 @@ namespace ParkingManagementSystemPL.Controllers
         public class DeleteReservationRequest
         {
             public int id { get; set; }
+        }
+
+        public class EditReservationRequestModel
+        {
+            public int ReservationID { get; set; }
+            public int UserID { get; set; }
+            public int Lot { get; set; }
+            public string Date { get; set; }
+            public int Timestamp { get; set; }
+            public string Plate { get; set; }
         }
     }
 }

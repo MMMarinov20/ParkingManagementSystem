@@ -159,6 +159,33 @@
                 <button id="updateConfirmation" class="mt-4 px-4 py-2 bg-green-400 text-white rounded-xl hover:scale-110 transition transform duration-300">Update account</button>
             </div>
         </div>
+
+        <div id="updateReservationModal" class="hidden bg-white p-6 rounded-xl shadow-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <h2 class="text-2xl font-bold mb-4 text-center">Update Reservation</h2>
+            <div class="flex flex-col gap-y-5">
+                <select id="lot" placeholder="Choose parking lot" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full">
+                    <option value="" selected disabled>Choose a parking lot</option>
+                </select>
+                <input type="text" id="plate" placeholder="Enter your (new) car plate" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full" />
+                <input type="datetime-local" id="startDate" placeholder="Enter your (new) start date" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full" />
+                <select id="timestamp" placeholder="Choose date" class="w-[35vw] border-2 border-gray-300 py-2 px-5 rounded-full">
+                    <option value="" selected disabled>Choose a timestamp</option>
+                    <option value="60">1 hour</option>
+                    <option value="120">2 hours</option>
+                    <option value="180">3 hours</option>
+                    <option value="360">6 hours</option>
+                    <option value="720">12 hours</option>
+                    <option value="1440">1 day</option>
+                    <option value="4320">3 days</option>
+                    <option value="7200">5 days</option>
+                    <option value="10080">1 week</option>
+                </select>
+            </div>
+            <div class="w-full h-fit flex flex-row justify-end gap-x-5">
+                <button id="closeReservationModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-xl hover:scale-110 transition transform duration-300">Cancel</button>
+                <button id="updateReservationConfirmation" class="mt-4 px-4 py-2 bg-green-400 text-white rounded-xl hover:scale-110 transition transform duration-300">Update account</button>
+            </div>
+        </div>
     </div>
 
     <script src="./lib/jquery/dist/jquery.min.js"></script>

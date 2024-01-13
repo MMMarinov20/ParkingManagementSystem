@@ -1,5 +1,6 @@
 ﻿import { fetchData, isPasswordValid } from "./utils.js";
 
+var reservations;
 document.addEventListener('DOMContentLoaded', async function () {
     const showReservations = document.getElementById("showReservations");
     const showUsers = document.getElementById("showUsers");
@@ -29,9 +30,103 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     fetchReservations();
     fetchUsers();
+    fetchLots();
+    handleUpdateReservation()
     handleDeleteModal();
     handleUpdateModal();
 })
+
+const handleUpdateReservation = () => {
+    const table = document.getElementById("tbodyReservations");
+    table.addEventListener('click', async (e) => {
+        const target = e.target;
+        if (target.innerText != "Edit") return;
+        const parent = target.parentElement.parentElement;
+        const id = parent.id.split('-')[1];
+        const reservation = reservations[id];
+
+        const now = new Date();
+        const reservationDate = new Date(reservation.startTime);
+        if (reservationDate < now) {
+            toastr.error("You cannot update a reservation that has already started.");
+            return;
+        }
+
+        const lot = document.getElementById('lot');
+        const plate = document.getElementById('plate');
+        const startDate = document.getElementById('startDate');
+        const timeStamp = document.getElementById('timestamp');
+
+        lot.value = reservation.lotID;
+        plate.value = reservation.carPlate;
+        startDate.value = reservation.startTime;
+
+        toastr.warning("Edit your reservation before it has started!", "Warning");
+        document.getElementById('overlay').classList.remove('hidden');
+        document.getElementById('updateReservationModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('closeReservationModal').addEventListener('click', function () {
+            document.getElementById('overlay').classList.add('hidden');
+            document.getElementById('updateReservationModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        });
+
+        window.addEventListener('click', function (event) {
+            if (event.target === document.getElementById('overlay')) {
+                document.getElementById('overlay').classList.add('hidden');
+                document.getElementById('updateReservationModal').classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.getElementById('updateReservationConfirmation').addEventListener('click', async () => {
+            if (lot.value == "" || plate.value == "" || startDate.value == "" || timeStamp.value == "") {
+                toastr.warning("Please fill all fields to update your reservation");
+                return;
+            }
+            const now = new Date();
+            const reservationDate = new Date(reservation.startTime);
+            if (reservationDate < now) {
+                toastr.error("You cannot update a reservation that has already started.");
+                return;
+            }
+
+            const data = await fetchData("/api/reservation/EditReservation", "POST", {
+                ReservationID: reservation.reservationID,
+                UserID: currentUserData.userID,
+                Lot: lot.value,
+                Date: startDate.value,
+                TimeStamp: timeStamp.value,
+                Plate: plate.value,
+            })
+
+            if (data == "Success!") {
+                toastr.success("Reservation updated successfuly.");
+                document.getElementById('overlay').classList.add('hidden');
+                document.getElementById('updateReservationModal').classList.add('hidden');
+                document.body.style.overflow = '';
+                setTimeout(() => {
+                    location.reload();
+                }, 500)
+            } else {
+                toastr.error("Error updating reservation.");
+            }
+        })
+    })
+
+}
+
+const fetchLots = async () => {
+    const lotSelect = document.getElementById('lot');
+    const data = await fetchData("/api/parkinglot/GetAllLots", "GET");
+
+    data.forEach((lot, i) => {
+        lotSelect.innerHTML += `<option value="${lot.lotID}">${lot.lotName}</option>`
+    })
+
+    if (data) toastr.info("Parking lots fetched successfuly.");
+    else toastr.error("Error fetching parking lots.");
+}
 
 const fetchUsers = async () => {
     const data = await fetchData("/api/user/GetUsers", "GET");
@@ -91,6 +186,7 @@ const generateUsersTable = (data) => {
 
 const fetchReservations = async () => {
     const data = await fetchData("/api/reservation/GetReservationsByUserId", "POST", { id: currentUserData.userID });
+    reservations = data;
     generateReservationsTable(data);
 }
 
