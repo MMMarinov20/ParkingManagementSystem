@@ -22,6 +22,7 @@ namespace ParkingManagementSystem.DAL.Repositories
         Task<bool> DeleteUserById(int id);
         Task<bool> UpdateUser(User user, string oldPassword);
         Task<List<User>> GetAllUsers();
+        Task PromoteUser(int id);
 
     }
     public class UserRepository : IUserRepository
@@ -292,6 +293,20 @@ namespace ParkingManagementSystem.DAL.Repositories
                 }
             }
             return users;
+        }
+
+        public async Task PromoteUser(int id)
+        {
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
+            {
+                string query = "UPDATE Users SET IsAdmin = 1 WHERE UserID = @UserID";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@UserID", id);
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
         }
     }
 }

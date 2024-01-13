@@ -19,5 +19,6 @@ namespace ParkingManagementSystem.BLL.Interfaces
         Task<bool> DeleteUserById(int id);
         Task<bool> UpdateUser(User user, string oldPassword);
         Task<List<User>>GetAllUsers();
+        Task PromoteUser(int id);
     }
 }

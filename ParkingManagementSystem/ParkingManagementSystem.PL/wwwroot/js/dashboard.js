@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         })
     }
 
-    fetchReservations();
-    fetchUsers();
-    fetchLots();
+    await fetchReservations();
+    await fetchUsers();
+    await fetchLots();
     handleUpdateReservation()
     handleDeleteModal();
     handleUpdateModal();
@@ -147,9 +147,10 @@ const generateUsersTable = (data) => {
                             <td class="py-2 px-4 border-b">${user.lastName}</td>
                             <td class="py-2 px-4 border-b">${user.email}</td>
                             <td class="py-2 px-4 border-b">${user.phone}</td>
-                            <td class="py-2 px-4 border-b">soon</td>
+                            <td class="py-2 px-4 border-b">${reservations.length}</td>
+                            <td class="py-2 px-4 border-b">${user.isAdmin.toString().toUpperCase()}</td>
                             <td class="py-2 px-4 border-b">
-                                <button style="color: #3498db; text-decoration: none; cursor: pointer; margin-right: 2px;">Edit</button>
+                                ${!user.isAdmin ? '<button style="color: #3498db; text-decoration: none; cursor: pointer; margin-right: 2px;">Promote</button>' : " "}
                                 <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Delete</button>
                             </td>
                         </tr>
@@ -163,25 +164,47 @@ const generateUsersTable = (data) => {
         const parent = target.parentElement.parentElement;
         const id = parent.id.split('-')[1];
         const user = data[id];
-        if (target.innerText === "Delete") {
-            if (user.userID == currentUserData.userID) {
-                toastr.warning("You can't delete yourself!");
-                return;
-            }
-
-            const data = await fetchData("/api/user/DeleteUserById", "POST", { id: user.userID });
-
-            if (data == "Success!") {
-                toastr.success("User deleted successfully!");
-                setTimeout(() => {
-                    location.reload();
-                }, 500);
-            }
-            else {
-                toastr.error("Something went wrong!");
-            }
-        }
+        if (target.innerText === "Delete") deleteUserById(user.userID);
+        else if (target.innerText === "Promote") promoteUser(user.userID);
+        
     })
+}
+
+const deleteUserById = (userId) => {
+    if (userId == currentUserData.userID) {
+        toastr.warning("You can't delete yourself!");
+        return;
+    }
+    else if (user.isAdmin) {
+        toastr.warning("You can't delete other admins");
+        return;
+    }
+
+    const data = await fetchData("/api/user/DeleteUserById", "POST", { id: user.userID });
+
+    if (data == "Success!") {
+        toastr.success("User deleted successfully!");
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+    }
+    else {
+        toastr.error("Something went wrong!");
+    }
+}
+
+const promoteUser = (userId) => {
+    const data = await fetchData("/api/user/PromoteUser", "POST", { id: userId });
+
+    if (data == "Success!") {
+        toastr.success("User promoted successfully!");
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+    }
+    else {
+        toastr.error("Something went wrong!");
+    }
 }
 
 const fetchReservations = async () => {

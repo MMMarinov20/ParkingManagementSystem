@@ -57,5 +57,9 @@ namespace ParkingManagementSystem.BLL.Services
         {
             return await _userRepository.GetAllUsers();
         }
+        public async Task PromoteUser(int id)
+        {
+            await _userRepository.PromoteUser(id);
+        }
     }
 }

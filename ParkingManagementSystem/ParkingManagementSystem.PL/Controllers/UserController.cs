@@ -158,6 +158,21 @@ namespace ParkingManagementSystemPL.Controllers
             }
         }
 
+        [HttpPost("PromoteUser")]
+        public async Task<IActionResult> PromoteUser([FromBody] DeleteUserByIdRequest user)
+        {
+            try
+            {
+                await _authenticationService.PromoteUser(user.id);
+                return new JsonResult("Success!");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return BadRequest("Error processing the request");
+            }
+        }
+
         public class LoginRequest
         {
             public string Email { get; set; }
