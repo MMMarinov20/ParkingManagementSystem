@@ -22,3 +22,4 @@ C:\Users\mmmarinov20\source\repos\2324-technologies-11-transport-assignment-MMMa
 C:\Users\mmmarinov20\source\repos\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\refint\ParkingManagementSystem.DAL.dll
 C:\Users\mmmarinov20\source\repos\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ParkingManagementSystem.DAL.pdb
 C:\Users\mmmarinov20\source\repos\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ref\ParkingManagementSystem.DAL.dll
+C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ParkingManagementSystem.DAL.sourcelink.json

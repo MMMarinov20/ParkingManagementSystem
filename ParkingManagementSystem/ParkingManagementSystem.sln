@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingManagementSystem.BLL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingManagementSystem.DAL", "ParkingManagementSystem.DAL\ParkingManagementSystem.DAL.csproj", "{5EF29044-CD61-4428-A4C4-7A666C6C4239}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingManagementSystem.Testing", "ParkingManagementSystem.Testing\ParkingManagementSystem.Testing.csproj", "{5EA159EB-B50D-4A9C-9B49-238FAD66D256}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingManagementSystem.Tests", "ParkingManagementSystem.Tests\ParkingManagementSystem.Tests.csproj", "{EAFF998F-075F-48EC-A66E-D7727D2F3638}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +31,10 @@ Global
 		{5EF29044-CD61-4428-A4C4-7A666C6C4239}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EF29044-CD61-4428-A4C4-7A666C6C4239}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EF29044-CD61-4428-A4C4-7A666C6C4239}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5EA159EB-B50D-4A9C-9B49-238FAD66D256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EA159EB-B50D-4A9C-9B49-238FAD66D256}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EA159EB-B50D-4A9C-9B49-238FAD66D256}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EA159EB-B50D-4A9C-9B49-238FAD66D256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAFF998F-075F-48EC-A66E-D7727D2F3638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAFF998F-075F-48EC-A66E-D7727D2F3638}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAFF998F-075F-48EC-A66E-D7727D2F3638}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAFF998F-075F-48EC-A66E-D7727D2F3638}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
