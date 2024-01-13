@@ -81,9 +81,28 @@ namespace ParkingManagementSystemPL.Controllers
         {
             try
             {
-                if (await _authenticationService.DeleteUser(UserSession.Instance.currentUser.UserID, user.password))
+                var currentUser = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("CurrentUser"));
+                if (await _authenticationService.DeleteUser(currentUser.UserID, user.password))
                 {
-                    UserSession.Instance.currentUser = null;
+                    HttpContext.Session.Clear();
+                    return new JsonResult("Success!");
+                }
+                return new JsonResult("Wrong credentials!");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return BadRequest("Error processing the request");
+            }
+        }
+
+        [HttpPost("DeleteUserById")]
+        public async Task<IActionResult> DeleteUserById([FromBody] DeleteUserByIdRequest user)
+        {
+            try
+            {
+                if (await _authenticationService.DeleteUserById(user.id))
+                {
                     return new JsonResult("Success!");
                 }
                 return new JsonResult("Wrong credentials!");
@@ -98,9 +117,10 @@ namespace ParkingManagementSystemPL.Controllers
         [HttpPost("UpdateUser")]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest user)
         {
+            var currentUser = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("CurrentUser"));
             User updatedUser = new User()
             {
-                UserID = UserSession.Instance.currentUser.UserID,
+                UserID = currentUser.UserID,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
@@ -155,6 +175,11 @@ namespace ParkingManagementSystemPL.Controllers
         public class DeleteUserRequest
         {
             public string password { get; set; }
+        }
+
+        public class DeleteUserByIdRequest
+        {
+            public int id { get; set; }
         }
 
         public class UpdateUserRequest

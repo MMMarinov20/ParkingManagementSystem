@@ -19,6 +19,7 @@ namespace ParkingManagementSystem.DAL.Repositories
         Task<User> GetUserByEmail(string email);
         Task<bool> AuthenticateUser(string email, string password);
         Task<bool> DeleteUser(int id, string password);
+        Task<bool> DeleteUserById(int id);
         Task<bool> UpdateUser(User user, string oldPassword);
         Task<List<User>> GetAllUsers();
 
@@ -195,6 +196,28 @@ namespace ParkingManagementSystem.DAL.Repositories
                     }
                 }
                 return false;
+            }
+        }
+
+        public async Task<bool> DeleteUserById(int id)
+        {
+            using (SqlConnection connection = _databaseConnector.GetOpenConnection())
+            {
+                string query = "DELETE FROM Reservations WHERE UserID = @UserID";
+                using (SqlCommand command2 = new SqlCommand(query, connection))
+                {
+                    command2.Parameters.AddWithValue("@UserID", id);
+                    await command2.ExecuteNonQueryAsync();
+                }
+
+                query = "DELETE FROM Users WHERE UserID = @UserID";
+                using (SqlCommand command3 = new SqlCommand(query, connection))
+                {
+                    command3.Parameters.AddWithValue("@UserID", id);
+                    await command3.ExecuteNonQueryAsync();
+                }
+
+                return true;
             }
         }
 

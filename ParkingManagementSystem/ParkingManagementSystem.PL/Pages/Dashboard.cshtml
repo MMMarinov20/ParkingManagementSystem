@@ -15,6 +15,9 @@
     <script>
         var currentUserData = @Html.Raw(Json.Serialize(currentUser));
     </script>
+} else
+{
+    return;
 }
 
 @using ParkingManagementSystemPL.Controllers

@@ -73,12 +73,58 @@ const generateUsersTable = (data) => {
                             <td class="py-2 px-4 border-b">soon</td>
                             <td class="py-2 px-4 border-b">
                                 <button style="color: #3498db; text-decoration: none; cursor: pointer; margin-right: 2px;">Edit</button>
-                                <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Cancel</button>
+                                <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Delete</button>
                             </td>
                         </tr>
         `
 
         table.innerHTML += html;
+    })
+
+    table.addEventListener('click', async (e) => {
+        const target = e.target;
+        const parent = target.parentElement.parentElement;
+        const id = parent.id.split('-')[1];
+        const user = data[id];
+        if (target.innerText === "Delete") {
+            if (user.userID == currentUserData.userID) {
+                toastr.warning("You can't delete yourself!");
+                return;
+            }
+
+            try {
+                const response = await fetch("/api/user/DeleteUserById", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': "application/json",
+                    },
+                    body: JSON.stringify({
+                        id: user.userID,
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    return;
+                }
+
+                const data = await response.json();
+
+                if (data == "Success!") {
+                    toastr.success("User deleted successfully!");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 500);
+                }
+                else {
+                    toastr.error("Something went wrong!");
+                }
+            }
+            catch (e) {
+                toastr.error(e);
+            }
+
+        }
     })
 }
 
@@ -146,7 +192,7 @@ const generateReservationsTable = (data) => {
                             <td class="py-2 px-4 border-b">${new Date(reservation.endTime).toLocaleString('en-US', options)}</td>
                             <td class="py-2 px-4 border-b">${reservation.status}</td>
                             <td class="py-2 px-4 border-b">
-                                <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Edit</button>
+                                <button style="color: #3498db; text-decoration: none; cursor: pointer; margin-right: 2px;">Edit</button>
                                 <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Cancel</button>
                             </td>
                         </tr>
