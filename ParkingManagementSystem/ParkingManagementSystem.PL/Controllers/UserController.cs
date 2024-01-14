@@ -171,6 +171,13 @@ namespace ParkingManagementSystemPL.Controllers
             }
         }
 
+        [HttpPost("GetUserById")]
+        public async Task<IActionResult> GetUserById([FromBody] DeleteUserByIdRequest user)
+        {
+            User userFromDb =  await _authenticationService.GetUserByIdAsync(user.id);
+            return new JsonResult(userFromDb);
+        }
+
         public class LoginRequest
         {
             public string Email { get; set; }

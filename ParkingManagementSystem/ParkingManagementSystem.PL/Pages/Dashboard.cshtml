@@ -40,9 +40,11 @@
                     <li id="reservationsLabel" class="text-gray-300 hover:text-white font-bold">Loading...</li>
                     @if (currentUser.IsAdmin)
                     {
-                        <li id="usersLabel" class="text-gray-300 hover:text-white font-bold">Loading...</li>
+                        <li id="usersLabel" class="text-green-300 hover:text-white font-bold">Loading...</li>
+                        <li id="feedbackLabel" class="text-green-300 hover:text-white font-bold">Loading...</li>
                         <li id="showReservations" class="text-gray-300 hover:text-white font-bold hover:cursor-pointer">ADMIN: Reservation Table</li>
                         <li id="showUsers" class="text-gray-300 hover:text-white font-bold hover:cursor-pointer">ADMIN: Users Table</li>
+                        <li id="showFeedback" class="text-gray-300 hover:text-white hover:cursor-pointer font-bold">ADMIN: Feedback Table</li>
                     }
                 </div>
                 <div>
@@ -69,8 +71,8 @@
                     <div class="absolute w-full h-0.5 bg-blue-500 transform translate-y-full opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"></div>
                 </a>
 
-                <a asp-page="/Contact" class="group inline-block relative">
-                    <h1 class="relative z-20">Contact us</h1>
+                <a asp-page="/Feedback" class="group inline-block relative">
+                    <h1 class="relative z-20">Feedback</h1>
                     <div class="absolute w-full h-0.5 bg-blue-500 transform translate-y-full opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"></div>
                 </a>
                 @if (currentUser != null)
@@ -129,6 +131,24 @@
                         </tr>
                     </thead>
                     <tbody id="tbodyUsers"></tbody>
+
+                </table>
+            </div>
+
+            <h1 id="tableTitleFeedback" class="hidden text-center text-3xl font-bold">Feedbacks</h1>
+
+            <div id="tableFeedback" class="hidden overflow-y-auto max-h-[35vh] pt-5">
+                <table class="min-w-full bg-white border border-gray-300 rounded">
+                    <thead class="sticky top-0 z-1 bg-white">
+                        <tr>
+                            <th class="py-2 px-4 border-b">Feedback ID</th>
+                            <th class="py-2 px-4 border-b">First Name</th>
+                            <th class="py-2 px-4 border-b">Last Name</th>
+                            <th class="py-2 px-4 border-b">Rating</th>
+                            <th class="py-2 px-4 border-b">Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyFeedback"></tbody>
 
                 </table>
             </div>

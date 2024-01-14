@@ -33,9 +33,9 @@ CREATE TABLE Reservations (
     CONSTRAINT chk_ReservationTime CHECK (StartTime < EndTime),
 );
 
-
 CREATE TABLE Feedback (
     FeedbackID INT PRIMARY KEY IDENTITY(1,1),
+	UserID INT REFERENCES Users(UserID),
     Rating INT NOT NULL, -- Rating out of 5, for example
     Comment TEXT,
 );

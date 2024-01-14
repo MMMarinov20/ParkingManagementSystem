@@ -1,19 +1,37 @@
 ﻿import { fetchData, isPasswordValid, modal } from "./utils.js";
 
-var reservations;
+var reservations, feedbacks;
 document.addEventListener('DOMContentLoaded', async function () {
+    handleTableSwitching();
+    await fetchReservations();
+    await fetchUsers();
+    await fetchLots();
+    await fetchFeedback();
+    handleUpdateReservation()
+    handleDeleteModal();
+    handleUpdateModal();
+})
+
+const handleTableSwitching = () => {
     const showReservations = document.getElementById("showReservations");
     const showUsers = document.getElementById("showUsers");
+    const showFeedback = document.getElementById("showFeedback");
+
     const tableTitleReservations = document.getElementById("tableTitleReservations");
     const tableElReservations = document.getElementById("tableReservations");
 
     const tableTitleUsers = document.getElementById("tableTitleUsers");
     const tableElUsers = document.getElementById("tableUsers");
 
+    const tableTitleFeedback = document.getElementById("tableTitleFeedback");
+    const tableElFeedback = document.getElementById("tableFeedback");
+
     if (currentUserData.isAdmin) {
         showUsers.addEventListener('click', () => {
             tableTitleUsers.classList.remove("hidden");
             tableElUsers.classList.remove("hidden");
+            tableTitleFeedback.classList.add("hidden");
+            tableElFeedback.classList.add("hidden");
             tableTitleReservations.classList.add("hidden");
             tableElReservations.classList.add("hidden");
         })
@@ -21,18 +39,25 @@ document.addEventListener('DOMContentLoaded', async function () {
         showReservations.addEventListener('click', () => {
             tableTitleUsers.classList.add("hidden");
             tableElUsers.classList.add("hidden");
-            tableTitleReservations.classList.remove("hidden");
-            tableElReservations.classList.remove("hidden");
-        })
-    }
+            tableTitleFeedback.classList.add("hidden");
+            tableElFeedback.classList.add("hidden");
 
-    await fetchReservations();
-    await fetchUsers();
-    await fetchLots();
-    handleUpdateReservation()
-    handleDeleteModal();
-    handleUpdateModal();
-})
+            tableTitleReservations.classList.remove("hidden");
+            if (reservations.length > 0) tableElReservations.classList.remove("hidden");
+        })
+
+        showFeedback.addEventListener('click', () => {
+            tableTitleUsers.classList.add("hidden");
+            tableElUsers.classList.add("hidden");
+
+            tableTitleReservations.classList.add("hidden");
+            tableElReservations.classList.add("hidden");
+
+            tableTitleFeedback.classList.remove("hidden");
+            if (feedbacks.length > 0) tableElFeedback.classList.remove("hidden");
+        });
+    }
+}
 
 const handleUpdateReservation = () => {
     const table = document.getElementById("tbodyReservations");
@@ -101,6 +126,14 @@ const handleUpdateReservation = () => {
 
 }
 
+const fetchFeedback = async () => {
+    const data = await fetchData("/api/feedback/GetAllFeedbacks", "GET");
+    feedbacks = data;
+
+    data.length == 0 ? toastr.info("No feedbacks found.") : toastr.info("Feedbacks fetched successfuly.");
+    generateFeedbackTable(data);
+}
+
 const fetchLots = async () => {
     const lotSelect = document.getElementById('lot');
     const data = await fetchData("/api/parkinglot/GetAllLots", "GET");
@@ -112,15 +145,37 @@ const fetchLots = async () => {
 }
 
 const fetchUsers = async () => {
+    const usersLabel = document.getElementById("usersLabel");
     const data = await fetchData("/api/user/GetUsers", "GET");
+    usersLabel.innerHTML = `ADMIN: Users (${data.length})`;
     generateUsersTable(data);
 }
 
-const generateUsersTable = (data) => {
-    const usersLabel = document.getElementById("usersLabel");
-    const table = document.getElementById("tbodyUsers");
+const generateFeedbackTable = (data) => {
+    const feedbacksLabel = document.getElementById("feedbackLabel");
+    const table = document.getElementById("tbodyFeedback");
 
-    usersLabel.innerHTML = `ADMIN: Users (${data.length})`;
+    feedbacksLabel.innerText = `ADMIN: Feedbacks (${data.length})`;
+
+    data.forEach(async (feedback, i) => {
+        const user = await fetchData(`/api/user/GetUserById`, "POST", { id: feedback.userID });
+        console.log(feedback)
+        const html = `
+                     <tr id="res-${i}" class="text-center">
+                            <td class="py-2 px-4 border-b">${data.Id}</td>
+                            <td class="py-2 px-4 border-b">${user.firstName}</td>
+                            <td class="py-2 px-4 border-b">${user.lastName}</td>
+                            <td class="py-2 px-4 border-b">${feedback.rating}</td>
+                            <td class="py-2 px-4 border-b" style="max-width: 200px; overflow-x: auto;">${feedback.comment}</td>
+                     </tr>
+        `;
+
+        table.innerHTML += html;
+    })
+}
+
+const generateUsersTable = (data) => {
+    const table = document.getElementById("tbodyUsers");
 
     data.forEach((user, i) => {
         const html = `

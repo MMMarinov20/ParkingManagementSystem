@@ -28,10 +28,11 @@ namespace ParkingManagementSystem.DAL.Repositories
         {
             using(SqlConnection connection = _databaseConnector.GetOpenConnection())
             {
-                string query = "INSERT INTO Feedback (Rating, Comment) VALUES (@Rating, @Comment)";
+                string query = "INSERT INTO Feedback (UserID, Rating, Comment) VALUES (@UserID, @Rating, @Comment)";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@UserID", feedback.UserID);
                     command.Parameters.AddWithValue("@Rating", feedback.Rating);
                     command.Parameters.AddWithValue("@Comment", feedback.Comment);
 
@@ -59,8 +60,9 @@ namespace ParkingManagementSystem.DAL.Repositories
                             Feedback feedback = new Feedback
                             {
                                 Id = reader.GetInt32(0),
-                                Rating = reader.GetInt32(1),
-                                Comment = reader.GetString(2)
+                                UserID = reader.GetInt32(1),
+                                Rating = reader.GetInt32(2),
+                                Comment = reader.GetString(3)
                             };
 
                             feedbacks.Add(feedback);

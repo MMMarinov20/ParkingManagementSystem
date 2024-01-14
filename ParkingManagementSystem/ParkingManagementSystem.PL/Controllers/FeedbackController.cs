@@ -4,6 +4,7 @@ using ParkingManagementSystem.BLL.Interfaces;
 using ParkingManagementSystem.DAL.Models;
 using System;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace ParkingManagementSystemPL.Controllers
 {
@@ -21,8 +22,10 @@ namespace ParkingManagementSystemPL.Controllers
         [HttpPost("CreateFeedback")]
         public async Task<IActionResult> CreateFeedback([FromBody] FeedbackRequest feedback)
         {
+            var currentUser = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("CurrentUser"));
             Feedback feedbackToCreate = new Feedback
             {
+                UserID = currentUser.UserID,
                 Comment = feedback.Comment,
                 Rating = feedback.Rating,
             };
