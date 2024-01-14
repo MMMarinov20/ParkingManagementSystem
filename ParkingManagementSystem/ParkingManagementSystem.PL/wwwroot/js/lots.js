@@ -1,4 +1,4 @@
-import { fetchData } from './utils.js';
+import { fetchData, modal } from './utils.js';
 
 var lots;
 document.addEventListener('DOMContentLoaded', async function () {
@@ -49,19 +49,8 @@ const handleReservation = () => {
         });
     })
 
-    document.getElementById('closeModal').addEventListener('click', function () {
-        document.getElementById('overlay').classList.add('hidden');
-        document.getElementById('myModal').classList.add('hidden');
-        document.body.style.overflow = '';
-    });
-
-    window.addEventListener('click', function (event) {
-        if (event.target === document.getElementById('overlay')) {
-            document.getElementById('overlay').classList.add('hidden');
-            document.getElementById('myModal').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-    });
+    modal('closeModal', 'myModal');
+    
     document.getElementById('goToCheckout').addEventListener('click', async function () {
         const lot = await parseFloat(document.getElementById('lot').value);
         const date = await document.getElementById('date').value;
@@ -84,12 +73,12 @@ const handleReservation = () => {
             Timestamp: timestamp,
             Plate: plate
         });
+        
         toastr.success("You can view your reservations in your profile page", "Reservation created.")
-        setTimeout(function () {
-            window.location.href = "/";
-        }, 500);
+        
+        setTimeout(() => window.location.href = "/", 500);
+        
         document.getElementById('overlay').classList.add('hidden');
         document.getElementById('myModal').classList.add('hidden');
-
     })
 }

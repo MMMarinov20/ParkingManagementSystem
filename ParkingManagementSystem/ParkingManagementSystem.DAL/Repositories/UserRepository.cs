@@ -140,9 +140,7 @@ namespace ParkingManagementSystem.DAL.Repositories
                     {
                         if (await reader.ReadAsync())
                         {
-                            Console.WriteLine("asd");
                             string storedPassword = reader["Password"].ToString();
-                            Console.WriteLine($"Stored Password: {storedPassword}");
                             return BCryptNet.Verify(password, storedPassword);
                         }
                         else

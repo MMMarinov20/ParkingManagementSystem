@@ -37,10 +37,10 @@
             <div class="h-full flex flex-col justify-between py-5">
                 <div>
                     <li class="text-gray-300 hover:text-white font-bold">👋 Hello, @currentUser?.FirstName!</li>
-                    <li id="reservationsLabel" class="text-gray-300 hover:text-white font-bold"></li>
+                    <li id="reservationsLabel" class="text-gray-300 hover:text-white font-bold">Loading...</li>
                     @if (currentUser.IsAdmin)
                     {
-                        <li id="usersLabel" class="text-gray-300 hover:text-white font-bold"></li>
+                        <li id="usersLabel" class="text-gray-300 hover:text-white font-bold">Loading...</li>
                         <li id="showReservations" class="text-gray-300 hover:text-white font-bold hover:cursor-pointer">ADMIN: Reservation Table</li>
                         <li id="showUsers" class="text-gray-300 hover:text-white font-bold hover:cursor-pointer">ADMIN: Users Table</li>
                     }
@@ -92,7 +92,7 @@
                 }
 
             </div>
-            <h1 id="tableTitleReservations" class="text-center text-3xl font-bold">Your reservations</h1>
+            <h1 id="tableTitleReservations" class="text-center text-3xl font-bold">Loading...</h1>
 
             <div id="tableReservations" class="overflow-y-auto max-h-[35vh] pt-5">
                 <table class="min-w-full bg-white border border-gray-300 rounded">

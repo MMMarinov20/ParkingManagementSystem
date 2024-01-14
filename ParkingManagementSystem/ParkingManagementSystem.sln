@@ -5,13 +5,11 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingManagementSystemPL", "ParkingManagementSystem.PL\ParkingManagementSystemPL.csproj", "{84C5FBCA-0B19-42FD-B178-4A6C1622D8B1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ParkingManagementSystem.PL", "ParkingManagementSystem.PL", "{5A20AA04-394F-4219-9FF0-CC2FF97EB60D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingManagementSystem.BLL", "ParkingManagementSystem.BLL\ParkingManagementSystem.BLL.csproj", "{67A7870A-DCBE-46A5-A815-F7F1770639AE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingManagementSystem.DAL", "ParkingManagementSystem.DAL\ParkingManagementSystem.DAL.csproj", "{5EF29044-CD61-4428-A4C4-7A666C6C4239}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingManagementSystem.Tests", "ParkingManagementSystem.Tests\ParkingManagementSystem.Tests.csproj", "{EAFF998F-075F-48EC-A66E-D7727D2F3638}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingManagementSystem.Tests", "ParkingManagementSystem.Tests\ParkingManagementSystem.Tests.csproj", "{EAFF998F-075F-48EC-A66E-D7727D2F3638}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

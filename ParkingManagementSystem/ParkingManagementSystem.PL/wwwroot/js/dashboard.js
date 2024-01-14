@@ -1,4 +1,4 @@
-﻿import { fetchData, isPasswordValid } from "./utils.js";
+﻿import { fetchData, isPasswordValid, modal } from "./utils.js";
 
 var reservations;
 document.addEventListener('DOMContentLoaded', async function () {
@@ -63,28 +63,16 @@ const handleUpdateReservation = () => {
         document.getElementById('overlay').classList.remove('hidden');
         document.getElementById('updateReservationModal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-        document.getElementById('closeReservationModal').addEventListener('click', function () {
-            document.getElementById('overlay').classList.add('hidden');
-            document.getElementById('updateReservationModal').classList.add('hidden');
-            document.body.style.overflow = '';
-        });
 
-        window.addEventListener('click', function (event) {
-            if (event.target === document.getElementById('overlay')) {
-                document.getElementById('overlay').classList.add('hidden');
-                document.getElementById('updateReservationModal').classList.add('hidden');
-                document.body.style.overflow = '';
-            }
-        });
+        modal('closeReservationModal', 'updateReservationModal');
 
         document.getElementById('updateReservationConfirmation').addEventListener('click', async () => {
             if (lot.value == "" || plate.value == "" || startDate.value == "" || timeStamp.value == "") {
                 toastr.warning("Please fill all fields to update your reservation");
                 return;
             }
-            const now = new Date();
-            const reservationDate = new Date(reservation.startTime);
-            if (reservationDate < now) {
+
+            if (new Date(reservation.startTime) < new Date()) {
                 toastr.error("You cannot update a reservation that has already started.");
                 return;
             }
@@ -100,15 +88,14 @@ const handleUpdateReservation = () => {
 
             if (data == "Success!") {
                 toastr.success("Reservation updated successfuly.");
+
                 document.getElementById('overlay').classList.add('hidden');
                 document.getElementById('updateReservationModal').classList.add('hidden');
                 document.body.style.overflow = '';
-                setTimeout(() => {
-                    location.reload();
-                }, 500)
-            } else {
-                toastr.error("Error updating reservation.");
+
+                setTimeout(() => location.reload(), 500)
             }
+            else toastr.error("Error updating reservation.");
         })
     })
 
@@ -118,9 +105,7 @@ const fetchLots = async () => {
     const lotSelect = document.getElementById('lot');
     const data = await fetchData("/api/parkinglot/GetAllLots", "GET");
 
-    data.forEach((lot, i) => {
-        lotSelect.innerHTML += `<option value="${lot.lotID}">${lot.lotName}</option>`
-    })
+    data.forEach(lot => lotSelect.innerHTML += `<option value="${lot.lotID}">${lot.lotName}</option>`)
 
     if (data) toastr.info("Parking lots fetched successfuly.");
     else toastr.error("Error fetching parking lots.");
@@ -132,12 +117,11 @@ const fetchUsers = async () => {
 }
 
 const generateUsersTable = (data) => {
-    const tableTitle = document.getElementById("tableTitleUsers");
-    const tableEl = document.getElementById("tableUsers");
     const usersLabel = document.getElementById("usersLabel");
     const table = document.getElementById("tbodyUsers");
 
     usersLabel.innerHTML = `ADMIN: Users (${data.length})`;
+
     data.forEach((user, i) => {
         const html = `
                         <tr id="res-${i}" class="text-center">
@@ -163,14 +147,14 @@ const generateUsersTable = (data) => {
         const parent = target.parentElement.parentElement;
         const id = parent.id.split('-')[1];
         const user = data[id];
-        if (target.innerText === "Delete") deleteUserById(user.userID);
+
+        if (target.innerText === "Delete") deleteUserById(user);
         else if (target.innerText === "Promote") promoteUser(user.userID);
-        
     })
 }
 
-const deleteUserById = async(userId) => {
-    if (userId == currentUserData.userID) {
+const deleteUserById = async (user) => {
+    if (user.userId == currentUserData.userID) {
         toastr.warning("You can't delete yourself!");
         return;
     }
@@ -183,13 +167,9 @@ const deleteUserById = async(userId) => {
 
     if (data == "Success!") {
         toastr.success("User deleted successfully!");
-        setTimeout(() => {
-            location.reload();
-        }, 500);
+        setTimeout(() => location.reload(), 500);
     }
-    else {
-        toastr.error("Something went wrong!");
-    }
+    else toastr.error("Something went wrong!");
 }
 
 const promoteUser = async (userId) => {
@@ -197,13 +177,9 @@ const promoteUser = async (userId) => {
 
     if (data == "Success!") {
         toastr.success("User promoted successfully!");
-        setTimeout(() => {
-            location.reload();
-        }, 500);
+        setTimeout(() => location.reload(), 500);
     }
-    else {
-        toastr.error("Something went wrong!");
-    }
+    else toastr.error("Something went wrong!");
 }
 
 const fetchReservations = async () => {
@@ -216,6 +192,7 @@ const generateReservationsTable = (data) => {
     const tableTitle = document.getElementById("tableTitleReservations");
     const tableEl = document.getElementById("tableReservations");
     const reservationsLabel = document.getElementById("reservationsLabel");
+    const table = document.getElementById("tbodyReservations");
 
     if (data.length == 0) {
         toastr.info("Why don't you make one?", "You don't have any reservations!");
@@ -229,8 +206,7 @@ const generateReservationsTable = (data) => {
         tableEl.classList.add("visible");
     }
 
-    const table = document.getElementById("tbodyReservations");
-    console.log(table);
+
     data.forEach((reservation, i) => {
         const options = {
             month: 'numeric',
@@ -267,12 +243,10 @@ const generateReservationsTable = (data) => {
 
         if (target.innerHTML == "Cancel") {
             const data = await fetchData("/api/reservation/DeleteReservation", "POST", { id: reservation.reservationID });
+
             if (data == "Success!") {
                 toastr.success("Reservation Cancelled");
-                setTimeout(function () {
-                    location.reload();
-                }, 500)
-
+                setTimeout(() => location.reload(), 500)
             }
         }
     })
@@ -288,19 +262,7 @@ const handleDeleteModal = () => {
         document.body.style.overflow = 'hidden';
     });
 
-    document.getElementById('closeModal').addEventListener('click', function () {
-        document.getElementById('overlay').classList.add('hidden');
-        document.getElementById('deleteModal').classList.add('hidden');
-        document.body.style.overflow = '';
-    });
-
-    window.addEventListener('click', function (event) {
-        if (event.target === document.getElementById('overlay')) {
-            document.getElementById('overlay').classList.add('hidden');
-            document.getElementById('deleteModal').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-    });
+    modal('closeModal', 'deleteModal')
 
     document.getElementById('deleteConfirmation').addEventListener('click', async function () {
 
@@ -309,14 +271,9 @@ const handleDeleteModal = () => {
         });
         if (data == "Success!") {
             toastr.success("Account Deleted!");
-
-            setTimeout(function () {
-                window.location.href = "/";
-            }, 500)
+            setTimeout(() => window.location.href = "/", 500)
         }
-        else {
-            toastr.error("Wrong password");
-        }
+        else toastr.error("Wrong password");
     })
 }
 
@@ -337,25 +294,13 @@ const handleUpdateModal = () => {
         document.body.style.overflow = 'hidden';
     });
 
-    document.getElementById('closeUpdateModal').addEventListener('click', function () {
-        document.getElementById('overlay').classList.add('hidden');
-        document.getElementById('updateModal').classList.add('hidden');
-        document.body.style.overflow = '';
-    });
-
-    window.addEventListener('click', function (event) {
-        if (event.target === document.getElementById('overlay')) {
-            document.getElementById('overlay').classList.add('hidden');
-            document.getElementById('updateModal').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-    });
+    modal('closeUpdateModal', 'updateModal');
 
     document.getElementById('updateConfirmation').addEventListener('click', async function () {
         const oldPassword = document.getElementById("OldPassword").value;
         const newPassword = document.getElementById("NewPassword").value;
 
-        if (!isPasswordValid(oldPassword)) {
+        if (!isPasswordValid(oldPassword) || !isPasswordValid(newPassword)) {
             toastr.error("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!");
             return;
         }
@@ -377,9 +322,18 @@ const handleUpdateModal = () => {
         if (data == "Success!") {
             toastr.success("Account Updated!");
 
-            setTimeout(function () {
-                location.reload();
-            }, 500)
+            document.getElementById('overlay').classList.add('hidden');
+            document.getElementById('updateModal').classList.add('hidden');
+
+            const data = await fetchData("/api/User/Logout", "POST");
+            if (data == "Success!") {
+                toastr.success("Logout successful!");
+                setTimeout(function () {
+                    if (window.location.pathname === "/Dashboard") return window.location.href = "/";
+                    location.reload();
+                }, 500)
+            }
         }
+        else toastr.error("Invalid credentials");
     })
 }

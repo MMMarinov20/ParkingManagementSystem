@@ -12,7 +12,6 @@
             throw new Error(`HTTP error! Status: ${response.status}`);
             return;
         }
-        
         return await response.json()
     }
     catch (e) {
@@ -26,4 +25,20 @@ export const isPasswordValid = (password) => {
         return false;
     }
     return true;
+}
+
+export const modal = (closeButton, modalName) => {
+    document.getElementById(closeButton).addEventListener('click', function () {
+        document.getElementById('overlay').classList.add('hidden');
+        document.getElementById(modalName).classList.add('hidden');
+        document.body.style.overflow = '';
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target === document.getElementById('overlay')) {
+            document.getElementById('overlay').classList.add('hidden');
+            document.getElementById(modalName).classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    });
 }

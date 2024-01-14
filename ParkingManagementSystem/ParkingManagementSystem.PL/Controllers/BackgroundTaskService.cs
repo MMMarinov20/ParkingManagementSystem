@@ -38,6 +38,11 @@ public class BackgroundTaskService : BackgroundService
 
             foreach (var reservation in reservations)
             {
+                if (reservation.StartTime > DateTime.Now && reservation.Status == "Cancelled")
+                {
+                    await reservationService.DeleteReservation(reservation.ReservationID);
+                    continue;
+                }
                 if (reservation.EndTime < DateTime.Now || reservation.Status == "Cancelled")
                 {
                     await reservationService.DeleteReservation(reservation.ReservationID);

@@ -40,7 +40,6 @@ CREATE TABLE Feedback (
     Comment TEXT,
 );
 
---INSERT INTO Users (FirstName, LastName, Email, [Password], Phone) VALUES ('admin', 'admin', 'example@', 'admin', '1234567890');
 INSERT INTO ParkingLots (LotID, LotName, [Location], Capacity, CurrentAvailability) VALUES (1, 'Sea Garden Parking', 'Sea Garden', 220, 220);
 INSERT INTO ParkingLots (LotID, LotName, [Location], Capacity, CurrentAvailability) VALUES (2, 'Grand Mall Parking', 'Grand Mall', 500, 500);
 INSERT INTO ParkingLots (LotID, LotName, [Location], Capacity, CurrentAvailability) VALUES (3, 'West Airport Parking', 'West Airport Parking', 700, 700);

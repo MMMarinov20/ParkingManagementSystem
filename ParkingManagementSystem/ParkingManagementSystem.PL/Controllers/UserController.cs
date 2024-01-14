@@ -11,7 +11,6 @@ namespace ParkingManagementSystemPL.Controllers
     [ApiController]
     public class UserController : Controller
     {
-        private UserSession session = UserSession.Instance;
         private readonly IUserService _authenticationService;
 
         public UserController(IUserService authenticationService)
@@ -31,12 +30,11 @@ namespace ParkingManagementSystemPL.Controllers
                     User currentUser = await _authenticationService.GetUserByEmail(email);
 
                     HttpContext.Session.SetString("CurrentUser", JsonSerializer.Serialize(currentUser));
-                    Console.WriteLine("Session: " + HttpContext.Session.GetString("CurrentUser"));
                     return new JsonResult("Success!");
                 }
                 else
                 {
-                    return new JsonResult("Invalid credentials!");
+                    return BadRequest("Invalid credentials");
                 }
             }
             catch (Exception ex)

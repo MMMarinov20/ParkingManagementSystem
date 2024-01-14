@@ -16,16 +16,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         if (data == "Success!") {
             toastr.success("Login successful!");
-            toastr.options.closeDuration = 500;
-            setTimeout(function () {
-                window.location.href = "/";
-            }, 500);
+
+            setTimeout(() => window.location.href = "/", 500);
+
             email.value = "";
             password.value = "";
-        } else {
-            toastr.error("Login failed!");
-            toastr.options.closeDuration = 500;
         }
-
+        else toastr.error("Login failed!");
     });
 })
