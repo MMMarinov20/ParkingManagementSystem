@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ParkingManagementSystem.BLL.Interfaces;
 using ParkingManagementSystem.DAL.Models;
 using ParkingManagementSystem.DAL.Repositories;
+using ParkingManagementSystem.DAL.Interfaces;
 
 namespace ParkingManagementSystem.BLL.Services
 {

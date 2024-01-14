@@ -6,28 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using ParkingManagementSystem.DAL.Models;
 using ParkingManagementSystem.DAL.Data;
+using ParkingManagementSystem.DAL.Interfaces;
 
 namespace ParkingManagementSystem.DAL.Repositories
 {
-    public interface IReservationRepository
-    {
-        Task<List<Reservation>> GetAllReservations();
-        Task CreateReservation(Reservation reservation);
-        Task EditReservation(Reservation reservation);
-        Task DeleteReservation(int id);
-        Task<Reservation> GetReservationById(int id);
-        Task<List<Reservation>> GetReservationsByUserId(int id);
-        Task UpdateStatus(int id);
-    }
     public class ReservationRepository : IReservationRepository
     {
         private readonly DatabaseConnector _databaseConnector;
-        private readonly IParkingLotRepository _parkingLotRepository;
 
-        public ReservationRepository(DatabaseConnector databaseConnector, IParkingLotRepository parkingLotRepository)
+        public ReservationRepository(DatabaseConnector databaseConnector)
         {
             _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
-            _parkingLotRepository = parkingLotRepository ?? throw new ArgumentNullException(nameof(parkingLotRepository));
         }
 
         public async Task<List<Reservation>> GetAllReservations()

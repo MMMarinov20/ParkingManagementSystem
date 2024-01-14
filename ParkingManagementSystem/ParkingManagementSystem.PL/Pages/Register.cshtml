@@ -1,8 +1,16 @@
 ﻿@page
 @model ParkingManagementSystemPL.Pages.RegisterModel
+@using ParkingManagementSystem.DAL.Models
+@using System.Text.Json
 @{
+    ViewData["Title"] = "Home page";
+    var currentUserJson = HttpContext.Session.GetString("CurrentUser");
+    var currentUser = !string.IsNullOrEmpty(currentUserJson)
+        ? JsonSerializer.Deserialize<User>(currentUserJson)
+        : null;
 }
 
+@if (currentUser != null) return;
 <!DOCTYPE html>
 <html lang="en">
 <head>

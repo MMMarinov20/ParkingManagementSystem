@@ -7,24 +7,10 @@ using Microsoft.Data.SqlClient;
 using ParkingManagementSystem.DAL.Models;
 using ParkingManagementSystem.DAL.Validators;
 using ParkingManagementSystem.DAL.Data;
+using ParkingManagementSystem.DAL.Interfaces;
 using BCryptNet = BCrypt.Net.BCrypt;
-
 namespace ParkingManagementSystem.DAL.Repositories
 {
-    public interface IUserRepository
-    {
-
-        Task<bool> CreateUser(User user);
-        Task<User> GetUserByIdAsync(int id);
-        Task<User> GetUserByEmail(string email);
-        Task<bool> AuthenticateUser(string email, string password);
-        Task<bool> DeleteUser(int id, string password);
-        Task<bool> DeleteUserById(int id);
-        Task<bool> UpdateUser(User user, string oldPassword);
-        Task<List<User>> GetAllUsers();
-        Task PromoteUser(int id);
-
-    }
     public class UserRepository : IUserRepository
     {
         private readonly DatabaseConnector _databaseConnector;

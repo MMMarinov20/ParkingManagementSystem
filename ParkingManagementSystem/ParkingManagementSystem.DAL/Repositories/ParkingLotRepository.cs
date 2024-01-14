@@ -6,17 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using ParkingManagementSystem.DAL.Data;
 using ParkingManagementSystem.DAL.Models;
+using ParkingManagementSystem.DAL.Interfaces;
 
 namespace ParkingManagementSystem.DAL.Repositories
 {
-    public interface IParkingLotRepository
-    {
-        Task<List<ParkingLot>> GetAllLots();
-        Task CreateParkingLot(ParkingLot parkingLot);
-        Task EditParkingLot(ParkingLot parkingLot);
-        Task<bool> DeleteParkingLot(int id);
-        Task UpdateLotAvailability(int id, bool isAvailable);
-    }
     public class ParkingLotRepository : IParkingLotRepository
     {
         private readonly DatabaseConnector _databaseConnector;

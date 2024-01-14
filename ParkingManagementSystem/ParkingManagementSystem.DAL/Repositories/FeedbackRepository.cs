@@ -5,16 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using ParkingManagementSystem.DAL.Data;
 using ParkingManagementSystem.DAL.Models;
+using ParkingManagementSystem.DAL.Interfaces;
 using Microsoft.Data.SqlClient;
-
 namespace ParkingManagementSystem.DAL.Repositories
 {
-    public interface IFeedbackRepository
-    {
-        Task<bool> CreateFeedback(Feedback feedback);
-        Task<List<Feedback>> GetFeedbacks();
-    }
-
     public class FeedbackRepository : IFeedbackRepository
     {
         private readonly DatabaseConnector _databaseConnector;

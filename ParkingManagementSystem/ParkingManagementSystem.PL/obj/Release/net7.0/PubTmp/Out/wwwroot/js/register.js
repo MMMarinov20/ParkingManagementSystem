@@ -27,11 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (data == "Success!") {
             toastr.success("Registration completed.");
-            setTimeout(function () {
-                window.location.href = "../Login";
-            }, 500)
-        } else {
-            toastr.error(data);
+            setTimeout(() => window.location.href = "../Login", 500)
         }
+        else toastr.error(data);
     });
 })

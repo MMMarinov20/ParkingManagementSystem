@@ -1,12 +1,15 @@
-﻿import { fetchData, isPasswordValid, modal } from "./utils.js";
+﻿import { fetchData, isPasswordValid, isEmailValid, modal } from "./utils.js";
 
 var reservations, feedbacks;
 document.addEventListener('DOMContentLoaded', async function () {
     handleTableSwitching();
-    await fetchReservations();
-    await fetchUsers();
+
     await fetchLots();
-    await fetchFeedback();
+    await fetchReservations();
+    if (currentUserData.isAdmin) {
+        await fetchUsers();
+        await fetchFeedback();
+    }
     handleUpdateReservation()
     handleDeleteModal();
     handleUpdateModal();
@@ -357,6 +360,11 @@ const handleUpdateModal = () => {
 
         if (!isPasswordValid(oldPassword) || !isPasswordValid(newPassword)) {
             toastr.error("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!");
+            return;
+        }
+
+        if (!isEmailValid(email.value)) {
+            toastr.error("Invalid email!");
             return;
         }
 

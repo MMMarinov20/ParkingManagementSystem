@@ -4,6 +4,7 @@
 @page
 @using ParkingManagementSystem.DAL.Models
 @using System.Text.Json
+@using ParkingManagementSystemPL.Controllers
 @model ParkingManagementSystem.Pages.IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -12,7 +13,13 @@
         ? JsonSerializer.Deserialize<User>(currentUserJson) 
         : null;
 }
-@using ParkingManagementSystemPL.Controllers
+
+@if (currentUser != null)
+{
+    <script>
+        var currentUserData = @Html.Raw(Json.Serialize(currentUser));
+    </script>
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,17 +77,21 @@
             <h1 class="text-blue-400 font-bold text-5xl lg:text-3xl 2xl:text-5xl">Park with Ease. Travel with Confidence</h1>
             <h1 class="text-8xl lg:text-5xl 2xl:text-8xl font-black text-white lg:max-w-lg max-w-3xl 2xl:max-w-3xl pt-6">We assure your parking spot!</h1>
             <h1 class="text-white font-semibold text-3xl lg:text-xl max-w-2xl py-10">Effortless parking, just a click away. Explore, reserve, and travel stress-free with our intuitive Parking Management System. Your journey, simplified.</h1
-            <a asp-page="/Login" class="inline-block">
-                <button class="bg-white px-8 py-4 rounded-full text-blue-400 text-3xl lg:text-xl 2xl:text-2xl font-semibold transition duration-300 ease-in-out transform hover:scale-105">
-                    Reserve your spot
-                </button>
-            </a>
 
         </div>
+
+        <a asp-page="/Lots" class="inline-block">
+            <button class="bg-white px-8 py-4 rounded-full text-blue-400 text-3xl lg:text-xl 2xl:text-2xl font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                Reserve your spot
+            </button>
+        </a>
     </div>
     
     <script src="./lib/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        if(currentUserData != null) toastr.success(`Welcome, ${currentUserData.firstName} ${currentUserData.lastName}!`);
+    </script>
 </body>
 </html>

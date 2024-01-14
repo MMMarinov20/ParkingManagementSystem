@@ -1,6 +1,7 @@
 using ParkingManagementSystem.BLL.Interfaces;
 using ParkingManagementSystem.BLL.Services;
 using ParkingManagementSystem.DAL.Repositories;
+using ParkingManagementSystem.DAL.Interfaces;
 using ParkingManagementSystem.DAL.Models;
 using ParkingManagementSystem.DAL.Data;
 using Microsoft.Data.SqlClient;
