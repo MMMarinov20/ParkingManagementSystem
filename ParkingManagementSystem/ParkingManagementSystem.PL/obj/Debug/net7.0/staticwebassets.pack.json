@@ -45,6 +45,10 @@
       "PackagePath": "staticwebassets\\js\\dashboard.js"
     },
     {
+      "Id": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\js\\feedback.js",
+      "PackagePath": "staticwebassets\\js\\feedback.js"
+    },
+    {
       "Id": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\js\\login.js",
       "PackagePath": "staticwebassets\\js\\login.js"
     },

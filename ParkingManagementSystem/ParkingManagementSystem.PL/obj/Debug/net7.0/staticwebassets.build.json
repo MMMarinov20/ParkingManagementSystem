@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9IMFeOkmsudUzfnH9ixoz4emQMVN7RVCsBenZ8YhqbA=",
+  "Hash": "3ocSYBjqB/CJHrFBKCG6xbAW2yHH0PGM70oyoFjjPJY=",
   "Source": "ParkingManagementSystemPL",
   "BasePath": "_content/ParkingManagementSystemPL",
   "Mode": "Default",
@@ -224,6 +224,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\dashboard.js"
+    },
+    {
+      "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\js\\feedback.js",
+      "SourceId": "ParkingManagementSystemPL",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\",
+      "BasePath": "_content/ParkingManagementSystemPL",
+      "RelativePath": "js/feedback.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\feedback.js"
     },
     {
       "Identity": "C:\\Users\\maksm\\Documents\\projects\\2324-technologies-11-transport-assignment-MMMarinov20\\ParkingManagementSystem\\ParkingManagementSystem.PL\\wwwroot\\js\\login.js",
