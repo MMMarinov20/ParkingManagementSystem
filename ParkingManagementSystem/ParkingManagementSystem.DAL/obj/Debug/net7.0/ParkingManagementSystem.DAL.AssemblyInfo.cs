@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ParkingManagementSystem.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ac78745385afad6fb69a2462054e457f1e0b128")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+99e015f88812e425f52ff1b713baaac88d5f3e5a")]
 [assembly: System.Reflection.AssemblyProductAttribute("ParkingManagementSystem.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ParkingManagementSystem.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

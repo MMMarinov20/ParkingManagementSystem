@@ -22,12 +22,24 @@ document.addEventListener('DOMContentLoaded', async function () {
         })
     })
 
-    submitButton.addEventListener('click', () => {
+    submitButton.addEventListener('click', async () => {
         const input = document.getElementById('feedback');
         if (input.value == "" || rating == 0) {
             toastr.error("Please fill in all fields!");
             return;
         }
-        console.log(rating);
+
+        const data = await fetchData("/api/feedback/CreateFeedback", "POST", {
+            Comment: input.value,
+            Rating: rating
+        });
+
+        if (data == "Success!") {
+            toastr.success("Feedback sent!");
+            stars.forEach(s => s.style.color = 'white');
+            input.value = "";
+        } else {
+            toastr.error("Feedback failed!");
+        }
     });
 });
