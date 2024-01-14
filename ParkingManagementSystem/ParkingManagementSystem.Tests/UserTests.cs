@@ -16,7 +16,7 @@ namespace ParkingManagementSystem.Tests
         public void DatabaseConnectionOpensSuccessfuly()
         {
             DatabaseConnector databaseConnector = new DatabaseConnector();
-            
+
             SqlConnection connection = databaseConnector.GetOpenConnection();
 
             Assert.IsNotNull(connection);
@@ -25,20 +25,23 @@ namespace ParkingManagementSystem.Tests
         [Test, Order(2)]
         public async Task UserCreatesAccountSuccessfuly()
         {
-            User user = new User();
-            user.FirstName = "Test";
-            user.LastName = "Test";
-            user.Email = "test@email.com";
-            user.PasswordHash = "Test123test";
-            user.Phone = "123456789";
 
             DatabaseConnector databaseConnector = new DatabaseConnector();
             UserRepository userRepository = new UserRepository(databaseConnector);
+
+            User user = new User();
+            user.FirstName = "Test";
+            user.LastName = "Test";
+            user.Email = "test1@email.com";
+            user.PasswordHash = "Test123test";
+            user.Phone = "123456789";
+
             await userRepository.CreateUser(user);
 
             User userFromDatabase = await userRepository.GetUserByEmail(user.Email);
 
             Assert.IsNotNull(userFromDatabase);
+            await userRepository.DeleteUser(userFromDatabase.UserID, user.PasswordHash);
         }
 
         [Test, Order(3)]
@@ -47,9 +50,21 @@ namespace ParkingManagementSystem.Tests
             DatabaseConnector databaseConnector = new DatabaseConnector();
             UserRepository userRepository = new UserRepository(databaseConnector);
 
-            User user = await userRepository.GetUserByIdAsync(1);
+            User user = new User();
+            user.FirstName = "Test";
+            user.LastName = "Test";
+            user.Email = "test2@email.com";
+            user.PasswordHash = "Test123test";
+            user.Phone = "123456789";
+
+            await userRepository.CreateUser(user);
+
+            User userFromDatabase = await userRepository.GetUserByEmail(user.Email);
+            userFromDatabase = await userRepository.GetUserByIdAsync(userFromDatabase.UserID);
 
             Assert.IsNotNull(user);
+
+            await userRepository.DeleteUser(userFromDatabase.UserID, user.PasswordHash);
         }
 
         [Test, Order(4)]
@@ -58,9 +73,20 @@ namespace ParkingManagementSystem.Tests
             DatabaseConnector databaseConnector = new DatabaseConnector();
             UserRepository userRepository = new UserRepository(databaseConnector);
 
-            User user = await userRepository.GetUserByEmail("test@email.com");
+            User user = new User();
+            user.FirstName = "Test";
+            user.LastName = "Test";
+            user.Email = "test3@email.com";
+            user.PasswordHash = "Test123test";
+            user.Phone = "123456789";
 
-            Assert.IsNotNull(user);
+            await userRepository.CreateUser(user);
+
+            User userFromDatabase = await userRepository.GetUserByEmail(user.Email);
+
+            Assert.IsNotNull(userFromDatabase);
+
+            await userRepository.DeleteUser(userFromDatabase.UserID, user.PasswordHash);
         }
 
         [Test, Order(5)]
@@ -69,11 +95,27 @@ namespace ParkingManagementSystem.Tests
             DatabaseConnector databaseConnector = new DatabaseConnector();
             UserRepository userRepository = new UserRepository(databaseConnector);
 
-            if (await userRepository.AuthenticateUser("test@email.com", "Test123test"))
+            User user = new User();
+            user.FirstName = "Test";
+            user.LastName = "Test";
+            user.Email = "test@email.com";
+            user.PasswordHash = "Test123test";
+            user.Phone = "123456789";
+
+            await userRepository.CreateUser(user);
+
+            User userFromDatabase = await userRepository.GetUserByEmail(user.Email);
+
+            if (await userRepository.AuthenticateUser(user.Email, user.PasswordHash))
             {
                 Assert.Pass();
+                await userRepository.DeleteUser(userFromDatabase.UserID, user.PasswordHash);
             }
-            else Assert.Fail();
+            else
+            {
+                Assert.Fail();
+                await userRepository.DeleteUser(userFromDatabase.UserID, user.PasswordHash);
+            }
         }
 
         [Test, Order(6)]
@@ -81,16 +123,35 @@ namespace ParkingManagementSystem.Tests
         {
             DatabaseConnector databaseConnector = new DatabaseConnector();
             UserRepository userRepository = new UserRepository(databaseConnector);
-        
-            User user = await userRepository.GetUserByEmail("test@email.com");
-        
-            user.LastName = "Test2";
-        
-            if (await userRepository.UpdateUser(user, "Test123test"))
+
+            User user = new User();
+            user.FirstName = "Test";
+            user.LastName = "Test";
+            user.Email = "test@email.com";
+            user.PasswordHash = "Test123test";
+            user.Phone = "123456789";
+
+            await userRepository.CreateUser(user);
+
+            User userFromDatabase = await userRepository.GetUserByEmail(user.Email);
+
+            userFromDatabase.FirstName = "Test2";
+
+            if (await userRepository.UpdateUser(userFromDatabase, user.PasswordHash))
             {
-                Assert.Pass();
+                userFromDatabase = await userRepository.GetUserByEmail(user.Email);
+
+                if (await userRepository.DeleteUserById(userFromDatabase.UserID))
+                {
+                    Assert.That(userFromDatabase.FirstName, Is.EqualTo("Test2"));
+                }
+
             }
-            else Assert.Fail();
+            else
+            {
+                Assert.Fail();
+            }
+
         }
 
         [Test, Order(7)]
@@ -99,9 +160,20 @@ namespace ParkingManagementSystem.Tests
             DatabaseConnector databaseConnector = new DatabaseConnector();
             UserRepository userRepository = new UserRepository(databaseConnector);
 
+            User user = new User();
+            user.FirstName = "Test";
+            user.LastName = "Test";
+            user.Email = "test@email.com";
+            user.PasswordHash = "Test123test";
+            user.Phone = "123456789";
+
+            await userRepository.CreateUser(user);
+
             List<User> users = await userRepository.GetAllUsers();
 
-            Assert.IsNotNull(users);
+            Assert.That(users.Count, Is.GreaterThan(0));
+
+            await userRepository.DeleteUser(users[0].UserID, user.PasswordHash);
         }
 
         [Test, Order(8)]
@@ -110,27 +182,24 @@ namespace ParkingManagementSystem.Tests
             DatabaseConnector databaseConnector = new DatabaseConnector();
             UserRepository userRepository = new UserRepository(databaseConnector);
 
-            User user = await userRepository.GetUserByEmail("test@email.com");
-            await userRepository.PromoteUser(user.UserID);
+            User user = new User();
+            user.FirstName = "Test";
+            user.LastName = "Test";
+            user.Email = "test@email.com";
+            user.PasswordHash = "Test123test";
+            user.Phone = "123456789";
 
-            User userFromDatabase = await userRepository.GetUserByIdAsync(user.UserID);
+            await userRepository.CreateUser(user);
 
-            Assert.That(userFromDatabase.IsAdmin == true);
+            User userFromDatabase = await userRepository.GetUserByEmail(user.Email);
+
+            await userRepository.PromoteUser(userFromDatabase.UserID);
+
+            userFromDatabase = await userRepository.GetUserByEmail(user.Email);
+
+            Assert.That(userFromDatabase.IsAdmin, Is.EqualTo(true));
+
+            await userRepository.DeleteUser(userFromDatabase.UserID, user.PasswordHash);
         }
-
-        //[Test]
-        //public async Task UserCanBeDeletedSuccessfuly()
-        //{
-        //    DatabaseConnector databaseConnector = new DatabaseConnector();
-        //    UserRepository userRepository = new UserRepository(databaseConnector);
-
-        //    User user = await userRepository.GetUserByEmail("test@email.com");
-
-        //    if (await userRepository.DeleteUser(user.UserID, "Test123test"))
-        //    {
-        //        Assert.Pass();
-        //    }
-        //    else Assert.Fail();
-        //}
     }
 }
