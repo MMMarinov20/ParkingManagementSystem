@@ -19,10 +19,10 @@
 - **Reservation Management:** Effortlessly handle parking reservations, ensuring a smooth experience for both users and administrators.
 - **User-friendly UI/UX:** Enjoy a visually appealing and intuitive interface designed to enhance your overall experience.
 
-Experience the power of our Parking Management System, where every feature is crafted to provide a seamless and efficient solution for your parking needs!</p>
+Experience the power of the Parking Management System, where every feature is crafted to provide a seamless and efficient solution for your parking needs!</p>
 
  
-## 🗂️ Our Tech Stack
+## 🗂️ Tech Stack
  
 ### Used code editor & collaborative service:
  
@@ -32,7 +32,7 @@ Experience the power of our Parking Management System, where every feature is cr
     <a href="https://git-scm.com/"><img src="https://img.icons8.com/nolan/344/git.png" alt="git logo" width=52px /></a>
 </p>
  
-### Used tools for our development:
+### Used tools for the development:
  
 <p align="left">
     <a href="https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/"><img src="https://miro.medium.com/v2/resize:fit:1400/1*_NVBTVdmjt3Qvq3CZOySXg.png" alt="cs" width=80px /></a>
@@ -46,13 +46,13 @@ Experience the power of our Parking Management System, where every feature is cr
  
 ### Presenting
  
-- [Presentation](https://github.com/VVYaneva20/MOPS/raw/main/documents/MOPS%20-%20presentation.pptx)
+- [Presentation](https://codingburgas-my.sharepoint.com/:p:/g/personal/mmmarinov20_codingburgas_bg/EU52QFaFUERDnArZ0NY-ae8Bp1jRIZ39_t6wOXiXkRvAVA?e=S3T56f)
  
 <hr>
  
 ## 📥 Installation
  
-If you want to clone our repo locally you can paste the following command in your preferred terminal:
+If you want to clone the repo locally you can paste the following command in your preferred terminal:
  
 <pre>https://github.com/codingburgas/2324-technologies-11-transport-assignment-MMMarinov20</pre>
 
@@ -78,5 +78,5 @@ If you want to clone our repo locally you can paste the following command in you
  
 <hr>
  
-<h1 align="center">Thanks for checking out my repo, show me some ❤️ by giving my repo a ⭐️!</h1>
+<h1 align="center">Thanks for checking out my repo, show some ❤️ by giving my repo a ⭐️!</h1>
 <h1 align="center">If you want to contribute, feel free to open a PR!</h1>
