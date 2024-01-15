@@ -15,13 +15,22 @@
         return await response.json()
     }
     catch (e) {
-        toastr.error(e);
+        console.error(e);
     }
 }
 
 export const isPasswordValid = (password) => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
     if (!passwordRegex.test(password)) {
+        return false;
+    }
+    return true;
+}
+
+export const isEmailValid = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailRegex.test(email)) {
         return false;
     }
     return true;

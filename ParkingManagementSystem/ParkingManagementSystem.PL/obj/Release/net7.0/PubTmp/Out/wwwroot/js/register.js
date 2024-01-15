@@ -1,4 +1,4 @@
-﻿import { fetchData, isPasswordValid } from './utils.js'
+﻿import { fetchData, isPasswordValid, isEmailValid } from './utils.js'
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('register').addEventListener('click', async function () {
         const fName = document.getElementById('fName').value;
@@ -14,6 +14,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!isPasswordValid(password)) {
             toastr.error("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!");
+            return;
+        }
+
+        if (!isEmailValid(email)) {
+            toastr.error("Please enter a valid email address!");
             return;
         }
 

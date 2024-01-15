@@ -10,7 +10,6 @@ namespace ParkingManagementSystem.DAL.Data
     public class DatabaseConnector
     {
         private readonly string ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ParkingManagementSystem;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False\r\n";
-
         public SqlConnection GetOpenConnection()
         {
             SqlConnection connection = new SqlConnection(ConnectionString);

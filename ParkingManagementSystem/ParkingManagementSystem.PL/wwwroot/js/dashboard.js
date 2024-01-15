@@ -165,7 +165,7 @@ const generateFeedbackTable = (data) => {
         console.log(feedback)
         const html = `
                      <tr id="res-${i}" class="text-center">
-                            <td class="py-2 px-4 border-b">${data.Id}</td>
+                            <td class="py-2 px-4 border-b">${feedback.id}</td>
                             <td class="py-2 px-4 border-b">${user.firstName}</td>
                             <td class="py-2 px-4 border-b">${user.lastName}</td>
                             <td class="py-2 px-4 border-b">${feedback.rating}</td>
@@ -275,6 +275,7 @@ const generateReservationsTable = (data) => {
             hour12: true,
         }
 
+        console.log(reservation.status);
         const html = `
                         <tr id="res-${i}" class="text-center">
                             <td class="py-2 px-4 border-b">${reservation.reservationID}</td>
@@ -284,8 +285,10 @@ const generateReservationsTable = (data) => {
                             <td class="py-2 px-4 border-b">${new Date(reservation.endTime).toLocaleString('en-US', options)}</td>
                             <td class="py-2 px-4 border-b">${reservation.status}</td>
                             <td class="py-2 px-4 border-b">
-                                <button style="color: #3498db; text-decoration: none; cursor: pointer; margin-right: 2px;">Edit</button>
-                                <button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Cancel</button>
+                            ${reservation.status != "Cancelled" ?
+                '<button style="color: #3498db; text-decoration: none; cursor: pointer; margin-right: 2px;">Edit</button>' : ""}
+                            ${reservation.status != "Cancelled" ?
+                '<button style="color: #e74c3c; text-decoration: none; cursor: pointer;">Cancel</button>' : ""}
                             </td>
                         </tr>
         `
