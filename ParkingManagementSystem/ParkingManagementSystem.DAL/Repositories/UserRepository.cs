@@ -167,11 +167,19 @@ namespace ParkingManagementSystem.DAL.Repositories
                                     await command2.ExecuteNonQueryAsync();
                                 }
 
-                                query = "DELETE FROM Users WHERE UserID = @UserID";
+                                query = "DELETE FROM Feedback WHERE UserID = @UserID";
+
                                 using (SqlCommand command3 = new SqlCommand(query, connection))
                                 {
                                     command3.Parameters.AddWithValue("@UserID", id);
                                     await command3.ExecuteNonQueryAsync();
+                                }
+
+                                query = "DELETE FROM Users WHERE UserID = @UserID";
+                                using (SqlCommand command4 = new SqlCommand(query, connection))
+                                {
+                                    command4.Parameters.AddWithValue("@UserID", id);
+                                    await command4.ExecuteNonQueryAsync();
                                 }
 
                                 return true;

@@ -9,7 +9,8 @@ namespace ParkingManagementSystem.DAL.Data
 {
     public class DatabaseConnector
     {
-        private readonly string ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ParkingManagementSystem;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False\r\n";
+        //private readonly string ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ParkingManagementSystem;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False\r\n";
+        private readonly string ConnectionString = "Server=tcp:parkingmanagementsystemmax.database.windows.net,1433;Initial Catalog=ParkingManagementSystem;Persist Security Info=False;User ID=MMMarinov20;Password=_ParkingManagementSystem123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public SqlConnection GetOpenConnection()
         {
             SqlConnection connection = new SqlConnection(ConnectionString);
