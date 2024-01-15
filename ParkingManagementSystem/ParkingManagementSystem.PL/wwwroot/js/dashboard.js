@@ -105,6 +105,11 @@ const handleUpdateReservation = () => {
                 return;
             }
 
+            if (new Date(startDate.value) < new Date()) {
+                toastr.error("Selected start date is in the past. Please choose a future date.");
+                return;
+            }
+
             const data = await fetchData("/api/reservation/EditReservation", "POST", {
                 ReservationID: reservation.reservationID,
                 UserID: currentUserData.userID,
