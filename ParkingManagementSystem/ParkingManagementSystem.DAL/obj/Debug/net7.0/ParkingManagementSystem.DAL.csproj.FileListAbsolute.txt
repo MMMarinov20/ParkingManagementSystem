@@ -1,15 +1,3 @@
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\bin\Debug\net7.0\ParkingManagementSystem.DAL.deps.json
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\bin\Debug\net7.0\ParkingManagementSystem.DAL.dll
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\bin\Debug\net7.0\ParkingManagementSystem.DAL.pdb
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ParkingManagementSystem.DAL.csproj.AssemblyReference.cache
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ParkingManagementSystem.DAL.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ParkingManagementSystem.DAL.AssemblyInfoInputs.cache
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ParkingManagementSystem.DAL.AssemblyInfo.cs
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ParkingManagementSystem.DAL.csproj.CoreCompileInputs.cache
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ParkingManagementSystem.DAL.dll
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\refint\ParkingManagementSystem.DAL.dll
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ParkingManagementSystem.DAL.pdb
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ref\ParkingManagementSystem.DAL.dll
 C:\Users\mmmarinov20\source\repos\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\bin\Debug\net7.0\ParkingManagementSystem.DAL.deps.json
 C:\Users\mmmarinov20\source\repos\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\bin\Debug\net7.0\ParkingManagementSystem.DAL.dll
 C:\Users\mmmarinov20\source\repos\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\bin\Debug\net7.0\ParkingManagementSystem.DAL.pdb
@@ -22,4 +10,3 @@ C:\Users\mmmarinov20\source\repos\2324-technologies-11-transport-assignment-MMMa
 C:\Users\mmmarinov20\source\repos\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\refint\ParkingManagementSystem.DAL.dll
 C:\Users\mmmarinov20\source\repos\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ParkingManagementSystem.DAL.pdb
 C:\Users\mmmarinov20\source\repos\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ref\ParkingManagementSystem.DAL.dll
-C:\Users\maksm\Documents\projects\2324-technologies-11-transport-assignment-MMMarinov20\ParkingManagementSystem\ParkingManagementSystem.DAL\obj\Debug\net7.0\ParkingManagementSystem.DAL.sourcelink.json
